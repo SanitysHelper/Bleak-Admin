@@ -1,1 +1,2923 @@
+local BleakAdmin = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local CommandList = Instance.new("ScrollingFrame")
+local NewCommand = Instance.new("TextButton")
+local Storage = Instance.new("Frame")
+local CommandBar = Instance.new("TextBox")
+local CommandHighlighting = Instance.new("TextButton")
+local Title = Instance.new("TextLabel")
+local Notification = Instance.new("TextButton")
+local HowToUse = Instance.new("Frame")
+local Title_2 = Instance.new("TextLabel")
+local Description = Instance.new("TextLabel")
+local CustomCommand = Instance.new("Frame")
+local NameLabel = Instance.new("TextLabel")
+local Title_3 = Instance.new("TextBox")
+local RequirementLabel = Instance.new("TextLabel")
+local Requirement = Instance.new("TextBox")
+local DescriptionLabel = Instance.new("TextLabel")
+local Description_2 = Instance.new("TextBox")
+local ScriptLabel = Instance.new("TextLabel")
+local Script = Instance.new("TextBox")
+local Documantation = Instance.new("TextLabel")
+local AddCommandButton = Instance.new("TextButton")
+local Close = Instance.new("TextButton")
+local Chatlogs = Instance.new("Frame")
+local Chatlogs_2 = Instance.new("ScrollingFrame")
+local AddChat = Instance.new("TextButton")
+local Save = Instance.new("TextButton")
+local AutoSave = Instance.new("TextButton")
+local Clear = Instance.new("TextButton")
+local Search = Instance.new("TextButton")
+local Searching = Instance.new("ScrollingFrame")
+local SearchBar = Instance.new("TextBox")
+local TagType = Instance.new("TextButton")
 
+--Properties:
+
+BleakAdmin.Name = "BleakAdmin"
+local runservice = game:GetService("RunService")
+if runservice:IsStudio() then
+	BleakAdmin.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+else
+	BleakAdmin.Parent = game.CoreGui
+end
+BleakAdmin.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+BleakAdmin.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = BleakAdmin
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.BackgroundTransparency = 1.000
+MainFrame.Position = UDim2.new(0.609361649, 0, 0.344916344, 0)
+MainFrame.Size = UDim2.new(0.132287234, 0, 0.223938227, 0)
+MainFrame.ZIndex = 0
+
+CommandList.Name = "CommandList"
+CommandList.Parent = MainFrame
+CommandList.Active = true
+CommandList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CommandList.BackgroundTransparency = 0.200
+CommandList.BorderColor3 = Color3.fromRGB(255, 255, 255)
+CommandList.Position = UDim2.new(0, 0, 0.231000006, -2)
+CommandList.Size = UDim2.new(0.999828994, 0, 0.670356393, 0)
+CommandList.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
+CommandList.CanvasPosition = Vector2.new(0, 29.749382)
+CommandList.CanvasSize = UDim2.new(0, 0, 1, 0)
+CommandList.MidImage = "rbxassetid://967852047"
+
+NewCommand.Name = "NewCommand"
+NewCommand.Parent = CommandList
+NewCommand.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NewCommand.BackgroundTransparency = 1.000
+NewCommand.BorderColor3 = Color3.fromRGB(255, 255, 255)
+NewCommand.Size = UDim2.new(1, 0, 0, 15)
+NewCommand.Visible = false
+NewCommand.Font = Enum.Font.SourceSans
+NewCommand.Text = "Invalid Command (Does not exist)"
+NewCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+NewCommand.TextScaled = true
+NewCommand.TextSize = 14.000
+NewCommand.TextWrapped = true
+NewCommand.TextXAlignment = Enum.TextXAlignment.Left
+
+Storage.Name = "Storage"
+Storage.Parent = MainFrame
+Storage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Storage.BackgroundTransparency = 0.200
+Storage.Size = UDim2.new(0.0818573385, 0, 0.126436785, 0)
+Storage.Visible = false
+
+CommandBar.Name = "CommandBar"
+CommandBar.Parent = MainFrame
+CommandBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CommandBar.BackgroundTransparency = 0.200
+CommandBar.Position = UDim2.new(0, 0, 0.113999993, 0)
+CommandBar.Size = UDim2.new(0.999828994, 0, 0.114942528, 0)
+CommandBar.ClearTextOnFocus = false
+CommandBar.Font = Enum.Font.SourceSans
+CommandBar.Text = ""
+CommandBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+CommandBar.TextScaled = true
+CommandBar.TextSize = 14.000
+CommandBar.TextWrapped = true
+
+CommandHighlighting.Name = "CommandHighlighting"
+CommandHighlighting.Parent = MainFrame
+CommandHighlighting.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CommandHighlighting.BackgroundTransparency = 0.200
+CommandHighlighting.BorderColor3 = Color3.fromRGB(255, 255, 255)
+CommandHighlighting.Position = UDim2.new(0, 0, 0.113701656, 0)
+CommandHighlighting.Size = UDim2.new(0.999828994, 0, 0.114942528, 0)
+CommandHighlighting.Font = Enum.Font.SourceSans
+CommandHighlighting.Text = "Command Here"
+CommandHighlighting.TextColor3 = Color3.fromRGB(255, 255, 255)
+CommandHighlighting.TextScaled = true
+CommandHighlighting.TextSize = 14.000
+CommandHighlighting.TextWrapped = true
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title.BackgroundTransparency = 0.200
+Title.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Title.Position = UDim2.new(0, 0, -0.00124999299, 0)
+Title.Size = UDim2.new(0.999828994, 0, 0.114942528, 0)
+Title.Font = Enum.Font.SourceSans
+Title.Text = "Bleak Admin 1.8"
+Title.TextColor3 = Color3.fromRGB(0, 209, 255)
+Title.TextScaled = true
+Title.TextSize = 14.000
+Title.TextStrokeColor3 = Color3.fromRGB(55, 79, 75)
+Title.TextWrapped = true
+
+Notification.Name = "Notification"
+Notification.Parent = MainFrame
+Notification.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Notification.BackgroundTransparency = 0.200
+Notification.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Notification.Position = UDim2.new(0.997216165, 0, -0.00124999299, 0)
+Notification.Size = UDim2.new(0.00261280523, 0, 0.230192497, 0)
+Notification.Visible = false
+Notification.Font = Enum.Font.SourceSans
+Notification.Text = "Your script has a error, if you are 100% sure it is alright, press this button"
+Notification.TextColor3 = Color3.fromRGB(6, 184, 211)
+Notification.TextScaled = true
+Notification.TextSize = 14.000
+Notification.TextWrapped = true
+
+HowToUse.Name = "HowToUse"
+HowToUse.Parent = BleakAdmin
+HowToUse.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HowToUse.BackgroundTransparency = 1.000
+HowToUse.Position = UDim2.new(0.285833329, 0, 0.445302457, 0)
+HowToUse.Size = UDim2.new(-0.107000001, 0, 0.0820000023, 0)
+HowToUse.Visible = false
+HowToUse.ZIndex = 2343
+
+Title_2.Name = "Title"
+Title_2.Parent = HowToUse
+Title_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title_2.BackgroundTransparency = 0.750
+Title_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Title_2.Size = UDim2.new(1, 0, 0.333000004, 0)
+Title_2.Font = Enum.Font.SourceSans
+Title_2.Text = "Title"
+Title_2.TextColor3 = Color3.fromRGB(255, 102, 0)
+Title_2.TextSize = 14.000
+Title_2.TextStrokeTransparency = 0.900
+Title_2.TextTransparency = 0.250
+Title_2.TextWrapped = true
+
+Description.Name = "Description"
+Description.Parent = HowToUse
+Description.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Description.BackgroundTransparency = 0.750
+Description.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Description.Position = UDim2.new(0, 0, 0.361802161, 0)
+Description.Size = UDim2.new(1, 0, 0.63819766, 0)
+Description.Font = Enum.Font.SourceSans
+Description.Text = "Hello this should explain how the command works."
+Description.TextColor3 = Color3.fromRGB(255, 0, 4)
+Description.TextSize = 14.000
+Description.TextStrokeTransparency = 0.900
+Description.TextTransparency = 0.250
+Description.TextWrapped = true
+Description.TextXAlignment = Enum.TextXAlignment.Left
+Description.TextYAlignment = Enum.TextYAlignment.Top
+
+CustomCommand.Name = "CustomCommand"
+CustomCommand.Parent = BleakAdmin
+CustomCommand.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+CustomCommand.BorderColor3 = Color3.fromRGB(74, 116, 255)
+CustomCommand.Position = UDim2.new(0.182500005, 0, 0.388674378, 0)
+CustomCommand.Size = UDim2.new(0.210833326, 0, 0.199485183, 0)
+CustomCommand.Visible = false
+
+NameLabel.Name = "NameLabel"
+NameLabel.Parent = CustomCommand
+NameLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NameLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
+NameLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+NameLabel.Font = Enum.Font.SourceSans
+NameLabel.Text = "Name:"
+NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+NameLabel.TextScaled = true
+NameLabel.TextSize = 14.000
+NameLabel.TextWrapped = true
+
+Title_3.Name = "Title"
+Title_3.Parent = CustomCommand
+Title_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title_3.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Title_3.Position = UDim2.new(0.395256937, 0, 0, 0)
+Title_3.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Title_3.Font = Enum.Font.SourceSans
+Title_3.PlaceholderText = "Name Here"
+Title_3.Text = ""
+Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title_3.TextScaled = true
+Title_3.TextSize = 14.000
+Title_3.TextWrapped = true
+
+RequirementLabel.Name = "RequirementLabel"
+RequirementLabel.Parent = CustomCommand
+RequirementLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+RequirementLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
+RequirementLabel.Position = UDim2.new(0, 0, 0.168214485, 0)
+RequirementLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+RequirementLabel.Font = Enum.Font.SourceSans
+RequirementLabel.Text = "Requirements"
+RequirementLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+RequirementLabel.TextScaled = true
+RequirementLabel.TextSize = 14.000
+RequirementLabel.TextWrapped = true
+
+Requirement.Name = "Requirement"
+Requirement.Parent = CustomCommand
+Requirement.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Requirement.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Requirement.Position = UDim2.new(0.395256937, 0, 0.1682145, 0)
+Requirement.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Requirement.Font = Enum.Font.SourceSans
+Requirement.PlaceholderText = "Requirement (plr, text etc)"
+Requirement.Text = ""
+Requirement.TextColor3 = Color3.fromRGB(255, 255, 255)
+Requirement.TextScaled = true
+Requirement.TextSize = 14.000
+Requirement.TextWrapped = true
+
+DescriptionLabel.Name = "DescriptionLabel"
+DescriptionLabel.Parent = CustomCommand
+DescriptionLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DescriptionLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
+DescriptionLabel.Position = UDim2.new(0, 0, 0.335956454, 0)
+DescriptionLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+DescriptionLabel.Font = Enum.Font.SourceSans
+DescriptionLabel.Text = "Description"
+DescriptionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+DescriptionLabel.TextScaled = true
+DescriptionLabel.TextSize = 14.000
+DescriptionLabel.TextWrapped = true
+
+Description_2.Name = "Description"
+Description_2.Parent = CustomCommand
+Description_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Description_2.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Description_2.Position = UDim2.new(0.395256937, 0, 0.335956454, 0)
+Description_2.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Description_2.Font = Enum.Font.SourceSans
+Description_2.PlaceholderText = "Description"
+Description_2.Text = ""
+Description_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Description_2.TextScaled = true
+Description_2.TextSize = 14.000
+Description_2.TextWrapped = true
+
+ScriptLabel.Name = "ScriptLabel"
+ScriptLabel.Parent = CustomCommand
+ScriptLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScriptLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
+ScriptLabel.Position = UDim2.new(0, 0, 0.503698409, 0)
+ScriptLabel.Size = UDim2.new(1.00000024, 0, 0.140069857, 0)
+ScriptLabel.Font = Enum.Font.SourceSans
+ScriptLabel.Text = "Script:"
+ScriptLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ScriptLabel.TextScaled = true
+ScriptLabel.TextSize = 14.000
+ScriptLabel.TextWrapped = true
+
+Script.Name = "Script"
+Script.Parent = CustomCommand
+Script.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Script.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Script.Position = UDim2.new(0, 0, 0.63918227, 0)
+Script.Size = UDim2.new(1.00000024, 0, 0.697424352, 0)
+Script.ClearTextOnFocus = false
+Script.Font = Enum.Font.SourceSans
+Script.MultiLine = true
+Script.PlaceholderText = "Script"
+Script.Text = ""
+Script.TextColor3 = Color3.fromRGB(255, 255, 255)
+Script.TextSize = 14.000
+Script.TextWrapped = true
+Script.TextXAlignment = Enum.TextXAlignment.Left
+Script.TextYAlignment = Enum.TextYAlignment.Top
+
+Documantation.Name = "Documantation"
+Documantation.Parent = CustomCommand
+Documantation.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Documantation.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Documantation.Position = UDim2.new(0, 0, -0.600000083, 0)
+Documantation.Size = UDim2.new(1.00000048, 0, 0.600000083, 0)
+Documantation.Font = Enum.Font.SourceSans
+Documantation.Text = "getplayer(arg[number]) for the player name, arg[2] is after the command and arg[3] is after that etc. To run a specific command, type run(\"command here\") example run(\"print hello\"). There needs to be something in every slot."
+Documantation.TextColor3 = Color3.fromRGB(255, 255, 255)
+Documantation.TextScaled = true
+Documantation.TextSize = 14.000
+Documantation.TextWrapped = true
+
+AddCommandButton.Name = "AddCommandButton"
+AddCommandButton.Parent = CustomCommand
+AddCommandButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AddCommandButton.BorderColor3 = Color3.fromRGB(74, 116, 255)
+AddCommandButton.Position = UDim2.new(0, 0, 1.33548403, 0)
+AddCommandButton.Size = UDim2.new(1.00000072, 0, 0.193548411, 0)
+AddCommandButton.Font = Enum.Font.SourceSans
+AddCommandButton.Text = "Add Command!"
+AddCommandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+AddCommandButton.TextScaled = true
+AddCommandButton.TextSize = 14.000
+AddCommandButton.TextWrapped = true
+
+Close.Name = "Close"
+Close.Parent = CustomCommand
+Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Close.Position = UDim2.new(0.881422997, 0, -0.729032338, 0)
+Close.Size = UDim2.new(0.118577085, 0, 0.129032269, 0)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(255, 0, 0)
+Close.TextScaled = true
+Close.TextSize = 14.000
+Close.TextWrapped = true
+
+Chatlogs.Name = "Chatlogs"
+Chatlogs.Parent = BleakAdmin
+Chatlogs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Chatlogs.BackgroundTransparency = 1.000
+Chatlogs.Position = UDim2.new(0, 0, 0.781209767, 0)
+Chatlogs.Size = UDim2.new(0.223833337, 0, 0.218790203, 0)
+Chatlogs.Visible = false
+
+Chatlogs_2.Name = "Chatlogs"
+Chatlogs_2.Parent = Chatlogs
+Chatlogs_2.Active = true
+Chatlogs_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Chatlogs_2.BackgroundTransparency = 0.250
+Chatlogs_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Chatlogs_2.Position = UDim2.new(3.56845504e-08, 0, 0, 0)
+Chatlogs_2.Size = UDim2.new(1, 0, 1, 0)
+Chatlogs_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+AddChat.Name = "AddChat"
+AddChat.Parent = Chatlogs_2
+AddChat.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AddChat.BackgroundTransparency = 1.000
+AddChat.BorderColor3 = Color3.fromRGB(37, 234, 255)
+AddChat.Size = UDim2.new(1, 0, 0, 25)
+AddChat.Font = Enum.Font.SourceSans
+AddChat.Text = "Chatlogs (Click a message to copy it)"
+AddChat.TextColor3 = Color3.fromRGB(255, 255, 255)
+AddChat.TextScaled = true
+AddChat.TextSize = 14.000
+AddChat.TextWrapped = true
+
+Save.Name = "Save"
+Save.Parent = Chatlogs
+Save.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Save.BackgroundTransparency = 0.250
+Save.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Save.Position = UDim2.new(0, 0, -0.130932987, 0)
+Save.Size = UDim2.new(0.25, 0, 0.131109446, 0)
+Save.Font = Enum.Font.SourceSans
+Save.Text = "Save"
+Save.TextColor3 = Color3.fromRGB(255, 255, 255)
+Save.TextScaled = true
+Save.TextSize = 14.000
+Save.TextWrapped = true
+
+AutoSave.Name = "AutoSave"
+AutoSave.Parent = Chatlogs
+AutoSave.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+AutoSave.BackgroundTransparency = 0.250
+AutoSave.BorderColor3 = Color3.fromRGB(255, 255, 255)
+AutoSave.Position = UDim2.new(0.25000003, 0, -0.131058648, 0)
+AutoSave.Size = UDim2.new(0.24999994, 0, 0.131109446, 0)
+AutoSave.Font = Enum.Font.SourceSans
+AutoSave.Text = "Autosave"
+AutoSave.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoSave.TextScaled = true
+AutoSave.TextSize = 14.000
+AutoSave.TextWrapped = true
+
+Clear.Name = "Clear"
+Clear.Parent = Chatlogs
+Clear.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Clear.BackgroundTransparency = 0.250
+Clear.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Clear.Position = UDim2.new(0.5, 0, -0.131058648, 0)
+Clear.Size = UDim2.new(0.25, 0, 0.131109446, 0)
+Clear.Font = Enum.Font.SourceSans
+Clear.Text = "Clear"
+Clear.TextColor3 = Color3.fromRGB(255, 255, 255)
+Clear.TextScaled = true
+Clear.TextSize = 14.000
+Clear.TextWrapped = true
+
+Search.Name = "Search"
+Search.Parent = Chatlogs
+Search.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Search.BackgroundTransparency = 0.250
+Search.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Search.Position = UDim2.new(0.75, 0, -0.131058648, 0)
+Search.Size = UDim2.new(0.25, 0, 0.131109446, 0)
+Search.Font = Enum.Font.SourceSans
+Search.Text = "Search"
+Search.TextColor3 = Color3.fromRGB(255, 255, 255)
+Search.TextScaled = true
+Search.TextSize = 14.000
+Search.TextWrapped = true
+
+Searching.Name = "Searching"
+Searching.Parent = Chatlogs
+Searching.Active = true
+Searching.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Searching.BackgroundTransparency = 0.250
+Searching.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Searching.Position = UDim2.new(3.56845504e-08, 0, 0, 0)
+Searching.Size = UDim2.new(1, 0, 1, 0)
+Searching.Visible = false
+Searching.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = Chatlogs
+SearchBar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SearchBar.BackgroundTransparency = 0.400
+SearchBar.BorderColor3 = Color3.fromRGB(255, 255, 255)
+SearchBar.Position = UDim2.new(0.50000006, 0, -0.266227126, 0)
+SearchBar.Size = UDim2.new(0.499999881, 0, 0.129600957, 0)
+SearchBar.Visible = false
+SearchBar.ZIndex = 2
+SearchBar.Font = Enum.Font.SourceSans
+SearchBar.PlaceholderColor3 = Color3.fromRGB(102, 102, 102)
+SearchBar.PlaceholderText = "Text Here"
+SearchBar.Text = ""
+SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBar.TextScaled = true
+SearchBar.TextSize = 14.000
+SearchBar.TextWrapped = true
+
+TagType.Name = "TagType"
+TagType.Parent = Chatlogs
+TagType.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TagType.BackgroundTransparency = 0.250
+TagType.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TagType.Position = UDim2.new(0.25000003, 0, -0.266227126, 0)
+TagType.Size = UDim2.new(0.25, 0, 0.130999997, 0)
+TagType.Visible = false
+TagType.Font = Enum.Font.SourceSans
+TagType.Text = "Tags"
+TagType.TextColor3 = Color3.fromRGB(255, 255, 255)
+TagType.TextScaled = true
+TagType.TextSize = 14.000
+TagType.TextWrapped = true
+
+-- Scripts:
+
+local function RBAQ_fake_script() -- NewCommand.ButtonScript 
+	local script = Instance.new('LocalScript', NewCommand)
+
+	local scrollingframe = script.Parent.Parent
+	spawn(function()
+		repeat wait() until scrollingframe.CanvasSize.Y.Offset > scrollingframe.AbsoluteWindowSize.Y
+		script.Parent.Size = UDim2.new(1,script.Parent.Size.X.Offset - (scrollingframe.ScrollBarThickness + 1),0,script.Parent.Size.Y.Offset)
+		script:Destroy()
+	end)
+end
+coroutine.wrap(RBAQ_fake_script)()
+local function KYNA_fake_script() -- CommandBar.LocalScript 
+	local script = Instance.new('LocalScript', CommandBar)
+
+	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+	local commands = {
+		Name = {};
+		Requirement = {};
+		Description = {};
+		Code = {};
+	}
+	local uis = game:GetService("UserInputService")
+	local isfocused = nil
+	local args = {}
+	local loops = {}
+	local localplayer = game.Players.LocalPlayer
+	local prefix = Enum.KeyCode.Semicolon
+	local uihovered = false
+	local spawnedcommand = {}
+	local exactcommand = ""
+	
+	if not isfile then
+		function isfile()
+			return true
+		end
+	end
+	
+	if not isfolder then
+		function isfolder()
+			return true
+		end
+	end
+	
+	if not loadfile then
+		function loadfile()
+	
+		end
+	end
+	
+	if not writefile then
+		function writefile(file,text)
+			print(file,"\n"..text)
+		end
+	end
+	
+	if not readfile then
+		function readfile()
+			return "wa wa wa waaaaa"
+		end
+	end
+	
+	if not makefolder then
+		function makefolder()
+			print("folder")
+		end
+	end
+	
+	if isfolder and not isfolder("Bleak Admin") then
+		makefolder("Bleak Admin")
+	end
+	
+	local function open()
+		checkstorage()
+		script.Parent.Parent.CommandList.ScrollBarImageTransparency = 0
+		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0.781),Enum.EasingDirection.In,Enum.EasingStyle.Quint ,0.25,true)
+	end
+	
+	local function notify(time, text, pressfunction)
+		local notifying = script.Parent.Parent.Notification:Clone()
+		notifying.Parent = script.Parent.Parent
+		notifying.Name = "Notifying"
+		if not time then
+			time = 1
+		end
+		notifying.Text = ""
+		notifying.Visible = true
+		local timeleft = time
+		local newtext = text.." ("..timeleft..")"
+		notifying.MouseButton1Click:Connect(function()
+			if timeleft > 0 then
+				if pressfunction then
+					pressfunction()
+				end
+				timeleft = 0
+			end
+		end)
+		spawn(function()
+			local done = false
+			notifying:TweenSize(UDim2.fromScale(0.854,notifying.Size.Y.Scale),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25,true,function() done = true end)
+			repeat wait() until done == true
+			for i = 1,#newtext do
+				if timeleft <= 0 then
+					break
+				end
+				if newtext[i] == "," or newtext[i] == "." or newtext[i] == " " then
+					wait(math.random(1,20)*0.01)
+				else
+					wait(math.random(1,10)*0.01)
+				end
+				notifying.Text = string.sub(newtext,1,i)
+			end
+	
+			spawn(function()
+				notifying.Text = newtext
+				while wait(1) and timeleft > 0 do
+					newtext = text.." ("..timeleft-1 ..")"
+					notifying.Text = newtext
+					timeleft = timeleft - 1
+				end
+			end)
+	
+			repeat game:GetService("RunService").Stepped:Wait() until timeleft <= 0
+			notifying:TweenSize(UDim2.fromScale(0,notifying.Size.Y.Scale),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.55,true,function() notifying:Destroy() end)
+		end)
+	end
+	
+	if not listfiles then
+		function listfiles()
+			local sad = {2}
+			notify(5,"Exploit is not supported for some of these commands")
+			return sad 
+		end
+	end
+	
+	local function resize(instance)
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,-1)
+		until instance.TextFits == false
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,1)
+		until instance.TextFits == true
+		instance.Size = instance.Size + UDim2.fromOffset(0,5)
+	end
+	
+	local function close()
+		repeat game:GetService("RunService").Stepped:Wait() until uihovered == false
+		script.Parent.Parent.CommandList.ScrollBarImageTransparency = 1
+		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25,true)
+	end
+	
+	
+	script.Parent.Parent.MouseEnter:Connect(function()
+		open()
+		uihovered = true
+	end)
+	
+	script.Parent.Parent.MouseLeave:Connect(function()
+		uihovered = false
+		close()
+	end)
+	
+	
+	function update()
+		local amount = 0
+		for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
+			if v:IsA("TextButton") and v.Name ~= "NewCommand" then
+				if v.Position.X.Scale == 1 then
+					v.Position = UDim2.new(1,0,0,v.Size.Y.Offset*amount)
+				end
+				v:TweenPosition(UDim2.new(0,0,0,v.Size.Y.Offset*amount),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.15,true)
+				amount = amount+1
+			end
+		end
+		script.Parent.Parent.CommandList.CanvasSize = UDim2.fromOffset(0,script.Parent.Parent.CommandList.NewCommand.Size.Y.Offset*amount)
+	end
+	
+	function getplayer(plr)
+		for i,v in pairs(game.Players:GetPlayers()) do
+			if string.lower(v.Name ) == string.lower(plr) then
+				return(v.Name)
+			elseif string.match(string.lower(v.Name),string.lower(plr)) then
+				return(v.Name)
+			elseif string.lower(plr) == "me" then
+				return(localplayer.Name)
+			end
+		end
+	end
+	
+	
+	local function postmessageondiscord(msg)
+		if syn and syn.request then
+			local message = msg
+			local amountofletter = 1
+			local message1 = message:split("")
+			local lastletter = ""
+			print("checking")
+			if string.match(message,"`") then
+				repeat
+					game:GetService("RunService").Stepped:Wait()
+					for i,v in pairs(message1) do
+						game:GetService("RunService").Stepped:Wait()
+						if string.match(v, "`") then
+							local removepee = table.find(message1,"`")
+							table.remove(message1,removepee)
+							game:GetService("RunService").Stepped:Wait()
+						end
+					end
+					message = table.concat(message1,"")
+				until not string.match(message,"`")
+			end
+	
+			---------------------------------------
+	
+			for i,v in pairs(message1) do
+				if v == lastletter then
+					amountofletter = amountofletter + 1
+				end
+				lastletter = v
+				if amountofletter == #message1 then
+					message = ""
+				end
+				repeat
+					if message1[#message1] == " " then
+						table.remove(message1,#message1)
+						message = table.concat(message1,"")
+						wait()
+					end
+				until message1[#message1] ~= " " 
+			end
+	
+			if message ~= "" then
+				local shitass1 = message:split(" ")
+				local suspiciousplayer = ""
+				for i,v in pairs(shitass1) do
+					if getplayer(v) then
+						suspiciousplayer = suspiciousplayer..getplayer(v)..", "
+						print(suspiciousplayer)
+					end
+				end
+				if suspiciousplayer == "" then
+					suspiciousplayer = "None"
+				end
+	
+	
+				local response = syn.request(
+					{
+						Url = "https://discord.com/api/webhooks/779879513021480970/QloiHR6xFKQefB2TrGPig5sLjEg0zD-g81_f414eDLWq_lg2P8XuvlCQly8zQbTd8S8T",  -- This website helps debug HTTP requests
+						Method = "POST",
+						Headers = {
+							["Content-Type"] = "application/json"  -- When sending JSON, set this!
+						};
+						Body = game:GetService("HttpService"):JSONEncode({
+							content = "```cs\n[1] Player: '"..game.Players.LocalPlayer.Name.."'\n[2] Message: '"..message.."'\n[3] Potential players: "..tostring(suspiciousplayer).."```";
+						})
+					}
+				)
+				print("Posted")
+			else
+				print("Fail")
+			end
+		end
+	end
+	
+	postmessageondiscord("Injected admin") -- Posts message to a webhook
+	
+	function checkstorage()
+		if script.Parent.Text == "" or script.Parent.Text == nil then
+			for i,v in pairs(script.Parent.Parent.Storage:GetChildren()) do
+				v.TextColor3 = Color3.fromRGB(255, 255, 255)
+				v.Position = UDim2.new(1,0,0,0)
+				v.Parent = script.Parent.Parent.CommandList
+			end
+		end
+		for i,v in pairs(script.Parent.Parent.Storage:GetChildren()) do
+			local commandtextpart1 = script.Parent.Text:split" "
+			local enterherenoob = commandtextpart1[1]
+			if string.match(string.lower(v.Name),string.lower(enterherenoob)) then
+				v.TextColor3 = Color3.fromRGB(255, 255, 255)
+				v.Position = UDim2.new(1,0,0,0)
+				v.Parent = script.Parent.Parent.CommandList
+			end
+		end
+	end
+	
+	function search(text)
+		text = tostring(text)
+		for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
+			if string.lower(v.Name) == string.lower(text) and v.Name ~="NewCommand" and v:IsA("TextButton") or v:IsA("ImageButton") then
+				v.TextColor3 = Color3.fromRGB(0, 123, 255)
+			elseif string.match(string.lower(v.Name), string.lower(text)) and v.Name ~="NewCommand" and script.Parent.Text ~= ""  then
+				v.TextColor3 = Color3.fromRGB(85, 255, 213)
+			elseif script.Parent.Text == "" and v:IsA("TextButton") or v:IsA("ImageButton") then
+				v.TextColor3 = Color3.fromRGB(255, 255, 255)
+			elseif v.Name ~="NewCommand" and v:IsA("TextButton") or v:IsA("ImageButton") then
+				v:TweenPosition(UDim2.new(1,0,0,v.Position.Y.Offset),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.1,true,function()
+					if not string.match(string.lower(v.Name),string.lower(script.Parent.Text)) and script.Parent.Text ~= "" then
+						v.Parent = script.Parent.Parent.Storage
+					end
+				end)
+			end
+		end
+	end
+	
+	function getcmdnumber(cmd)
+		local name = commands.Name
+		if cmd then
+			cmd = cmd:lower()
+			local sad = cmd:split("")
+			cmd = ""
+			for i,v in pairs(sad) do
+				if v ~= "'" and v ~= "1" and v ~= "2" and v ~= "3" and v ~= "4" and v ~= "5" and v ~= "6" and v ~= "7" and v ~= "8" and v ~= "9" and v ~= "0" then
+					cmd = cmd..v
+				end
+			end
+			for i,v in pairs(name) do
+				if v == cmd then
+					return i 
+				end
+			end
+		end
+	end
+	
+	
+	function getdupes(cmd)
+		local cmd = cmd:lower()
+		local name = commands.Name
+		local names = cmd:split(" ")
+		local dupes = 0
+		for i,v in pairs(name) do
+			if v:match(cmd) then
+				dupes = dupes + 1
+			end
+		end
+		if dupes > 0 then
+			return dupes
+		end
+	end
+	
+	function runcmd(command)
+		local command = command:split(" ")
+		local cmd = command[1]:split("")
+		local cmdname = ""
+		for i, v in pairs(cmd) do
+			if v ~= ";" then
+				cmdname = cmdname..v
+			end
+		end
+		local number = getcmdnumber(cmdname)
+		if number then
+			local ran = nil
+			local error = ""
+			spawn(function()
+				ran,error = pcall(function()commands.Code[number](command)end)
+			end)
+			repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
+			if ran == true then
+			else
+				print(error)
+				return error
+			end
+		end
+	end
+	
+	if not firetouchinterest then
+		function firetouchinterest(part1,part2)
+			local oldcframe = part1.CFrame
+			part1.CFrame = part2.Parent.CFrame
+			wait()
+			part1.CFrame = oldcframe
+		end
+	end
+	
+	if not fireclickdetector then
+		function fireclickdetector(part)
+			print("Exploit not support with 'fireclickdetector'")
+		end
+	end
+	
+	function addcmd(name, requirement, description, code)
+		if requirement and code and description and name then
+			if getcmdnumber(name)  then
+				name = name.."'"..getdupes(name).."'"
+				tostring(name:lower())
+			end
+			table.insert(commands.Name,name:lower())
+			table.insert(commands.Requirement,requirement)
+			table.insert(commands.Description,description)
+			table.insert(commands.Code,code)
+			local cmdnumber = #commands.Name
+			print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
+			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
+			newbutton.Visible = true
+			newbutton.Parent = script.Parent.Parent.CommandList
+			newbutton.Name = name
+			newbutton.Position = UDim2.fromScale(1,0)
+			newbutton.Text = name
+			newbutton.MouseButton1Click:Connect(function()
+				script.Parent:CaptureFocus()
+				script.Parent.Text = newbutton.Text.." "
+				script.Parent.CursorPosition = 234
+			end)
+			local entered = false
+			newbutton.MouseEnter:Connect(function()
+				entered = true
+			end)
+	
+			newbutton.MouseButton2Down:Connect(function()
+				newbutton.Text = name.." "..requirement
+			end)
+	
+			newbutton.MouseButton2Up:Connect(function()
+				newbutton.Text = name
+			end)
+	
+			newbutton.MouseLeave:Connect(function()
+				entered = false
+				newbutton.Text = name
+				script.Parent.Parent.Parent.HowToUse.Visible = false
+				script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(0,0)
+			end)
+	
+			newbutton.MouseMoved:Connect(function()
+				if entered == true then
+					local mouse = game.Players.LocalPlayer:GetMouse()
+					script.Parent.Parent.Parent.HowToUse.Visible = true
+					script.Parent.Parent.Parent.HowToUse.Title.Text = name.." ".. requirement
+					resize(script.Parent.Parent.Parent.HowToUse.Title)
+					if description then
+						script.Parent.Parent.Parent.HowToUse.Description.Text = description
+						resize(script.Parent.Parent.Parent.HowToUse.Description)
+						script.Parent.Parent.Parent.HowToUse.Description.Position = UDim2.new(0,0,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Scale,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Offset)
+					end
+					script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(mouse.X-5,mouse.Y)
+				end
+			end)
+			update()
+			wait(0.1)
+		end
+	end
+	
+	local bald = script.Parent.FocusLost:Connect(function(pressed)
+		if pressed then
+			local text = script.Parent.Text
+			spawn(function()
+				runcmd(text)
+			end)
+			spawn(function()
+				postmessageondiscord(text)
+			end)
+			script.Parent.Text = ""
+		end
+	end)
+	
+	local luigijuice = uis.TextBoxFocused:Connect(function(name)
+		isfocused = name.Name
+	end)
+	
+	local romainia = uis.TextBoxFocusReleased:Connect(function()
+		isfocused = nil
+	end)
+	
+	local openedi = script.Parent.Focused:Connect(open)
+	
+	local marioi = script.Parent.FocusLost:Connect(close)
+	
+	local doritos = uis.InputBegan:Connect(function(pp)
+		if pp.KeyCode == prefix and isfocused == nil then
+			script.Parent:CaptureFocus()
+			game:GetService("RunService").Stepped:Wait()
+			script.Parent.Text = ""
+		elseif pp.KeyCode == Enum.KeyCode.Tab and isfocused == script.Parent.Name then
+			script.Parent.CursorPosition = -1
+			for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
+				if v:IsA("TextButton") and v.Position == UDim2.new(0,0,0,0) and v.Visible == true and v.Text ~= "" and not string.match(v.Text,"  ") then
+					wait()
+					local newexacttext = (v.Text.." ")
+					script.Parent.Text = newexacttext
+					script.Parent.CursorPosition = #v.Text + 10
+				end
+			end
+		end
+	end)
+	
+	local starterinput = uis.InputBegan:Connect(function(key)
+		if isfocused == script.Parent.Name then
+			open()
+		end
+	end)
+	game:GetService("RunService").Stepped:Wait()
+	local boomertext = script.Parent.Text
+	script.Parent.Changed:Connect(function()
+		if boomertext ~= script.Parent.Text then
+			boomertext = script.Parent.Text
+			spawn(function()
+				local informationsad = script.Parent.Text:split(" ")
+				checkstorage()
+				search(informationsad[1])
+				if script.Parent.Parent.CommandList:FindFirstChild(string.lower(informationsad[1])) then
+					exactcommand = string.lower(informationsad[1])
+					script.Parent.Parent.Title.Text = "Matching command: ".. exactcommand
+				else
+					script.Parent.Parent.Title.Text = "Bleak Admin 1.7"
+					exactcommand = ""
+				end
+				wait(0.15)
+				update()
+			end)
+		end
+	end)
+	
+	local loopedcommands = {}
+	
+	function loopcmd(seconds,amount, cmd)
+		seconds = tonumber(seconds)
+		amount = tonumber(amount)
+		print(seconds, amount, cmd)
+		for i = 1,amount do
+			runcmd(cmd)
+			wait(seconds)
+		end
+		print("done")
+	end
+	
+	
+	
+	game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+		repeat game:GetService("RunService").Stepped:Wait() until char and char:FindFirstChild("Humanoid") and char:FindFirstChild("HumanoidRootPart") and char:FindFirstChild("Head")
+		for i,v in pairs(spawnedcommand) do
+			runcmd(v)
+		end
+	end)
+	
+	game.Players.LocalPlayer.Chatted:Connect(function(msg)
+		local shitass = msg:split("")
+		if shitass[1] == ";" then
+			runcmd(msg)
+		end
+	end)
+	
+	function attach()
+		local humanoid = localplayer.Character.Humanoid
+		humanoid.Parent.Animate.Disabled = true
+		local humanoid2 = humanoid:Clone()
+		humanoid2.Parent = humanoid.Parent
+		humanoid:Destroy()
+		humanoid2.Parent.Animate.Disabled = false
+		game.Workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character
+		humanoid2.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+		for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+			if v:IsA("Tool") and v:FindFirstChildWhichIsA("BasePart") then
+				v.Parent = localplayer.Character
+			end
+		end
+		repeat wait() until not humanoid2 or not humanoid2.Parent:FindFirstChildWhichIsA("Tool")
+		if humanoid2 then
+			return true
+		else
+			return false
+		end
+	end
+	
+	
+	addcmd("print", "String", "Prints a string to the console",function(arg)
+		if arg[2] then
+			print(table.concat(arg," ",2))
+		end
+	end)
+	
+	
+	addcmd("findplr","Plr","Checks if the chosen player is in the game", function(arg)
+		if getplayer(arg[2]) then
+			runcmd("print ".. getplayer(arg[2]))
+		else
+			runcmd("print didn't find the player :(")
+		end
+	end)
+	
+	addcmd("loopcmd","Amount(a), Seconds(s), Command(c)","Loops the c a times every s second", function(arg)
+		loopcmd(arg[2],arg[3],table.concat(arg," ",4))
+	end)
+	
+	addcmd("breakloops","","Breaks the loops",function()
+		loopedcommands = {}
+	end)
+	
+	addcmd("goto","Plr","Teleports you to the player", function(arg)
+		if getplayer(arg[2]) then
+			localplayer.Character.HumanoidRootPart.CFrame = game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame
+		end
+	end)
+	
+	addcmd("toolkill","[player] and requires a tool","Sends a player to the shadow realm with your tools",function(arg)
+		if getplayer(arg[2]) then
+			print(attach())
+		end
+	end)
+	
+	local maxflyspeed = 2*2
+	local flyspeed = maxflyspeed/2
+	local flying = false
+	local function fly()
+		if flying == false then
+			spawn(function()
+				notify(2,"You should be flying")
+				flying = true
+				local x = 0
+				local y = 0
+				local z = 0
+				local keys = {}
+				local focusedcheck = ""
+				local status = "none"
+				game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+				local uis = game:GetService("UserInputService")
+				local velocity = Instance.new("BodyVelocity",game.Players.LocalPlayer.Character.HumanoidRootPart)
+				velocity.MaxForce = Vector3.new('inf','inf','inf')
+				local gyro = Instance.new("BodyGyro",game.Players.LocalPlayer.Character.HumanoidRootPart)
+				gyro.MaxTorque = Vector3.new('inf','inf','inf')
+				gyro.D = 300
+				gyro.P = 9000
+				local focuschecc = uis.TextBoxFocused:Connect(function(thing)
+					focusedcheck = thing.Name
+					uis.TextBoxFocusReleased:Wait()
+					focusedcheck = ""
+				end)
+				velocity.Velocity = Vector3.new(0,0,0)
+				local fli = uis.InputBegan:Connect(function(key)
+					if not table.find(keys,uis:GetStringForKeyCode(key.KeyCode)) then
+						keys[#keys+1] = uis:GetStringForKeyCode(key.KeyCode)
+					end
+					if key.KeyCode == Enum.KeyCode.W and focusedcheck == "" then
+						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
+							gyro.CFrame = game.Workspace.Camera.CFrame
+							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 16
+							local cameray = game.Workspace.Camera.CFrame.LookVector.Y*16
+							if table.find(keys,"S") or table.find(keys,"Q") or table.find(keys,'E') then
+								if table.find(keys,"Q") then
+									cameray = -16
+								elseif table.find(keys,"E") then
+									cameray = 16
+								else
+									velocity.Velocity = Vector3.new(0,0,0)
+									repeat wait() until not table.find(keys,"S") and not table.find(keys,"Q") and not table.find(keys,'E')
+								end
+							end
+							direction = Vector3.new(direction.X,cameray,direction.Z)
+							velocity.Velocity = direction * flyspeed
+							game:GetService("RunService").Stepped:Wait()
+						end
+						velocity.Velocity = Vector3.new(0,0,0)
+					end
+	
+					if key.KeyCode == Enum.KeyCode.S and focusedcheck == "" then
+						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
+							gyro.CFrame = game.Workspace.Camera.CFrame
+							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 16
+							local cameray = -(game.Workspace.Camera.CFrame.LookVector.Y*16)
+							if table.find(keys,"W") or table.find(keys,"Q") or table.find(keys,'E') then
+								if table.find(keys,"Q") then
+									cameray = -16
+								elseif table.find(keys,"E") then
+									cameray = 16
+								else
+									velocity.Velocity = Vector3.new(0,0,0)
+									repeat wait() until not table.find(keys,"W") and not table.find(keys,"Q") and not table.find(keys,'E')
+	
+								end
+							end
+							direction = Vector3.new(direction.X,cameray,direction.Z)
+							velocity.Velocity = direction * flyspeed
+							game:GetService("RunService").Stepped:Wait()
+						end
+						velocity.Velocity = Vector3.new(0,0,0)
+					end
+					if key.KeyCode == Enum.KeyCode.A and focusedcheck == "" or key.KeyCode == Enum.KeyCode.D and focusedcheck == "" then
+						local progress = 0
+						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
+							gyro.CFrame = game.Workspace.Camera.CFrame
+							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 16
+							local cameray = velocity.Velocity.Y
+							direction = Vector3.new(direction.X*flyspeed,cameray,direction.Z*flyspeed)
+							velocity.Velocity = direction
+							game:GetService("RunService").Stepped:Wait()
+						end
+						velocity.Velocity = Vector3.new(0,0,0)
+					end
+					if key.KeyCode == Enum.KeyCode.E and  focusedcheck == ""  then
+						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
+							gyro.CFrame = game.Workspace.Camera.CFrame
+							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 0
+							local cameray = 16
+							if table.find(keys,'Q') then
+								cameray = 0
+							end
+							direction = Vector3.new(direction.X,cameray,direction.Z)
+							velocity.Velocity = direction * flyspeed
+							game:GetService("RunService").Stepped:Wait()
+						end
+						velocity.Velocity = Vector3.new(0,0,0)
+					end
+					if key.KeyCode == Enum.KeyCode.Q and  focusedcheck == ""  then
+						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
+							gyro.CFrame = game.Workspace.Camera.CFrame
+							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 0
+							local cameray = -16
+							if table.find(keys,'E') then
+								cameray = 0
+							end
+							direction = Vector3.new(direction.X,cameray,direction.Z)
+							velocity.Velocity = direction * flyspeed
+							game:GetService("RunService").Stepped:Wait()
+						end
+						velocity.Velocity = Vector3.new(0,0,0)
+					end
+	
+					if key.KeyCode == Enum.KeyCode.Space and focusedcheck == "" then
+						game.Players.LocalPlayer.Character.Humanoid.Sit = false
+					end
+	
+					if key.KeyCode == Enum.KeyCode.LeftShift and focusedcheck == "" then
+						flyspeed = maxflyspeed
+						repeat wait() until key.UserInputState == Enum.UserInputState.End
+						flyspeed = maxflyspeed /2
+					end
+				end)
+	
+				local qwe = uis.InputEnded:Connect(function(key)
+					if table.find(keys,uis:GetStringForKeyCode(key.KeyCode)) then
+						local number = table.find(keys,uis:GetStringForKeyCode(key.KeyCode))
+						table.remove(keys,number)
+					end
+				end)
+	
+				while flying == true and game.Players.LocalPlayer.Character.Humanoid.Health > 0 do
+					gyro.CFrame = game.Workspace.Camera.CFrame
+					game:GetService("RunService").Stepped:Wait()
+				end
+				notify(2,"Flying turned off")
+				fli:Disconnect()
+				qwe:Disconnect()
+				focuschecc:Disconnect()
+				velocity:Destroy()
+				gyro:Destroy()
+				game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+				flying = false
+			end)
+		else
+			flying = false
+	
+		end
+	end
+	
+	function unfly()
+		flying = false
+	end
+	
+	function setspeedfly(int)
+		maxflyspeed = int*2
+		flyspeed = maxflyspeed / 2
+	end
+	
+	addcmd("fly","","Makes you fly. Press Q/E to go up or down and shift to go fast.",function()
+		fly()
+	end)
+	
+	addcmd("vfly","","Makes you and a vehicle fly", function()
+		fly()
+		wait()
+		localplayer.Character.Humanoid.PlatformStand = false
+	end)
+	
+	local vclipparts = {}
+	
+	addcmd("vnoclip","","Makes you and the vehicle noclip",function()
+		runcmd("noclip")
+		local seatmodel = localplayer.Character.Humanoid.SeatPart
+		print(seatmodel.Name)
+		local finished = false
+		repeat
+			if not seatmodel:IsA("Model") and seatmodel.Parent ~= workspace then
+				seatmodel = seatmodel.Parent
+				print(seatmodel.Name)
+			else
+				finished = true
+			end
+		until seatmodel:IsA("Model") or seatmodel.Parent == workspace or finished == true
+		if finished == true then
+			if seatmodel:IsA("BasePart") then
+				seatmodel.CanCollide = false
+				vclipparts[#vclipparts+1] = seatmodel
+			end
+		end
+		for i,v in pairs(seatmodel:GetDescendants()) do
+			if v:IsA("BasePart") and v.CanCollide then
+				vclipparts[#vclipparts+1] = v
+				print("clipped "..v.Name)
+				v.CanCollide = false
+			end
+		end
+	end)
+	
+	addcmd("vclip","","Clips your vehicle",function()
+		for i,v in pairs(vclipparts) do
+			v.CanCollide = true
+		end
+		runcmd("clip")
+	end)
+	
+	addcmd("flyspeed","number","Changes your fly speed", function(arg)
+		setspeedfly(arg[2])
+	end)
+	
+	addcmd("unfly","","Makes you stop flying", function()
+		unfly()
+	end)
+	
+	local noclipping = false
+	function noclip()
+		if noclipping == false then
+			noclipping = true
+			spawn(function()
+				local clipi = game:GetService("RunService").Stepped:Connect(function()
+					for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+						if v:IsA("BasePart") and v.CanCollide == true then
+							v.CanCollide = false
+						end
+					end
+				end)
+				repeat game:GetService("RunService").Stepped:Wait() until noclipping == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+				noclipping = false
+				clip()
+				clipi:Disconnect()
+			end)
+		end
+	end
+	
+	function clip()
+		noclipping = false
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+			if v:IsA("BasePart") and not v.Name:match("Hand") and not v.Name:match("Foot") and not v.Name:match("Leg") then
+				v.CanCollide = true
+			end
+		end
+		print("stopped noclipping")
+	end
+	
+	addcmd("clip","","Makes you clip", function()
+		clip()
+	end)
+	
+	addcmd("noclip","","Makes you noclip", function()
+		noclip()
+	end)
+	
+	
+	addcmd("tweengoto","plr","Teleports you to the player bypassing most anti exploits",function(arg)
+		local tweenservice = game:GetService("TweenService")
+		local info = TweenInfo.new(1)
+		local proptable = {}
+		proptable.CFrame = game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame
+		local newtween = tweenservice:Create(localplayer.Character.HumanoidRootPart,info,proptable)
+		newtween:Play()
+	end)
+	
+	addcmd("saveassets","[clothing type (Pants or Shirt)]","Saves assets in a file", function(arg)
+		if arg[2] and arg[2]:lower() == "shirt" or arg[2]:lower() == "pants" then
+			local text = arg[2]
+			local firstletter = string.sub(text,1,1):upper()
+			arg[2] = tostring(firstletter..text:sub(2))
+			local function getname(id)
+				if id ~= "" and id ~= nil and id ~= "Click a audio for options" then
+					local IDITO = id
+					local Asset = game:GetService("MarketplaceService"):GetProductInfo(IDITO)
+					return Asset.Name
+				end
+			end
+	
+			local typeofasset = tostring(arg[2]) -- Shirt or Pants
+			if not isfile(typeofasset.."Templates.txt") then
+				writefile(typeofasset.."Templates.txt","")
+			end
+	
+			local gui = Instance.new("ScreenGui")
+			if game:GetService("RunService"):IsStudio() then
+				gui.Parent = game.Players.LocalPlayer.PlayerGui
+			else
+				gui.Parent = game.CoreGui
+			end
+			local imagelabel = Instance.new("ImageLabel",gui)
+			imagelabel.Size = UDim2.new(0.05,0,0.1,0)
+			imagelabel.Position = UDim2.new(0,50,0,50)
+			imagelabel.Draggable = true
+	
+			local function getnumbers(value)
+				local strings = value:split("")
+				local valid = {}
+				for i = 1,#strings do
+					if strings[i] == 1 or strings[i] == 2 or strings[i] == 3 or strings[i] == 4 or strings[i] == 5 or strings[i] == 6 or strings[i] == 7 or strings[i] == 8 or strings[i] == 9 or strings[i] == 0 then
+						valid[#valid + 1] = strings[i]
+					elseif strings[i] == "1" or strings[i] == "2" or strings[i] == "3" or strings[i] == "4" or strings[i] == "5" or strings[i] == '6' or strings[i] == '7' or strings[i] == '8' or strings[i] == '9' or strings[i] == '0' then
+						valid[#valid + 1] = strings[i]
+					end
+				end
+				return tostring(table.concat(valid, ""))
+			end
+	
+	
+			local collected = {}
+			for i,v in pairs(game.Workspace:GetDescendants()) do
+				if v:IsA(typeofasset) and not table.find(collected,v[typeofasset.."Template"]) then
+					writefile(typeofasset.."Templates.txt",readfile(typeofasset.."Templates.txt")..getname(getnumbers(v[typeofasset.."Template"])).."   ".."https://www.roblox.com/library/"..getnumbers(v[typeofasset.."Template"]).."/"..getname(getnumbers(v[typeofasset.."Template"])).."\n")
+					collected[#collected+1] = v[typeofasset.."Template"]
+					imagelabel.Image = v[typeofasset.."Template"]
+					print("saved")
+				end
+			end
+			imagelabel:Destroy()
+		end
+	end)
+	
+	addcmd("audiologger","","Gives a audiologger GUI",function(arg)
+		notify(2,"Loading...")
+		--[[This is san/tal's audiologger. I spent about 2 days making this. Have fun getting audios!]]
+		loadstring(game:HttpGet("https://pastebin.com/raw/z80z5Nee",true))()
+	end)
+	
+	addcmd("deleteadmin","Yes or no","Deletes the admin gui",function(arg)
+		if arg[2] == "yes" then
+			doritos:Disconnect()
+			romainia:Disconnect()
+			starterinput:Disconnect()
+			openedi:Disconnect()
+			marioi:Disconnect()
+			luigijuice:Disconnect()
+			unfly()
+			bald:Disconnect()
+			script.Parent.Parent:Destroy()
+		end
+	end)
+	
+	addcmd("firealltouchinterest","","Fires touch interests", function()
+		for i,v in pairs(game.Workspace:GetDescendants()) do
+			if v:IsA("TouchTransmitter") then
+				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v)
+			end
+		end
+	end)
+	
+	esp = false
+	function Esp(plr)
+		if tostring(plr):lower() == "all" then
+			for i,v in pairs(game.Players:GetPlayers()) do
+				Esp(v)
+			end
+		end
+		if esp == false and plr and tostring(plr):lower() ~= "all" then
+			spawn(function()
+				esp = true
+				local spawnchecking = plr.CharacterAdded:Connect(function()
+					repeat wait() until plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
+					local chosen = plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
+					local Top = Instance.new("SurfaceGui")
+					local TextLabel = Instance.new("TextLabel")
+					local Bottom = Instance.new("SurfaceGui")
+					local TextLabel_2 = Instance.new("TextLabel")
+					local Left = Instance.new("SurfaceGui")
+					local TextLabel_3 = Instance.new("TextLabel")
+					local Front = Instance.new("SurfaceGui")
+					local TextLabel_4 = Instance.new("TextLabel")
+					local Back = Instance.new("SurfaceGui")
+					local TextLabel_5 = Instance.new("TextLabel")
+					local Right = Instance.new("SurfaceGui")
+					local TextLabel_6 = Instance.new("TextLabel")
+	
+					Top.Name = "Top"
+					Top.Parent = chosen
+					Top.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Top.AlwaysOnTop = true
+					Top.Face = Enum.NormalId.Top
+					Top.LightInfluence = 1.000
+	
+					TextLabel.Parent = Top
+					TextLabel.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel.BackgroundTransparency = 0.500
+					TextLabel.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel.Font = Enum.Font.SourceSans
+					TextLabel.Text = ""
+					TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel.TextSize = 14.000
+	
+					Bottom.Name = "Bottom"
+					Bottom.Parent = chosen
+					Bottom.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Bottom.AlwaysOnTop = true
+					Bottom.Face = Enum.NormalId.Bottom
+					Bottom.LightInfluence = 1.000
+	
+					TextLabel_2.Parent = Bottom
+					TextLabel_2.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel_2.BackgroundTransparency = 0.500
+					TextLabel_2.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel_2.Font = Enum.Font.SourceSans
+					TextLabel_2.Text = ""
+					TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel_2.TextSize = 14.000
+	
+					Left.Name = "Left"
+					Left.Parent = chosen
+					Left.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Left.AlwaysOnTop = true
+					Left.Face = Enum.NormalId.Left
+					Left.LightInfluence = 1.000
+	
+					TextLabel_3.Parent = Left
+					TextLabel_3.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel_3.BackgroundTransparency = 0.500
+					TextLabel_3.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel_3.Font = Enum.Font.SourceSans
+					TextLabel_3.Text = ""
+					TextLabel_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel_3.TextSize = 14.000
+	
+					Front.Name = "Front"
+					Front.Parent = chosen
+					Front.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Front.AlwaysOnTop = true
+					Front.LightInfluence = 1.000
+	
+					TextLabel_4.Parent = Front
+					TextLabel_4.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel_4.BackgroundTransparency = 0.500
+					TextLabel_4.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel_4.Font = Enum.Font.SourceSans
+					TextLabel_4.Text = ""
+					TextLabel_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel_4.TextSize = 14.000
+	
+					Back.Name = "Back"
+					Back.Parent = chosen
+					Back.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Back.AlwaysOnTop = true
+					Back.Face = Enum.NormalId.Back
+					Back.LightInfluence = 1.000
+	
+					TextLabel_5.Parent = Back
+					TextLabel_5.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel_5.BackgroundTransparency = 0.500
+					TextLabel_5.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel_5.Font = Enum.Font.SourceSans
+					TextLabel_5.Text = ""
+					TextLabel_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel_5.TextSize = 14.000
+	
+					Right.Name = "Right"
+					Right.Parent = chosen
+					Right.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					Right.AlwaysOnTop = true
+					Right.Face = Enum.NormalId.Right
+					Right.LightInfluence = 1.000
+	
+					TextLabel_6.Parent = Right
+					TextLabel_6.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+					TextLabel_6.BackgroundTransparency = 0.500
+					TextLabel_6.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel_6.Font = Enum.Font.SourceSans
+					TextLabel_6.Text = ""
+					TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
+					TextLabel_6.TextSize = 14.000
+	
+					repeat wait() until not plr or esp == false
+					if Top then
+						Top:Destroy()
+					end
+					if Bottom then
+						Bottom:Destroy()
+					end
+					if Left then
+						Left:Destroy()
+					end
+					if Right then
+						Right:Destroy()
+					end
+					if Back then
+						Back:Destroy()
+					end
+					if Front then
+						Front:Destroy()
+					end
+				end)
+				local chosen = plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
+				local Top = Instance.new("SurfaceGui")
+				local TextLabel = Instance.new("TextLabel")
+				local Bottom = Instance.new("SurfaceGui")
+				local TextLabel_2 = Instance.new("TextLabel")
+				local Left = Instance.new("SurfaceGui")
+				local TextLabel_3 = Instance.new("TextLabel")
+				local Front = Instance.new("SurfaceGui")
+				local TextLabel_4 = Instance.new("TextLabel")
+				local Back = Instance.new("SurfaceGui")
+				local TextLabel_5 = Instance.new("TextLabel")
+				local Right = Instance.new("SurfaceGui")
+				local TextLabel_6 = Instance.new("TextLabel")
+	
+				Top.Name = "Top"
+				Top.Parent = chosen
+				Top.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Top.AlwaysOnTop = true
+				Top.Face = Enum.NormalId.Top
+				Top.LightInfluence = 1.000
+	
+				TextLabel.Parent = Top
+				TextLabel.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel.BackgroundTransparency = 0.500
+				TextLabel.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel.Font = Enum.Font.SourceSans
+				TextLabel.Text = ""
+				TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel.TextSize = 14.000
+	
+				Bottom.Name = "Bottom"
+				Bottom.Parent = chosen
+				Bottom.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Bottom.AlwaysOnTop = true
+				Bottom.Face = Enum.NormalId.Bottom
+				Bottom.LightInfluence = 1.000
+	
+				TextLabel_2.Parent = Bottom
+				TextLabel_2.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel_2.BackgroundTransparency = 0.500
+				TextLabel_2.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel_2.Font = Enum.Font.SourceSans
+				TextLabel_2.Text = ""
+				TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel_2.TextSize = 14.000
+	
+				Left.Name = "Left"
+				Left.Parent = chosen
+				Left.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Left.AlwaysOnTop = true
+				Left.Face = Enum.NormalId.Left
+				Left.LightInfluence = 1.000
+	
+				TextLabel_3.Parent = Left
+				TextLabel_3.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel_3.BackgroundTransparency = 0.500
+				TextLabel_3.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel_3.Font = Enum.Font.SourceSans
+				TextLabel_3.Text = ""
+				TextLabel_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel_3.TextSize = 14.000
+	
+				Front.Name = "Front"
+				Front.Parent = chosen
+				Front.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Front.AlwaysOnTop = true
+				Front.LightInfluence = 1.000
+	
+				TextLabel_4.Parent = Front
+				TextLabel_4.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel_4.BackgroundTransparency = 0.500
+				TextLabel_4.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel_4.Font = Enum.Font.SourceSans
+				TextLabel_4.Text = ""
+				TextLabel_4.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel_4.TextSize = 14.000
+	
+				Back.Name = "Back"
+				Back.Parent = chosen
+				Back.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Back.AlwaysOnTop = true
+				Back.Face = Enum.NormalId.Back
+				Back.LightInfluence = 1.000
+	
+				TextLabel_5.Parent = Back
+				TextLabel_5.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel_5.BackgroundTransparency = 0.500
+				TextLabel_5.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel_5.Font = Enum.Font.SourceSans
+				TextLabel_5.Text = ""
+				TextLabel_5.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel_5.TextSize = 14.000
+	
+				Right.Name = "Right"
+				Right.Parent = chosen
+				Right.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				Right.AlwaysOnTop = true
+				Right.Face = Enum.NormalId.Right
+				Right.LightInfluence = 1.000
+	
+				TextLabel_6.Parent = Right
+				TextLabel_6.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
+				TextLabel_6.BackgroundTransparency = 0.500
+				TextLabel_6.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel_6.Font = Enum.Font.SourceSans
+				TextLabel_6.Text = ""
+				TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
+				TextLabel_6.TextSize = 14.000
+	
+				repeat wait() until not plr or esp == false
+				if Top then
+					Top:Destroy()
+				end
+				if Bottom then
+					Bottom:Destroy()
+				end
+				if Left then
+					Left:Destroy()
+				end
+				if Right then
+					Right:Destroy()
+				end
+				if Back then
+					Back:Destroy()
+				end
+				if Front then
+					Front:Destroy()
+				end
+				repeat wait() until not plr or esp == false
+				if plr then
+					spawnchecking:Disconnect()
+					print("Disabled")
+					esp = false
+				end
+			end)
+		end
+	end
+	
+	function unEsp()
+		esp = false
+	end
+	
+	addcmd("esp","plr or all","Highlights a player", function(arg)
+		if getplayer(arg[2]) or arg[2]:lower() == "all" then
+			if arg[2]:lower() == "all" then
+				Esp("all")
+			else
+				Esp(game.Players[getplayer(arg[2])])
+			end
+		end
+	end)
+	
+	addcmd("unesp","","Removes all of the highlighting", function()
+		unEsp()
+	end)
+	
+	addcmd("spin","number","Makes you *spin*",function(arg)
+		runcmd("unspin")
+		if not arg[2] then
+			arg[2] = 1
+		end
+		local spin = Instance.new("BodyAngularVelocity",localplayer.Character.HumanoidRootPart)
+		spin.Name = "BAspin"
+		spin.MaxTorque = Vector3.new(0,'inf',0)
+		spin.AngularVelocity = Vector3.new(0,arg[2],0)
+	end)
+	
+	addcmd("unspin","","Makes you stop spinning",function()
+		local spin = localplayer.Character.HumanoidRootPart:FindFirstChild("BAspin")
+		if spin then
+			spin:Destroy()
+		end
+	end)
+	
+	addcmd("fireallclickdetectors","","Fires all click detectors", function(arg)
+		if fireclickdetector then
+			for i,v in pairs(game.Workspace:GetDescendants()) do
+				if v:IsA("ClickDetector") then
+					fireclickdetector(v)
+				end
+			end
+		else
+			notify("Exploit not supported")
+		end
+	end)
+	
+	addcmd("tpparts","plr","Teleports unanchored parts",function(arg)
+		local target = game.Players[getplayer(arg[2])].Character.HumanoidRootPart
+		if setsimulationradius then
+			local function move(part,PartToGoto)
+				if part:FindFirstChildWhichIsA("BodyPosition") then
+					repeat
+						game:GetService("RunService").Stepped:Wait()
+						if part:FindFirstChildWhichIsA("BodyPosition") then
+							part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+							print("Deleted")
+						end
+					until not part:FindFirstChildWhichIsA("BodyPosition")
+				end
+				local tp = Instance.new("BodyPosition",part)
+				tp.MaxForce = Vector3.new('inf','inf','inf')
+				spawn(function()
+					if enabled == false and PartToGoto ~= nil and PartToGoto ~= "" then
+						if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
+							part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+							print("Stopped")
+						end
+					end
+					pcall(function()
+						setsimulationradius(9e9,9e9)
+						part.CanCollide = false
+						if PartToGoto == nil or PartToGoto == "" then
+							tp.Position = target.Position
+						else
+							print("not fine")
+							tp.position = PartToGoto.Position
+						end
+						wait(3)
+						tp:Destroy()
+					end)
+				end)
+			end
+	
+			for i,v in pairs(game.Workspace:GetDescendants()) do
+				if v:IsA("BasePart") and v.Anchored == false and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
+					if v and v:FindFirstChildWhichIsA"Weld" and v:FindFirstChildWhichIsA"Weld".Enabled == false and v:FindFirstChildWhichIsA"WeldConstraint" and v:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
+						move(v)
+					elseif not v:FindFirstChildWhichIsA"WeldConstraint" and not v:FindFirstChildWhichIsA"Weld" then
+						move(v)
+					end
+				end
+			end
+		else
+			notify(5,"Exploit not supported")
+		end
+	end)
+	local target = ""
+	local enabled = false
+	
+	addcmd("unlooptpparts","","Disables the tp thing",function(arg)
+		enabled = false    
+	
+	end)
+	
+	addcmd("bindkey","press a key","Binds a command to a key", function(arg)
+		local currentkey = ""
+		local enabled = true
+		local ctrlpressed = false
+		local uis = game:GetService("UserInputService")
+		notify(1,"Press a key to bind the command")
+		local start = uis.InputBegan:Connect(function(key)
+			currentkey = uis:GetStringForKeyCode(key.KeyCode)
+		end)
+		repeat wait() until currentkey ~= ""
+		start:Disconnect()
+		notify(3,"Binded "..currentkey.." to the command".. table.concat(arg, " " ,2)..", press \ and "..currentkey.." to remove the keybind")
+		local finished = false
+	
+		local realdeal = uis.InputBegan:Connect(function(key)
+			if ctrlpressed == true and uis:GetStringForKeyCode(key.KeyCode) == currentkey then
+				finished = true
+			elseif uis:GetStringForKeyCode(key.KeyCode) == currentkey and ctrlpressed == false and finished == false then
+				print("ran")
+				runcmd(table.concat(arg, " " ,2))
+			end
+		end)
+	
+		local saddeal = uis.InputBegan:Connect(function(key)
+			if key.KeyCode == Enum.KeyCode.BackSlash then
+				ctrlpressed = true
+				repeat
+					game:GetService("RunService").Stepped:Wait()
+				until key.UserInputState == Enum.UserInputState.End
+				ctrlpressed = false
+			end
+		end)
+	
+		repeat game:GetService("RunService").Stepped:Wait() until finished == true
+		realdeal:Disconnect()
+		saddeal:Disconnect()
+		print("removed command")
+	
+	end)
+	
+	
+	addcmd("looptpparts","plr","Brings parts to a player for eternity unless you quit. Laggy!",function(arg)
+		enabled = true
+		local lastpart = ""
+		spawn(function()
+			while wait() do
+				if enabled == false then
+					break
+				end
+				pcall(function()
+					target = game.Players[getplayer(arg[2])].Character.HumanoidRootPart -- can be anything that has the "position" property or a cframe.position.
+					loaded1 = true
+				end)
+			end
+		end)
+		repeat wait() until loaded1 == true
+		print("Loaded")
+		local function move(part,PartToGoto)
+			if part:FindFirstChildWhichIsA("BodyPosition") then
+				repeat
+					wait()
+					if part:FindFirstChildWhichIsA("BodyPosition") then
+						part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+						print("Deleted")
+					end
+				until not part:FindFirstChildWhichIsA("BodyPosition")
+			end
+			if enabled == true then
+				if lastpart ~= part.Name then
+					lastpart = part.Name
+				end
+				local tp = Instance.new("BodyPosition",part)
+				tp.MaxForce = Vector3.new('inf','inf','inf')
+				if PartToGoto == nil or PartToGoto == "" then
+					tp.Position = target.Position
+				else
+					print("not fine")
+					tp.position = PartToGoto.Position
+				end
+				spawn(function()
+					while wait(0.1) do
+						if enabled == false or part.Anchored == true then
+							if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
+								if part:FindFirstChildWhichIsA("BodyPosition") then
+									part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
+								end
+								print("Stopped")
+								break
+							end
+						end
+						pcall(function()
+							setsimulationradius(9e9,9e9)
+							part.CanCollide = false
+							if PartToGoto == nil or PartToGoto == "" then
+								tp.Position = target.Position
+							else
+								print("not fine")
+								tp.position = PartToGoto.Position
+							end
+						end)
+					end
+				end)
+			end
+			wait()
+		end
+	
+		local eee game.Workspace.DescendantAdded:Connect(function(thing)
+			if enabled == true and thing and thing:IsA("BasePart") and thing.Anchored == false and not thing:IsDescendantOf(game.Players.LocalPlayer.Character) then
+				if thing:FindFirstChildWhichIsA"Weld" and thing:FindFirstChildWhichIsA"Weld".Enabled == false and thing:FindFirstChildWhichIsA"WeldConstraint" and thing:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
+					move(thing)
+				elseif not thing:FindFirstChildWhichIsA"WeldConstraint" and not thing:FindFirstChildWhichIsA"Weld" then
+					move(thing)
+				end
+			elseif enabled == true and thing and thing:IsA("BasePart") and thing.Anchored == true and not thing:IsDescendantOf(game.Players.LocalPlayer.Character) then
+				spawn(function()
+					repeat wait() until not thing or thing.Anchored == false
+					wait()
+					print("not anchored")
+					move(thing)
+				end)
+			end
+		end)
+	
+	
+		for i,v in pairs(game.Workspace:GetDescendants()) do
+			if v:IsA("BasePart") and v.Anchored == false and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
+				if v and v:FindFirstChildWhichIsA"Weld" and v:FindFirstChildWhichIsA"Weld".Enabled == false and v:FindFirstChildWhichIsA"WeldConstraint" and v:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
+					move(v)
+				elseif not v:FindFirstChildWhichIsA"WeldConstraint" and not v:FindFirstChildWhichIsA"Weld" then
+					move(v)
+				end
+				wait()
+			elseif v and v:IsA("BasePart") and v.Anchored == true and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
+				spawn(function()
+					repeat wait() until not v or v.Anchored == false
+					move(v)
+					print("not anchored 1")
+				end)
+			end
+		end
+		repeat wait() until enabled == false
+		eee:Disconnect()
+	end)
+	
+	addcmd("setsimulationradius","number","Sets the simulation radius to a number",function(arg)
+		if setsimulationradius then
+			while wait() do
+				setsimulationradius(arg[2])    
+			end
+		else
+			notify(3,"Not suppored with your exploit")
+		end
+	end)
+	
+	addcmd("music","ID","Plays music of the specified ID",function(arg)
+		if arg[2] then
+			if game.Workspace:FindFirstChild("MUSIC") then
+				game.Workspace:FindFirstChild("MUSIC"):Destroy()
+			end
+			notify(5,"Playing  the ID ".. arg[2])
+			local sound = Instance.new("Sound",game.Workspace)
+			sound.Name = "MUSIC"
+			sound.SoundId = "rbxassetid://"..tostring(arg[2])
+			sound:Play()
+			repeat wait() until sound.Playing == false
+			if sound then
+				sound:Destroy()
+			end
+		end
+	end)
+	
+	
+	--Specific game commands
+	if game.GameId == 424968782 then --Ninja Simulator (Old)
+		addcmd('meditate', 'none', 'Meditates', function(arg)
+			local A_1 = game:GetService("Workspace")[game.Players.LocalPlayer.Name].Meditate.LocalScript
+			local Event = game:GetService("ReplicatedStorage").Remotes.Metitate
+			Event:InvokeServer(A_1)
+	
+		end)
+		addcmd('nknockback', 'player, force, time', 'Knockbacks player at the force of X and the time of Y', function(arg)
+			-- Script generated by R2Sv2
+			-- R2Sv2 fixed by ButterflyEffect, dragging function DanistyÂ§#9161
+			-- Remote Path: game:GetService("ReplicatedStorage").Remotes.Knockback
+	
+			local A_1 = game.Players[getplayer(arg[2])].Character.Humanoid
+			local A_2 = arg[3]
+			local A_3 = arg[4]
+			local Event = game:GetService("ReplicatedStorage").Remotes.Knockback
+			Event:InvokeServer(A_1, A_2, A_3)
+	
+		end)
+	
+	elseif game.GameId == 110988953 then
+		addcmd("autobuystuff", "", "Auto buys stuff in Wizard Tycoon", function() 
+			local team = tostring(game.Players.LocalPlayer.Team)
+			local parttoclick = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].GreenSecond.PurchasedObjects.Mine.Button.ClickDetector
+			spawn(function()
+				while wait() do
+					pcall(function()
+						local part11 = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].Essentials.Giver
+						local part21 = game.Players.LocalPlayer.Character.HumanoidRootPart
+						firetouchinterest(part21,part11,1)
+						firetouchinterest(part21,part11,0)
+						fireclickdetector(parttoclick)
+						wait()
+					end)
+				end
+			end)
+	
+	
+	
+			local path = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"]
+	
+			while wait() do
+				for i,v in pairs(path:GetDescendants()) do
+					if v:IsA("TouchTransmitter") and v.Parent.Parent:FindFirstChild("Price") then
+						wait()
+						pcall(function()
+							local part1 = v.Parent
+							local part2 = game.Players.LocalPlayer.Character.HumanoidRootPart
+							firetouchinterest(part2,part1,1)
+							wait()
+							firetouchinterest(part2,part1,0)
+						end)
+					end
+				end
+			end
+		end)
+	end
+	
+	addcmd("onspawnedcommand","Cmd","Uses the specified command when you respawn",function(arg)
+		spawnedcommand[#spawnedcommand+1] = table.concat(arg," ",2)
+		notify(5,"Added spawned command ".. spawnedcommand[#spawnedcommand])
+	end)
+	
+	addcmd("removespawnedcommand","Cmd","Deletes the command that runs when you respawn",function(arg)
+		local checking = table.find(spawnedcommand,table.concat(arg,2))
+		if checking then
+			table.remove(spawnedcommand,checking)
+			notify(5,"Removed spawned command "..table.concat(arg," ",2))
+		end
+	end)
+	
+	addcmd("removehighlighting","","Removes the command highlighting",function(arg)
+		script.Parent.Parent.CommandHighlighting.Visible = false
+	end)
+	
+	addcmd("showhighlighting","","Shows the command highlighting",function(arg)
+		script.Parent.Parent.CommandHighlighting.Visible = true
+	end)
+	
+	addcmd("stopmusic","","Stops the music",function(arg)
+		if game.Workspace:FindFirstChild("MUSIC") then
+			game.Workspace:FindFirstChild("MUSIC"):Destroy()
+			notify(5,"Deleted the music")
+		end
+	end)
+	
+	addcmd("walkspeed","Int","Changes your walkspeed",function(arg)
+		if arg[2] then
+			localplayer.Character.Humanoid.WalkSpeed = arg[2]
+		end
+	end)
+	
+	addcmd("jumppower","Int","Changes your jumpheight",function(arg)
+		if arg[2] then
+			localplayer.Character.Humanoid.JumpPower = arg[2]
+		end
+	end)
+	
+	addcmd("gravity","Int","Changes gravity [CLIENT]",function(arg)
+		if arg[2] then
+			game.Workspace.Gravity = arg[2]
+		end
+	end)
+	
+	addcmd("rejoin","","Makes you rejoin the game",function(arg)
+		notify(5,"Rejoining...")
+		game:GetService("TeleportService"):Teleport(game.PlaceId)
+	end)
+	
+	addcmd("antiafk","","Prevents you from being kicked for being afk",function(arg)
+		local vu = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+	
+		notify(5,"Loaded Anti Afk")
+	end)
+	
+	addcmd("increaselighting","Int","Makes it brighter or darker depending on what you chose", function(arg)
+		if arg[2] then
+			game.Lighting.Brightness = arg[2]
+		end
+	end)
+	
+	addcmd("drophats","","Drops your accessories",function(arg)
+		for i,v in pairs(localplayer.Character:GetChildren()) do
+			if v:IsA("Accessory") then
+				v.Parent = game.Workspace
+			end
+		end
+	end)
+	
+	addcmd("chatlogs","","Shows a chatlogs gui that is included with this admin",function(arg)
+		notify(5,"Loading Chatlogs...")
+		script.Parent.Parent.Parent.Chatlogs.Visible = true
+	end)
+	
+	addcmd("closechatlogs","","Closes the chatlogs",function(arg)
+		script.Parent.Parent.Parent.Chatlogs.Visible = false
+	end)
+	
+	local antilag = false
+	
+	addcmd("antilag","","Turns on antilag",function()
+		antilag = true
+		local count = 0
+		local count1 = 0
+		function removetexture(part)
+			if part then
+				if part:IsA("MeshPart") or part:IsA("SpecialMesh") then
+					if part:IsA("MeshPart") then
+						part.TextureID = ""
+					else
+						part.TextureId = ""
+					end
+					count = count + 1
+				elseif part:IsA("Texture") or part:IsA("Decal") then
+					part:Destroy()
+					count1 = count1 + 1
+				end
+			end
+		end
+	
+		for i,v in pairs(workspace:GetDescendants()) do
+			removetexture(v)
+		end
+	
+		print("Changed "..count.." meshes")
+		print("Deleted "..count1.." textures")
+	
+		local newantilag = workspace.DescendantAdded:Connect(function(v)
+			wait(1)
+			if v then
+				removetexture(v)
+			end
+		end)
+	
+		repeat wait() until antilag == false
+		newantilag:Disconnect()
+	end)
+	
+	addcmd("unantilag","","Turns off the auto antilag",function()
+		antilag = false
+	end)
+	
+	addcmd("prefix","Key","Changes the prefix from "..tostring(prefix).." to your new chosen prefix",function(arg)
+		if string.len(arg[2]) <= 1 then
+			arg[2] = string.upper(arg[2])
+		else
+			local letters = arg[2]:split("")
+			letters[1] = string.upper(letters[1])
+			args[2] = table.concat(letters,"")
+		end
+		prefix = Enum.KeyCode[arg[2]]
+		notify(5,"Set prefix to the key "..arg[2])
+	end)
+	if game.GameId == 719754874 then
+		addcmd("ragdollengineadmin","","Loads the RGA I made, it prints the commands",function(arg)
+				--[[RAGDOLL ENGINE ADMIN MADE BY SAN
+			Commands are printed when you execute the script
+			Here you go]]
+			notify(5,"Loading ragdoll engine admin")
+			loadstring(game:HttpGet("https://pastebin.com/raw/EbGJu9A8",true))()
+		end)
+	end
+	
+	
+	addcmd("addcommand","look at gui","Adds a custom command",function(arg)
+		script.Parent.Parent.Parent.CustomCommand.Visible = true
+	end)
+	
+	local files = listfiles("Bleak Admin")
+	for i,v in pairs(files) do
+		local ran,error = pcall(function()
+			loadfile(v)()
+		end)
+		if not ran then
+			print(error)
+		end
+	end
+	
+	--if isfolder and not isfolder("Bleak Admin") then
+	--	makefolder("Bleak Admin")
+	--	wait(1)
+	--	writefile("Bleak Admin/Functions.txt","")
+	--	writefile("Bleak Admin/Descriptions.txt","")
+	--	writefile("Bleak Admin/Name.txt","")
+	--	writefile("Bleak Admin/Requirement.txt","")
+	--end
+	
+	close()
+	
+	script.Parent.Parent.Parent.CustomCommand.AddCommandButton.MouseButton1Click:Connect(function()
+		local name = script.Parent.Parent.Parent.CustomCommand.Title.Text
+		local descript = script.Parent.Parent.Parent.CustomCommand.Description.Text
+		local reqire = script.Parent.Parent.Parent.CustomCommand.Requirement.Text
+		local addfunction = script.Parent.Parent.Parent.CustomCommand.Script.Text
+		spawn(function()
+			wait(40)
+		end)
+		if name ~= "" and descript ~= "" and addfunction ~= "" then
+			addcmd(name,reqire,descript,function(arg)
+				loadstring("local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
+			end)
+		end
+	
+		if writefile then
+			writefile("Bleak Admin/"..name..".lua","local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
+			--function addcmd(cmd, requirement, description, functioninscript)
+		end
+	end)
+	update()
+	notify(5,"Updated the admin. Added tpparts and looptpparts and setsimulationradius.")
+end
+coroutine.wrap(KYNA_fake_script)()
+local function VUTJ_fake_script() -- CommandHighlighting.LocalScript 
+	local script = Instance.new('LocalScript', CommandHighlighting)
+
+	script.Parent.RichText = true
+	function highlight(text,r,g,b)
+		return '<font color= "rgb' .. '(' .. r .. ', ' .. g .. ', ' .. b .. ')" >'..text..'</font>'
+		--<font color= "rgb(240, 40, 10)">red text</font>
+		--<font color= "rgb (0, 150, 50)" >print</font>
+	end
+	
+	function findandhighlightplr(text)
+		local w = text
+		if w ~= nil and w~="" then
+			for i,v in pairs(game.Players:GetPlayers()) do
+				if string.lower(w) == string.lower(v.Name) then
+					w = highlight(w,115, 255, 148)
+				elseif string.match(string.lower(v.Name), string.lower(w)) then
+					w = highlight(text,158, 101, 255)
+				elseif string.lower(w) == "me" then
+					w = highlight(w,115, 255, 148)
+				end
+			end
+		end
+		return w
+	end
+	
+	function isNumber(letter)
+		local l = tostring(letter)
+		local isletter = false
+		if l == "1" or l == "2" or l == "3" or l == "4" or l == "5" or l == "6" or l == "7" or l == "8" or l == "9" or l == "0" then
+		else
+			isletter = true
+	
+		end
+		return isletter
+	end
+	
+	function highlighnormaltext(text)
+		local plrfound = false
+		local numberfound = false
+		for i,v in pairs(game.Players:GetPlayers()) do
+			if string.match(string.lower(v.Name), string.lower(text)) then
+				plrfound = true
+				break
+			end
+		end
+		if plrfound == false then
+			local str = text:split("")
+			for i,v in pairs(str) do
+				if isNumber(str[i]) == false then
+					numberfound = true
+				end
+			end
+		end
+		if plrfound == false and numberfound== false then
+			return highlight(text, 255, 192, 250)
+		else
+			return text
+		end
+	end
+	
+	function highlightnumber(text)
+		local isnumber = true
+		local str = text:split("")
+		for i = 1,#str do
+			if isNumber(str[i]) == false then
+			else
+				isnumber = false
+				break
+			end
+		end
+		if isnumber == true then
+			return highlight(text ,255, 166, 76)
+		else
+			return text
+		end
+	end
+	
+	function scaletext()
+		if script.Parent.Text == "" then
+			script.Parent.TextSize = 17
+		end
+		local finished = false
+		local rancount = 0
+		repeat 
+			local maxtextsize = script.Parent.AbsoluteSize.Y*0.95
+			if script.Parent.TextBounds.X >= script.Parent.AbsoluteSize.X * 0.95  or script.Parent.TextBounds.Y >= script.Parent.AbsoluteSize.Y * 0.95 and script.Parent.TextSize - 1 >= 1 then
+				script.Parent.TextSize = script.Parent.TextSize - 1
+				rancount = rancount + 1
+			elseif  script.Parent.TextBounds.Y < script.Parent.AbsoluteSize.Y * 0.95 and script.Parent.TextSize+1 <= maxtextsize then
+				script.Parent.TextSize = script.Parent.TextSize + 1
+				rancount = rancount + 1
+			else
+				finished = true
+			end
+		until script.Parent.TextBounds.X < script.Parent.AbsoluteSize.X * 0.90 or finished == true or rancount >= 10
+	end
+	
+	
+	script.Parent.Parent.CommandBar.Changed:Connect(function()
+		local args = script.Parent.Parent.CommandBar.Text:split(" ")
+		if args then
+			scaletext()
+			for i = 1, #args do
+				if i > 1 then
+					args[i] = findandhighlightplr(args[i])
+					args[i] = highlightnumber(args[i])
+					args[i] = highlighnormaltext(args[i])
+				elseif i == 1 and args[i] ~= "" and args[i] ~= nil then
+					args[i] = highlight(args[i],192, 250, 255)
+				else
+					args[i] = ""
+	
+				end
+			end
+		end
+		script.Parent.Text = table.concat(args," ")
+	end)
+	spawn(function()
+		while wait(1) do
+			pcall(function()
+				local args = script.Parent.Parent.CommandBar.Text:split(" ")
+				if args then
+					scaletext()
+					for i = 1, #args do
+						if i > 1 then
+							args[i] = findandhighlightplr(args[i])
+							args[i] = highlightnumber(args[i])
+							args[i] = highlighnormaltext(args[i])
+						elseif i == 1 and args[i] ~= "" and args[i] ~= nil then
+							args[i] = highlight(args[i],192, 250, 255)
+						else
+							args[i] = ""
+	
+						end
+					end
+				end
+				script.Parent.Text = table.concat(args," ")
+			end)
+		end
+	end)
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.CommandBar:CaptureFocus()
+	end)
+end
+coroutine.wrap(VUTJ_fake_script)()
+local function LTLFWBC_fake_script() -- Close.LocalScript 
+	local script = Instance.new('LocalScript', Close)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
+	end)
+end
+coroutine.wrap(LTLFWBC_fake_script)()
+local function DRUB_fake_script() -- BleakAdmin.NewScript 
+	local script = Instance.new('LocalScript', BleakAdmin)
+
+	local runservice = game:GetService("RunService")
+	
+	if runservice:IsStudio() then
+		script.Parent.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	else
+		script.Parent.Parent = game.CoreGui
+	end
+	
+	for i,v in pairs(script.Parent:GetDescendants()) do
+		if v:IsA("ScrollingFrame") then
+			print(v.Name)
+			v.MidImage = "http://www.roblox.com/asset/?id=5903324492"
+			v.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
+			v.TopImage = "http://www.roblox.com/asset/?id=5903324492"
+			spawn(function()
+				local beginnumber = 0.513722
+				local maxnumber = 0.624833
+				local number = 0.513722
+				local reversing = false
+				while wait() do
+					if reversing == false then
+						number = number + 0.001
+						v.ScrollBarImageColor3 = Color3.fromHSV(number,1,1)
+						if number > maxnumber then
+							reversing = true
+						end
+					else
+						number = number - 0.001
+						v.ScrollBarImageColor3 = Color3.fromHSV(number,1,1)
+						if number <= beginnumber then
+							number = beginnumber
+							reversing = false
+						end
+					end
+				end
+			end)
+		end
+	end
+	
+	local UIS = game:GetService("UserInputService")
+	local function dragify(Frame)
+		local dragToggle = nil
+		local dragSpeed = 1
+		local dragInput = nil
+		local dragStart = nil
+		local dragPos = nil
+		local function updateInput(input)
+			local Delta = input.Position - dragStart
+			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25,Enum.EasingStyle.Quad), {Position = Position}):Play()
+		end
+		Frame.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				if UIS:GetFocusedTextBox() == nil then
+					dragToggle = true
+					dragStart = input.Position
+					startPos = Frame.Position
+					input.Changed:Connect(function()
+						if input.UserInputState == Enum.UserInputState.End then
+							dragToggle = false
+						end
+					end)
+				end
+			end
+		end)
+		Frame.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragToggle then
+				updateInput(input)
+			end
+		end)
+	end
+	dragify(script.Parent:WaitForChild("MainFrame"))
+end
+coroutine.wrap(DRUB_fake_script)()
+local function RYMP_fake_script() -- Chatlogs_2.ChatScript 
+	local script = Instance.new('LocalScript', Chatlogs_2)
+
+	local messages = {}
+	
+	local lastmessagesaid = ""
+	local amountrepeated = 1
+	local lasttext = ""
+	local oldtext = ""
+	local totalsize = 25
+	local realmessage = {}
+	local realoldtext = ""
+	local autosaving = false
+	if isfile and isfile("Bleak Admin/ChatSettings.txt") then
+		local settings = readfile("Bleak Admin/ChatSettings.txt"):split("\n")
+		if settings[1] == true then
+			autosaving = true
+			script.Parent.Parent.AutoSave.Text = "Autosave [true]"
+			if writefile and isfile("Bleak Admin/Chatlogs.txt") then
+				writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
+				realmessage = {}
+			elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") then
+				writefile("Bleak Admin/Chatlogs.txt", "New chatlogs \n\n"..table.concat(realmessage,"\n"))
+				realmessage = {}
+			elseif not writefile then
+				script.Parent.Parent.Save.Text = "Not supported"
+				wait(5)
+				script.Parent.Parent.Save.Text = "Save"
+			end
+		else
+			script.Parent.Parent.AutoSave.Text = "Autosave [false]"
+		end
+	end
+	
+	
+	function getTime()
+		local date = os.date("*t")
+		local hour = tonumber(date["hour"])
+		local minute = date["min"]
+		local letter = ""
+		if hour > 12 then
+			hour = hour - 12
+			letter = "PM"
+		else
+			letter = "AM"
+		end
+		if hour == 0 then
+			hour = 12
+		end
+		if minute < 10 then
+			minute = 0 .. minute
+		end
+		return hour..":"..minute.." "..letter
+	end
+	
+	function highlight(text,r,g,b)
+		return '<font color= "rgb' .. '(' .. r .. ', ' .. g .. ', ' .. b .. ')" >'..text..'</font>'
+	end
+	
+	local function resize(instance)
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,-2)
+		until instance.TextFits == false
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,2)
+		until instance.TextFits == true
+		instance.Size = instance.Size + UDim2.fromOffset(0,7)
+	end
+	
+	local function logplr(plr)
+		game.Players[plr].Chatted:Connect(function(msg)
+			if lastmessagesaid ~= msg then
+				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg
+				realoldtext = realmessage[#realmessage] 
+				if writefile and isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
+					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
+					realmessage = {}
+				elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
+					writefile("Bleak Admin/Chatlogs.txt", realoldtext)
+					realmessage = {}
+				end
+				lastmessagesaid = msg
+				amountrepeated = 1
+				if plr.Name == game.Players.LocalPlayer.Name then
+					messages[#messages+1] = getTime().." ["..highlight(plr,253, 150, 255).."]"..": ".. msg
+				else
+					messages[#messages+1] = getTime().." ".."["..highlight(plr,253, 255, 92).."]"..": ".. msg
+				end
+				local newchat = script.Parent.AddChat:Clone()
+				newchat.Name = plr
+				local first3letterofplr = string.lower(string.sub(game.Players.LocalPlayer.Name,0,3))
+				local first3letterofmsg = string.lower(string.sub(msg,0,3))
+				local checkedpassed = 0
+				local excludespaces = msg:split(" ")
+				for i,v in pairs(excludespaces) do
+					local letters3 = string.lower(string.sub(v,0,3))
+					if first3letterofplr == letters3 then
+						first3letterofmsg = letters3
+					end
+				end
+				if string.match(string.lower(msg),"www") or string.match(string.lower(msg),"http") or string.match(string.lower(msg),"//") or string.match(string.lower(msg),".com") or string.match(string.lower(msg),".org") or string.match(string.lower(msg),"net") or string.match(string.lower(msg),"site") then
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "url"
+					newchat.TextColor3 = Color3.fromRGB(0, 170, 255)
+				elseif string.match(msg,";") or string.match(msg,":") then
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "admin"
+					newchat.TextColor3 = Color3.fromRGB(255, 0, 0)
+				elseif first3letterofmsg == first3letterofplr then
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "localname"
+					newchat.TextColor3 = Color3.fromRGB(255, 0, 0)
+				elseif string.match(string.lower(msg),"/w") then
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "pm"
+					newchat.TextColor3 = Color3.fromRGB(71, 255, 163)
+				elseif string.match(string.lower(msg),"exploit") or string.match(string.lower(msg),"synapse") or string.match(string.lower(msg),"jjsploit") or string.match(string.lower(msg),"report") or string.match(string.lower(msg),"exploit") or string.match(string.lower(msg),"hack") then
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "exploiter"
+					newchat.TextColor3 = Color3.fromRGB(255, 199, 69)
+				else
+					local tag = Instance.new("StringValue",newchat)
+					tag.Name = "tag"
+					tag.Value = "none"
+				end
+				
+				local tags = {
+					"url";
+					"localname";
+					"pm";
+					"admin";
+					"exploiter";
+					"none";
+				}
+				
+				newchat.Parent = script.Parent
+				newchat.Text = " "..messages[#messages]
+				newchat.RichText = true
+				newchat.TextXAlignment = Enum.TextXAlignment.Left
+				resize(newchat)
+				newchat.MouseButton1Click:Connect(function()
+					if setclipboard then
+						setclipboard(msg)
+					else
+						print(msg)
+					end
+				end)
+				newchat.Position = UDim2.fromOffset(script.Parent.AbsoluteWindowSize.X+1,totalsize)
+				newchat:TweenPosition(UDim2.fromOffset(0,totalsize),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true,function()
+					newchat.BackgroundTransparency = 1
+				end)
+				totalsize = totalsize + newchat.Size.Y.Offset
+				lasttext = newchat
+				oldtext = newchat.Text
+				local scroll = false
+				if script.Parent.CanvasPosition.Y + (script.Parent.CanvasSize.Y.Offset/250) >= script.Parent.CanvasSize.Y.Offset - script.Parent.AbsoluteWindowSize.Y then
+					scroll = true
+				end
+				script.Parent.CanvasSize = UDim2.fromOffset(0,totalsize)
+				if scroll == true then
+					script.Parent.CanvasPosition = Vector2.new(0,totalsize)
+				end	
+			elseif lastmessagesaid == msg then
+				amountrepeated = amountrepeated+1
+				lasttext.Text = oldtext.." (".. amountrepeated.."x)"
+				realmessage[#realmessage] = realoldtext.." (".. amountrepeated.."x)"
+			end
+		end)
+	end
+	
+	
+	script.Parent.Parent.Save.MouseButton1Click:Connect(function()
+		if writefile and isfile("Bleak Admin/Chatlogs.txt") then
+			writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
+			realmessage = {}
+		elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") then
+			writefile("Bleak Admin/Chatlogs.txt", "New chatlogs \n\n"..table.concat(realmessage,"\n"))
+			realmessage = {}
+		elseif not writefile then
+			script.Parent.Parent.Save.Text = "Not supported"
+			wait(5)
+			script.Parent.Parent.Save.Text = "Save"
+		end
+	end)
+	
+	script.Parent.Parent.Clear.MouseButton1Click:Connect(function()
+		messages = {}
+	
+		lastmessagesaid = ""
+		amountrepeated = 1
+		lasttext = script.Parent.AddChat
+		oldtext = ""
+		totalsize = 25
+		realmessage = {}
+		realoldtext = ""
+		script.Parent.CanvasSize = UDim2.fromOffset(0,25)
+		for i,v in pairs(script.Parent:GetChildren()) do
+			if v:IsA("TextButton") and v.Name ~="AddChat" then
+				v:Destroy()
+			end
+		end
+	
+	end)
+	
+	for i,v in pairs(game.Players:GetPlayers()) do
+		logplr(v.Name)
+	end
+	
+	game.Players.PlayerAdded:Connect(function(e)
+		logplr(e.Name)
+	end)
+	
+	script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
+	
+	script.Parent.Parent.AutoSave.MouseButton1Click:Connect(function()
+		autosaving = not autosaving
+		script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
+	end)
+	
+	local UIS = game:GetService("UserInputService")
+	local function dragify(Frame)
+		local dragToggle = nil
+		local dragSpeed = 1
+		local dragInput = nil
+		local dragStart = nil
+		local dragPos = nil
+		local function updateInput(input)
+			local Delta = input.Position - dragStart
+			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
+			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25,Enum.EasingStyle.Quad), {Position = Position}):Play()
+		end
+		Frame.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				if UIS:GetFocusedTextBox() == nil then
+					dragToggle = true
+					dragStart = input.Position
+					startPos = Frame.Position
+					input.Changed:Connect(function()
+						if input.UserInputState == Enum.UserInputState.End then
+							dragToggle = false
+						end
+					end)
+				end
+			end
+		end)
+		Frame.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end)
+		game:GetService("UserInputService").InputChanged:Connect(function(input)
+			if input == dragInput and dragToggle then
+				updateInput(input)
+			end
+		end)
+	end
+	spawn(function()
+		dragify(script.Parent.Parent)
+	end)
+end
+coroutine.wrap(RYMP_fake_script)()
+local function XSRM_fake_script() -- AddChat.Chatscript 
+	local script = Instance.new('LocalScript', AddChat)
+
+	local scrollingframe = script.Parent.Parent
+	spawn(function()
+		repeat wait() until scrollingframe.CanvasSize.Y.Offset > scrollingframe.AbsoluteWindowSize.Y
+		script.Parent.Size = UDim2.new(1,script.Parent.Size.X.Offset - (scrollingframe.ScrollBarThickness + 1),0,script.Parent.Size.Y.Offset)
+		script:Destroy()
+	end)
+end
+coroutine.wrap(XSRM_fake_script)()
+local function XCSQCZ_fake_script() -- Search.LocalScript 
+	local script = Instance.new('LocalScript', Search)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Chatlogs.Visible = not script.Parent.Parent.Chatlogs.Visible
+		script.Parent.Parent.Searching.Visible = not script.Parent.Parent.Searching.Visible
+		if script.Parent.Parent.Chatlogs.Visible == true then
+			script.Parent.Text = "Search"
+			script.Parent.Parent.SearchBar.Visible = false
+			script.Parent.Parent.TagType.Visible = false
+		else
+			script.Parent.Text = "Close Search"
+			script.Parent.Parent.SearchBar.Visible = true
+			script.Parent.Parent.TagType.Visible = true
+		end
+	end)
+end
+coroutine.wrap(XCSQCZ_fake_script)()
+local function NMDCBMH_fake_script() -- SearchBar.LocalScript 
+	local script = Instance.new('LocalScript', SearchBar)
+
+	local focused = false
+	local uis = game:GetService("UserInputService")
+	uis.TextBoxFocused:Connect(function(thing)
+		if thing.Name == script.Parent.Name then
+			focused = true
+			uis.TextBoxFocusReleased:Wait()
+			focused = false
+		end
+	end)
+	tag = script.Parent.Parent.TagType
+	function search(text)
+		text = text:lower()	
+		local totalsize = 0
+		for i,v in pairs(script.Parent.Parent.Searching:GetChildren()) do
+			v:Destroy()
+		end
+		script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,0)
+		if tag.Text == "user" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+				if v.Name:lower():match(text) and v.Name ~= "AddChat" and v:IsA("TextButton") then
+					local found = v:Clone()
+					found.Parent = script.Parent.Parent.Searching
+					found.Position = UDim2.fromOffset(0,totalsize)
+					totalsize = totalsize + v.AbsoluteSize.Y
+					script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+				end
+			end
+		elseif tag.Text == "msgtxt" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+	
+				if v:IsA("TextButton") and  v.Name ~= "AddChat" then
+					local msgs = v.Text:split(": ")
+					local msg = msgs[2]
+					if msg then
+						msg = msg:lower()
+					end
+					if msg and msg:match(text) then
+						local found = v:Clone()
+						found.Parent = script.Parent.Parent.Searching
+						found.Position = UDim2.fromOffset(0,totalsize)
+						totalsize = totalsize + v.AbsoluteSize.Y
+						script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+					end
+				end
+			end
+		elseif tag.Text == "pm" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+				if v:IsA("TextButton") and v.Text:lower():match("/w") and v.Name ~= "AddChat" then
+					local msgs = v.Text:split(": ")
+					local msg = msgs[2]
+					if msg then
+						msg = msg:lower()
+					end
+					if msg and msg:match(text) then
+						local found = v:Clone()
+						found.Parent = script.Parent.Parent.Searching
+						found.Position = UDim2.fromOffset(0,totalsize)
+						totalsize = totalsize + v.AbsoluteSize.Y
+						script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+					end
+				end
+			end
+		elseif tag.Text == "localname" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "localname" then
+					local msgs = v.Text:split(": ")
+					local msg = msgs[2]
+					if msg then
+						msg = msg:lower()
+					end
+					if msg and msg:match(text) then
+						local found = v:Clone()
+						found.Parent = script.Parent.Parent.Searching
+						found.Position = UDim2.fromOffset(0,totalsize)
+						totalsize = totalsize + v.AbsoluteSize.Y
+						script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+					end
+				end
+			end
+		elseif tag.Text == "url" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "url" then
+					local msgs = v.Text:split(": ")
+					local msg = msgs[2]
+					if msg then
+						msg = msg:lower()
+					end
+					if msg and msg:match(text) then
+						local found = v:Clone()
+						found.Parent = script.Parent.Parent.Searching
+						found.Position = UDim2.fromOffset(0,totalsize)
+						totalsize = totalsize + v.AbsoluteSize.Y
+						script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+					end
+				end
+			end
+		end
+	end
+	
+	local lasttag = tag.Text
+	
+	tag.Changed:Connect(function()
+		if tag.Text ~= lasttag then
+			lasttag = tag.Text
+		script.Parent.Text = ""
+			search(script.Parent.Text)
+		end
+	end)
+	
+	script.Parent.Parent.Chatlogs.ChildAdded:Connect(function()
+		game:GetService("RunService").Stepped:Wait()
+		search(script.Parent.Text)
+	end)
+	
+	uis.InputBegan:Connect(function()
+		if focused == true then
+			game:GetService("RunService").Stepped:Wait()
+			search(script.Parent.Text)
+		end
+	end)
+end
+coroutine.wrap(NMDCBMH_fake_script)()
+local function FWYXV_fake_script() -- TagType.LocalScript 
+	local script = Instance.new('LocalScript', TagType)
+
+	local tags = {
+		"url";
+		"localname";
+		"msgtxt";
+		"user";
+		"pm";
+	}
+	
+	local number = 1
+	script.Parent.Text = tags[number]
+	script.Parent.MouseButton1Click:Connect(function()
+		number = number + 1
+		local tag = tags[number]
+		if tag then
+			script.Parent.Text = tag
+		else
+			number = 1
+			tag = tags[number]
+			script.Parent.Text = tag
+		end
+	end)
+end
+coroutine.wrap(FWYXV_fake_script)()
