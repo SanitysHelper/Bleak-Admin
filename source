@@ -1,3 +1,8 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
 local BleakAdmin = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local CommandList = Instance.new("ScrollingFrame")
@@ -49,7 +54,7 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = BleakAdmin
 MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BackgroundTransparency = 1.000
-MainFrame.Position = UDim2.new(0.609361649, 0, 0.344916344, 0)
+MainFrame.Position = UDim2.new(0.41957441, 0, 0.483912468, 0)
 MainFrame.Size = UDim2.new(0.132287234, 0, 0.223938227, 0)
 MainFrame.ZIndex = 0
 
@@ -62,7 +67,7 @@ CommandList.BorderColor3 = Color3.fromRGB(255, 255, 255)
 CommandList.Position = UDim2.new(0, 0, 0.231000006, -2)
 CommandList.Size = UDim2.new(0.999828994, 0, 0.670356393, 0)
 CommandList.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
-CommandList.CanvasPosition = Vector2.new(0, 29.749382)
+CommandList.CanvasPosition = Vector2.new(0, 57.3580017)
 CommandList.CanvasSize = UDim2.new(0, 0, 1, 0)
 CommandList.MidImage = "rbxassetid://967852047"
 
@@ -476,7 +481,7 @@ TagType.TextWrapped = true
 
 -- Scripts:
 
-local function RBAQ_fake_script() -- NewCommand.ButtonScript 
+local function LFMCHQU_fake_script() -- NewCommand.ButtonScript 
 	local script = Instance.new('LocalScript', NewCommand)
 
 	local scrollingframe = script.Parent.Parent
@@ -486,8 +491,8 @@ local function RBAQ_fake_script() -- NewCommand.ButtonScript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(RBAQ_fake_script)()
-local function KYNA_fake_script() -- CommandBar.LocalScript 
+coroutine.wrap(LFMCHQU_fake_script)()
+local function NSEQP_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -521,7 +526,12 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 	
 	if not loadfile then
 		function loadfile()
-	
+			local plugins = {
+				addcmd("kick","","Kicks you from the game", function()
+					game.Players.LocalPlayer:Kick()
+				end);
+			}
+			return plugins
 		end
 	end
 	
@@ -556,6 +566,7 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 	local function notify(time, text, pressfunction)
 		local notifying = script.Parent.Parent.Notification:Clone()
 		notifying.Parent = script.Parent.Parent
+		local pressed = false
 		notifying.Name = "Notifying"
 		if not time then
 			time = 1
@@ -564,15 +575,17 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		notifying.Visible = true
 		local timeleft = time
 		local newtext = text.." ("..timeleft..")"
-		notifying.MouseButton1Click:Connect(function()
-			if timeleft > 0 then
-				if pressfunction then
-					pressfunction()
-				end
-				timeleft = 0
-			end
-		end)
 		spawn(function()
+			notifying.MouseButton1Click:Connect(function()
+				if timeleft > 0 and pressed == false then
+					if pressfunction then
+						spawn(function()
+							pressfunction()
+						end)
+					end
+					timeleft = 0
+				end
+			end)
 			local done = false
 			notifying:TweenSize(UDim2.fromScale(0.854,notifying.Size.Y.Scale),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25,true,function() done = true end)
 			repeat wait() until done == true
@@ -656,10 +669,16 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		for i,v in pairs(game.Players:GetPlayers()) do
 			if string.lower(v.Name ) == string.lower(plr) then
 				return(v.Name)
-			elseif string.match(string.lower(v.Name),string.lower(plr)) then
+			elseif string.match(string.lower(v.Name),string.lower(plr)) and v.Name ~= localplayer.Name then
 				return(v.Name)
 			elseif string.lower(plr) == "me" then
 				return(localplayer.Name)
+			elseif string.lower(plr) == "random" then
+				local plrsingame = {}
+				for i,v in pairs(game.Players:GetPlayers()) do
+					table.insert(plrsingame,#plrsingame,v)
+				end
+				return plrsingame[math.random(0,#plrsingame)].Name
 			end
 		end
 	end
@@ -707,12 +726,11 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 			end
 	
 			if message ~= "" then
-				local shitass1 = message:split(" ")
+				local shitass = message:split(" ")
 				local suspiciousplayer = ""
-				for i,v in pairs(shitass1) do
+				for i,v in pairs(shitass) do
 					if getplayer(v) then
 						suspiciousplayer = suspiciousplayer..getplayer(v)..", "
-						print(suspiciousplayer)
 					end
 				end
 				if suspiciousplayer == "" then
@@ -825,17 +843,19 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		end
 		local number = getcmdnumber(cmdname)
 		if number then
-			local ran = nil
-			local error = ""
-			spawn(function()
-				ran,error = pcall(function()commands.Code[number](command)end)
-			end)
-			repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
-			if ran == true then
-			else
-				print(error)
-				return error
-			end
+			--local ran = nil
+			--local error = ""
+			--spawn(function()
+			--	ran,error = pcall(function()
+			commands.Code[number](command)
+			--end)
+			--	end)
+			--repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
+			--if ran == true then
+			--	else
+			--	print(error)
+			--	return error
+			--end
 		end
 	end
 	
@@ -986,15 +1006,18 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	
-	local loopedcommands = {}
+	local unloopcmd = false
 	
 	function loopcmd(seconds,amount, cmd)
 		seconds = tonumber(seconds)
 		amount = tonumber(amount)
-		print(seconds, amount, cmd)
 		for i = 1,amount do
-			runcmd(cmd)
-			wait(seconds)
+			if unloopcmd == false then
+				runcmd(cmd)
+				wait(seconds)
+			else
+				break
+			end
 		end
 		print("done")
 	end
@@ -1015,6 +1038,36 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	
+	function gettools(parttype)
+		if parttype == "char" then
+			local number = 0
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Tool") and v:FindFirstChild("Handle") then
+					number = number + 1
+				end
+			end
+			return number
+		elseif parttype == "backpack" then
+			local number = 0
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+				if v:IsA("Tool") and v:FindFirstChild"Handle" then
+					number = number + 1
+				end
+			end
+			return number
+		end
+	end
+	
+	function respawn()
+		localplayer.Character:ClearAllChildren()
+	end
+	
+	function checkroot()
+		if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+			return game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+		end
+	end
+	
 	function attach()
 		local humanoid = localplayer.Character.Humanoid
 		humanoid.Parent.Animate.Disabled = true
@@ -1029,12 +1082,6 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 				v.Parent = localplayer.Character
 			end
 		end
-		repeat wait() until not humanoid2 or not humanoid2.Parent:FindFirstChildWhichIsA("Tool")
-		if humanoid2 then
-			return true
-		else
-			return false
-		end
 	end
 	
 	
@@ -1042,6 +1089,10 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		if arg[2] then
 			print(table.concat(arg," ",2))
 		end
+	end)
+	
+	addcmd("respawn", "", "Makes you respawn in ".. game.Players.RespawnTime, function()
+		respawn()
 	end)
 	
 	
@@ -1054,22 +1105,59 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("loopcmd","Amount(a), Seconds(s), Command(c)","Loops the c a times every s second", function(arg)
+		unloopcmd = false
 		loopcmd(arg[2],arg[3],table.concat(arg," ",4))
 	end)
 	
 	addcmd("breakloops","","Breaks the loops",function()
-		loopedcommands = {}
+		unloopcmd = true
 	end)
 	
 	addcmd("goto","Plr","Teleports you to the player", function(arg)
-		if getplayer(arg[2]) then
+		if getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])] and game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart" then
 			localplayer.Character.HumanoidRootPart.CFrame = game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame
 		end
 	end)
 	
+	addcmd("cbring","Plr","Beings a player to you [CLIENT]",function(arg)
+		if getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])] and game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart" then
+			game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
+		end
+	end)
+	
 	addcmd("toolkill","[player] and requires a tool","Sends a player to the shadow realm with your tools",function(arg)
-		if getplayer(arg[2]) then
-			print(attach())
+		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
+			local victim = getplayer(arg[2])
+			local victimroot = game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart"
+			local oldpos = checkroot().CFrame
+			attach()
+			local hrp = checkroot() 
+			local done = false
+			spawn(function()
+				localplayer.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = oldpos
+			end)
+			repeat
+				game:GetService("RunService").Stepped:Wait()
+				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
+					hrp.CFrame = CFrame.new(99999999, workspace.FallenPartsDestroyHeight+2,99999999)
+					print("killing")
+				elseif hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil  then
+					runcmd("cbring "..victim)
+					print("going to player")
+				else
+					print("finished")
+					done = true
+				end
+			until not hrp or game.Players.LocalPlayer.Character == nil or not checkroot() or done == true or not getplayer(arg[2]) or game.Players[getplayer(arg[2])].Character == nil
+			if getplayer(arg[2]) and game.Players[getplayer(arg[2])].Character == nil and not victimroot or victimroot.Parent == nil then
+				notify(2,"Killed ".. victim .." successfully")
+			elseif getplayer(arg[2]) and game.Players[getplayer(arg[2])].Character ~= nil then
+				notify(2,"Failed to kill ".. victim..". Press this button to try again", function ()
+					runcmd("toolkill ".. victim)
+				end)
+			else
+				notify(1,"Player left")
+			end
 		end
 	end)
 	
@@ -1407,7 +1495,7 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 			romainia:Disconnect()
 			starterinput:Disconnect()
 			openedi:Disconnect()
-			marioi:Disconnect()
+			marioi:Disconnet()
 			luigijuice:Disconnect()
 			unfly()
 			bald:Disconnect()
@@ -2204,15 +2292,6 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 		end
 	end
 	
-	--if isfolder and not isfolder("Bleak Admin") then
-	--	makefolder("Bleak Admin")
-	--	wait(1)
-	--	writefile("Bleak Admin/Functions.txt","")
-	--	writefile("Bleak Admin/Descriptions.txt","")
-	--	writefile("Bleak Admin/Name.txt","")
-	--	writefile("Bleak Admin/Requirement.txt","")
-	--end
-	
 	close()
 	
 	script.Parent.Parent.Parent.CustomCommand.AddCommandButton.MouseButton1Click:Connect(function()
@@ -2224,9 +2303,7 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 			wait(40)
 		end)
 		if name ~= "" and descript ~= "" and addfunction ~= "" then
-			addcmd(name,reqire,descript,function(arg)
-				loadstring("local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
-			end)
+				loadstring("addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .." end)")()
 		end
 	
 		if writefile then
@@ -2237,8 +2314,8 @@ local function KYNA_fake_script() -- CommandBar.LocalScript
 	update()
 	notify(5,"Updated the admin. Added tpparts and looptpparts and setsimulationradius.")
 end
-coroutine.wrap(KYNA_fake_script)()
-local function VUTJ_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(NSEQP_fake_script)()
+local function RCBYXTL_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2264,14 +2341,18 @@ local function VUTJ_fake_script() -- CommandHighlighting.LocalScript
 		return w
 	end
 	
+	local previousletter = ""
+	
 	function isNumber(letter)
 		local l = tostring(letter)
 		local isletter = false
 		if l == "1" or l == "2" or l == "3" or l == "4" or l == "5" or l == "6" or l == "7" or l == "8" or l == "9" or l == "0" then
-		else
+		elseif l == "," and isNumber(previousletter) == false then
+			else
 			isletter = true
 	
 		end
+		previousletter = l
 		return isletter
 	end
 	
@@ -2384,16 +2465,16 @@ local function VUTJ_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(VUTJ_fake_script)()
-local function LTLFWBC_fake_script() -- Close.LocalScript 
+coroutine.wrap(RCBYXTL_fake_script)()
+local function VLIHQU_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(LTLFWBC_fake_script)()
-local function DRUB_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(VLIHQU_fake_script)()
+local function PXSAAG_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -2474,8 +2555,8 @@ local function DRUB_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(DRUB_fake_script)()
-local function RYMP_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(PXSAAG_fake_script)()
+local function PBBW_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -2583,7 +2664,7 @@ local function RYMP_fake_script() -- Chatlogs_2.ChatScript
 				elseif string.match(msg,";") or string.match(msg,":") then
 					local tag = Instance.new("StringValue",newchat)
 					tag.Name = "tag"
-					tag.Value = "admin"
+					tag.Value = "potentialadmin"
 					newchat.TextColor3 = Color3.fromRGB(255, 0, 0)
 				elseif first3letterofmsg == first3letterofplr then
 					local tag = Instance.new("StringValue",newchat)
@@ -2605,15 +2686,6 @@ local function RYMP_fake_script() -- Chatlogs_2.ChatScript
 					tag.Name = "tag"
 					tag.Value = "none"
 				end
-				
-				local tags = {
-					"url";
-					"localname";
-					"pm";
-					"admin";
-					"exploiter";
-					"none";
-				}
 				
 				newchat.Parent = script.Parent
 				newchat.Text = " "..messages[#messages]
@@ -2736,12 +2808,10 @@ local function RYMP_fake_script() -- Chatlogs_2.ChatScript
 			end
 		end)
 	end
-	spawn(function()
 		dragify(script.Parent.Parent)
-	end)
 end
-coroutine.wrap(RYMP_fake_script)()
-local function XSRM_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(PBBW_fake_script)()
+local function CXWC_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -2751,8 +2821,8 @@ local function XSRM_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(XSRM_fake_script)()
-local function XCSQCZ_fake_script() -- Search.LocalScript 
+coroutine.wrap(CXWC_fake_script)()
+local function UFVHBD_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2769,8 +2839,8 @@ local function XCSQCZ_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(XCSQCZ_fake_script)()
-local function NMDCBMH_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(UFVHBD_fake_script)()
+local function BAVWJW_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -2869,6 +2939,23 @@ local function NMDCBMH_fake_script() -- SearchBar.LocalScript
 					end
 				end
 			end
+		elseif tag.Text == "potentialadmin" then
+			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "potentialadmin" then
+					local msgs = v.Text:split(": ")
+					local msg = msgs[2]
+					if msg then
+						msg = msg:lower()
+					end
+					if msg and msg:match(text) then
+						local found = v:Clone()
+						found.Parent = script.Parent.Parent.Searching
+						found.Position = UDim2.fromOffset(0,totalsize)
+						totalsize = totalsize + v.AbsoluteSize.Y
+						script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,totalsize)
+					end
+				end
+			end
 		end
 	end
 	
@@ -2894,8 +2981,8 @@ local function NMDCBMH_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(NMDCBMH_fake_script)()
-local function FWYXV_fake_script() -- TagType.LocalScript 
+coroutine.wrap(BAVWJW_fake_script)()
+local function RTGRR_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -2904,6 +2991,7 @@ local function FWYXV_fake_script() -- TagType.LocalScript
 		"msgtxt";
 		"user";
 		"pm";
+		"potentialadmin"
 	}
 	
 	local number = 1
@@ -2920,4 +3008,4 @@ local function FWYXV_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(FWYXV_fake_script)()
+coroutine.wrap(RTGRR_fake_script)()
