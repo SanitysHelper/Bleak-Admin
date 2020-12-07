@@ -886,7 +886,7 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 			table.insert(commands.Description,description)
 			table.insert(commands.Code,code)
 			local cmdnumber = #commands.Name
-			print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
+			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
 			newbutton.Parent = script.Parent.Parent.CommandList
@@ -2286,7 +2286,9 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
 		local ran,error = pcall(function()
-			loadfile(v)()
+		    if v:match(".lua") then
+			    loadfile(v)()
+			end
 		end)
 		if not ran then
 			print(error)
@@ -2572,7 +2574,7 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	local autosaving = false
 	if isfile and isfile("Bleak Admin/Settings.txt") then
 		local settings = readfile("Bleak Admin/Settings.txt"):split("\n")
-		if settings[1] == true then
+		if settings[1] == "true" then
 			autosaving = true
 			script.Parent.Parent.AutoSave.Text = "Autosave [true]"
 			if writefile and isfile("Bleak Admin/Chatlogs.txt") then
@@ -2633,7 +2635,7 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	local function logplr(plr)
 		game.Players[plr].Chatted:Connect(function(msg)
 			if lastmessagesaid ~= msg then
-				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg
+				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg.."\n"
 				realoldtext = realmessage[#realmessage] 
 				if writefile and isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
 					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
@@ -2861,8 +2863,9 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 	tag = script.Parent.Parent.TagType
-	function search(text)
-		text = text:lower()	
+	function search1(text)
+		text = text:lower()
+		print(text)
 		local totalsize = 0
 		for i,v in pairs(script.Parent.Parent.Searching:GetChildren()) do
 			v:Destroy()
@@ -2870,6 +2873,7 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 		script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,0)
 		if tag.Text == "user" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
+			    print(v.Name)
 				if v.Name:lower():match(text) and v.Name ~= "AddChat" and v:IsA("TextButton") then
 					local found = v:Clone()
 					found.Parent = script.Parent.Parent.Searching
@@ -2968,24 +2972,24 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 	end
 	
 	local lasttag = tag.Text
-	
+	print("loaded")
 	tag.Changed:Connect(function()
 		if tag.Text ~= lasttag then
 			lasttag = tag.Text
 		script.Parent.Text = ""
-			search(script.Parent.Text)
+			search1(script.Parent.Text)
 		end
 	end)
 	
 	script.Parent.Parent.Chatlogs.ChildAdded:Connect(function()
 		game:GetService("RunService").Stepped:Wait()
-		search(script.Parent.Text)
+		search1(script.Parent.Text)
 	end)
 	
 	uis.InputBegan:Connect(function()
 		if focused == true then
 			game:GetService("RunService").Stepped:Wait()
-			search(script.Parent.Text)
+			search1(script.Parent.Text)
 		end
 	end)
 end
