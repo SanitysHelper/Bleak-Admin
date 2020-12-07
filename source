@@ -2586,11 +2586,13 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 				wait(5)
 				script.Parent.Parent.Save.Text = "Save"
 			end
-		elseif writefile then
-			writefile("Bleak Admin/Settings","true")
-		else
-			script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 		end
+	elseif writefile then
+		writefile("Bleak Admin/Settings","true")
+		autosaving = true
+		script.Parent.Parent.AutoSave.Text = "Autosave [true]"
+		else
+		script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 	end
 	
 	
