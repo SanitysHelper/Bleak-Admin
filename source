@@ -2570,8 +2570,8 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	local realmessage = {}
 	local realoldtext = ""
 	local autosaving = false
-	if isfile and isfile("Bleak Admin/ChatSettings.txt") then
-		local settings = readfile("Bleak Admin/ChatSettings.txt"):split("\n")
+	if isfile and isfile("Bleak Admin/Settings.txt") then
+		local settings = readfile("Bleak Admin/Settings.txt"):split("\n")
 		if settings[1] == true then
 			autosaving = true
 			script.Parent.Parent.AutoSave.Text = "Autosave [true]"
@@ -2586,6 +2586,8 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 				wait(5)
 				script.Parent.Parent.Save.Text = "Save"
 			end
+		elseif writefile then
+			writefile("Bleak Admin/Settings","true")
 		else
 			script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 		end
