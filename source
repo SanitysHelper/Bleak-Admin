@@ -1,4 +1,4 @@
-repeat game:GetService("RunService"):Wait() until game:FindFirstChild("CoreGui")
+repeat game:GetService("RunService").Stepped:Wait() until game:FindFirstChild("CoreGui")
 -- Gui to Lua
 -- Version: 3.2
 
