@@ -536,11 +536,6 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 		end
 	end
 	
-	if not writefile then
-		function writefile(file,text)
-			print(file,"\n"..text)
-		end
-	end
 	
 	if not readfile then
 		function readfile()
@@ -2638,11 +2633,15 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg.."\n"
 				realoldtext = realmessage[#realmessage] 
 				if writefile and isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
+                    pcall(function()
 					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
 					realmessage = {}
+                end)
 				elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
+                    pcall(function()
 					writefile("Bleak Admin/Chatlogs.txt", realoldtext)
 					realmessage = {}
+                    end)
 				end
 				lastmessagesaid = msg
 				amountrepeated = 1
