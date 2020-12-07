@@ -2591,7 +2591,7 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 		writefile("Bleak Admin/Settings.txt","true")
 		autosaving = true
 		script.Parent.Parent.AutoSave.Text = "Autosave [true]"
-		else
+	else
 		script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 	end
 	
@@ -2774,6 +2774,9 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	script.Parent.Parent.AutoSave.MouseButton1Click:Connect(function()
 		autosaving = not autosaving
 		script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
+		if writefile then
+		    writefile("Bleak Admin/Settings.txt",tostring(autosaving))
+		end
 	end)
 	
 	local UIS = game:GetService("UserInputService")
