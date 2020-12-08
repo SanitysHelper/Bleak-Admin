@@ -24,10 +24,13 @@ local Requirement = Instance.new("TextBox")
 local DescriptionLabel = Instance.new("TextLabel")
 local Description_2 = Instance.new("TextBox")
 local ScriptLabel = Instance.new("TextLabel")
-local Script = Instance.new("TextBox")
 local Documantation = Instance.new("TextLabel")
 local AddCommandButton = Instance.new("TextButton")
 local Close = Instance.new("TextButton")
+local Check = Instance.new("TextButton")
+local OnlyForThisGame = Instance.new("TextLabel")
+local Script = Instance.new("ScrollingFrame")
+local Script_2 = Instance.new("TextBox")
 local Chatlogs = Instance.new("Frame")
 local Chatlogs_2 = Instance.new("ScrollingFrame")
 local AddChat = Instance.new("TextButton")
@@ -68,7 +71,6 @@ CommandList.BorderColor3 = Color3.fromRGB(255, 255, 255)
 CommandList.Position = UDim2.new(0, 0, 0.231000006, -2)
 CommandList.Size = UDim2.new(0.999828994, 0, 0.670356393, 0)
 CommandList.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
-CommandList.CanvasPosition = Vector2.new(0, 57.3580017)
 CommandList.CanvasSize = UDim2.new(0, 0, 1, 0)
 CommandList.MidImage = "rbxassetid://967852047"
 
@@ -293,23 +295,6 @@ ScriptLabel.TextScaled = true
 ScriptLabel.TextSize = 14.000
 ScriptLabel.TextWrapped = true
 
-Script.Name = "Script"
-Script.Parent = CustomCommand
-Script.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Script.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Script.Position = UDim2.new(0, 0, 0.63918227, 0)
-Script.Size = UDim2.new(1.00000024, 0, 0.697424352, 0)
-Script.ClearTextOnFocus = false
-Script.Font = Enum.Font.SourceSans
-Script.MultiLine = true
-Script.PlaceholderText = "Script"
-Script.Text = ""
-Script.TextColor3 = Color3.fromRGB(255, 255, 255)
-Script.TextSize = 14.000
-Script.TextWrapped = true
-Script.TextXAlignment = Enum.TextXAlignment.Left
-Script.TextYAlignment = Enum.TextYAlignment.Top
-
 Documantation.Name = "Documantation"
 Documantation.Parent = CustomCommand
 Documantation.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -317,7 +302,7 @@ Documantation.BorderColor3 = Color3.fromRGB(74, 116, 255)
 Documantation.Position = UDim2.new(0, 0, -0.600000083, 0)
 Documantation.Size = UDim2.new(1.00000048, 0, 0.600000083, 0)
 Documantation.Font = Enum.Font.SourceSans
-Documantation.Text = "getplayer(arg[number]) for the player name, arg[2] is after the command and arg[3] is after that etc. To run a specific command, type run(\"command here\") example run(\"print hello\"). There needs to be something in every slot."
+Documantation.Text = "getplayer(arg[number]) is to get the full name of a player while shortening it. Arg is the textbox split into spaces. Example lets say you typed in \"print Hello World!\", arg[1] = print arg[2] = Hello arg[3] = World! you get Name, Description and script are required."
 Documantation.TextColor3 = Color3.fromRGB(255, 255, 255)
 Documantation.TextScaled = true
 Documantation.TextSize = 14.000
@@ -348,6 +333,57 @@ Close.TextColor3 = Color3.fromRGB(255, 0, 0)
 Close.TextScaled = true
 Close.TextSize = 14.000
 Close.TextWrapped = true
+
+Check.Name = "Check"
+Check.Parent = CustomCommand
+Check.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Check.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Check.Position = UDim2.new(0.437389672, 0, -0.729032338, 0)
+Check.Size = UDim2.new(0.118577085, 0, 0.129032269, 0)
+Check.Font = Enum.Font.SourceSans
+Check.Text = ""
+Check.TextColor3 = Color3.fromRGB(255, 0, 0)
+Check.TextScaled = true
+Check.TextSize = 14.000
+Check.TextWrapped = true
+
+OnlyForThisGame.Name = "OnlyForThisGame"
+OnlyForThisGame.Parent = CustomCommand
+OnlyForThisGame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OnlyForThisGame.BorderColor3 = Color3.fromRGB(74, 116, 255)
+OnlyForThisGame.Position = UDim2.new(0.0565133952, 0, -0.729032338, 0)
+OnlyForThisGame.Size = UDim2.new(0.378353804, 0, 0.129032269, 0)
+OnlyForThisGame.Font = Enum.Font.SourceSans
+OnlyForThisGame.Text = "Only for this game"
+OnlyForThisGame.TextColor3 = Color3.fromRGB(255, 255, 255)
+OnlyForThisGame.TextScaled = true
+OnlyForThisGame.TextSize = 14.000
+OnlyForThisGame.TextWrapped = true
+
+Script.Name = "Script"
+Script.Parent = CustomCommand
+Script.Active = true
+Script.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Script.BorderColor3 = Color3.fromRGB(0, 85, 255)
+Script.Position = UDim2.new(6.10016286e-08, 0, 0.638709724, 0)
+Script.Size = UDim2.new(1, 0, 0.697000027, 0)
+Script.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+Script_2.Name = "Script"
+Script_2.Parent = Script
+Script_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Script_2.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Script_2.Size = UDim2.new(0, 70, 0, 40)
+Script_2.ClearTextOnFocus = false
+Script_2.Font = Enum.Font.SourceSans
+Script_2.MultiLine = true
+Script_2.PlaceholderText = "Script"
+Script_2.Text = ""
+Script_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Script_2.TextSize = 14.000
+Script_2.TextWrapped = true
+Script_2.TextXAlignment = Enum.TextXAlignment.Left
+Script_2.TextYAlignment = Enum.TextYAlignment.Top
 
 Chatlogs.Name = "Chatlogs"
 Chatlogs.Parent = BleakAdmin
@@ -482,7 +518,7 @@ TagType.TextWrapped = true
 
 -- Scripts:
 
-local function LFMCHQU_fake_script() -- NewCommand.ButtonScript 
+local function STBSM_fake_script() -- NewCommand.ButtonScript 
 	local script = Instance.new('LocalScript', NewCommand)
 
 	local scrollingframe = script.Parent.Parent
@@ -492,8 +528,8 @@ local function LFMCHQU_fake_script() -- NewCommand.ButtonScript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(LFMCHQU_fake_script)()
-local function NSEQP_fake_script() -- CommandBar.LocalScript 
+coroutine.wrap(STBSM_fake_script)()
+local function BDZC_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -531,11 +567,19 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 				addcmd("kick","","Kicks you from the game", function()
 					game.Players.LocalPlayer:Kick()
 				end);
+				addcmd("jump","","Makes you jump", function()
+					game.Players.LocalPlayer.Character.Humanoid.Jump = true
+				end)
 			}
 			return plugins
 		end
 	end
 	
+	if not writefile then
+		function writefile(file,text)
+			print(file,"\n"..text)
+		end
+	end
 	
 	if not readfile then
 		function readfile()
@@ -881,7 +925,7 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 			table.insert(commands.Description,description)
 			table.insert(commands.Code,code)
 			local cmdnumber = #commands.Name
-			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
+			print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
 			newbutton.Parent = script.Parent.Parent.CommandList
@@ -2259,8 +2303,9 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 			local letters = arg[2]:split("")
 			letters[1] = string.upper(letters[1])
 			args[2] = table.concat(letters,"")
+			print(arg[2])
 		end
-		prefix = Enum.KeyCode[arg[2]]
+		prefix = Enum.KeyCode[tostring(arg[2])]
 		notify(5,"Set prefix to the key "..arg[2])
 	end)
 	if game.GameId == 719754874 then
@@ -2280,14 +2325,14 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 	
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
+		if tostring(v):match(".lua") then
 		local ran,error = pcall(function()
-		    if v:match(".lua") then
-			    loadfile(v)()
-			end
+			loadfile(v)()
 		end)
 		if not ran then
 			print(error)
-		end
+			end
+			end
 	end
 	
 	close()
@@ -2296,24 +2341,27 @@ local function NSEQP_fake_script() -- CommandBar.LocalScript
 		local name = script.Parent.Parent.Parent.CustomCommand.Title.Text
 		local descript = script.Parent.Parent.Parent.CustomCommand.Description.Text
 		local reqire = script.Parent.Parent.Parent.CustomCommand.Requirement.Text
-		local addfunction = script.Parent.Parent.Parent.CustomCommand.Script.Text
+		local addfunction = script.Parent.Parent.Parent.CustomCommand.Script.Script.Text
 		spawn(function()
 			wait(40)
 		end)
 		if name ~= "" and descript ~= "" and addfunction ~= "" then
-				loadstring("addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .." end)")()
-		end
-	
-		if writefile then
-			writefile("Bleak Admin/"..name..".lua","local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
-			--function addcmd(cmd, requirement, description, functioninscript)
+			loadstring("addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .." end)")()
+			if writefile then
+				if script.Parent.Parent.Parent.CustomCommand.Check.Text ~= "X" then
+					writefile("Bleak Admin/"..name..".lua","local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
+				else
+					writefile("Bleak Admin/"..name..".lua","if game.GameId == "..game.GameId.." then\nlocal plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins\nend")
+				end
+				--function addcmd(cmd, requirement, description, functioninscript)
+			end
 		end
 	end)
 	update()
 	notify(5,"Updated the admin. Added tpparts and looptpparts and setsimulationradius.")
 end
-coroutine.wrap(NSEQP_fake_script)()
-local function RCBYXTL_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(BDZC_fake_script)()
+local function WXNO_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2463,16 +2511,47 @@ local function RCBYXTL_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(RCBYXTL_fake_script)()
-local function VLIHQU_fake_script() -- Close.LocalScript 
+coroutine.wrap(WXNO_fake_script)()
+local function ZADS_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(VLIHQU_fake_script)()
-local function PXSAAG_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(ZADS_fake_script)()
+local function PIBL_fake_script() -- Check.LocalScript 
+	local script = Instance.new('LocalScript', Check)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		if script.Parent.Text == "X" then
+			script.Parent.Text = ""
+		else
+			script.Parent.Text = "X"
+		end
+	end)
+end
+coroutine.wrap(PIBL_fake_script)()
+local function PGFI_fake_script() -- Script_2.LocalScript 
+	local script = Instance.new('LocalScript', Script_2)
+
+	local function resize(instance)
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,-1)
+		until instance.TextFits == false
+		repeat
+			instance.Size = instance.Size + UDim2.fromOffset(0,1)
+		until instance.TextFits == true
+		instance.Size = instance.Size + UDim2.fromOffset(0,5)
+		instance.Size = UDim2.fromOffset(instance.TextBounds.X+10,instance.Size.Y.Offset)
+		script.Parent.Parent.CanvasSize = UDim2.fromOffset(script.Parent.TextBounds.X,script.Parent.Size.Y.Offset)
+	end
+	while wait() do
+		resize(script.Parent)
+	end
+end
+coroutine.wrap(PGFI_fake_script)()
+local function GHZU_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -2553,8 +2632,8 @@ local function PXSAAG_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(PXSAAG_fake_script)()
-local function PBBW_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(GHZU_fake_script)()
+local function XQCEQO_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -2587,7 +2666,6 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	elseif writefile then
 		writefile("Bleak Admin/Settings.txt","true")
 		autosaving = true
-		script.Parent.Parent.AutoSave.Text = "Autosave [true]"
 	else
 		script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 	end
@@ -2641,7 +2719,7 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
                     pcall(function()
 					writefile("Bleak Admin/Chatlogs.txt", realoldtext)
 					realmessage = {}
-                    end)
+                end)
 				end
 				lastmessagesaid = msg
 				amountrepeated = 1
@@ -2776,7 +2854,7 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 		autosaving = not autosaving
 		script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
 		if writefile then
-		    writefile("Bleak Admin/Settings.txt",tostring(autosaving))
+			writefile("Bleak Admin/Settings.txt",tostring(autosaving))
 		end
 	end)
 	
@@ -2819,8 +2897,8 @@ local function PBBW_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(PBBW_fake_script)()
-local function CXWC_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(XQCEQO_fake_script)()
+local function QIJPRV_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -2830,8 +2908,8 @@ local function CXWC_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(CXWC_fake_script)()
-local function UFVHBD_fake_script() -- Search.LocalScript 
+coroutine.wrap(QIJPRV_fake_script)()
+local function AMLGQJ_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2848,8 +2926,8 @@ local function UFVHBD_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(UFVHBD_fake_script)()
-local function BAVWJW_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(AMLGQJ_fake_script)()
+local function YHJUJE_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -2863,8 +2941,7 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 	end)
 	tag = script.Parent.Parent.TagType
 	function search1(text)
-		text = text:lower()
-		print(text)
+		text = text:lower()	
 		local totalsize = 0
 		for i,v in pairs(script.Parent.Parent.Searching:GetChildren()) do
 			v:Destroy()
@@ -2872,7 +2949,6 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 		script.Parent.Parent.Searching.CanvasSize = UDim2.fromOffset(0,0)
 		if tag.Text == "user" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
-			    print(v.Name)
 				if v.Name:lower():match(text) and v.Name ~= "AddChat" and v:IsA("TextButton") then
 					local found = v:Clone()
 					found.Parent = script.Parent.Parent.Searching
@@ -2971,7 +3047,7 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 	end
 	
 	local lasttag = tag.Text
-	print("loaded")
+	
 	tag.Changed:Connect(function()
 		if tag.Text ~= lasttag then
 			lasttag = tag.Text
@@ -2992,8 +3068,8 @@ local function BAVWJW_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(BAVWJW_fake_script)()
-local function RTGRR_fake_script() -- TagType.LocalScript 
+coroutine.wrap(YHJUJE_fake_script)()
+local function XKGYS_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3019,4 +3095,4 @@ local function RTGRR_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(RTGRR_fake_script)()
+coroutine.wrap(XKGYS_fake_script)()
