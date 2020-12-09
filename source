@@ -2805,7 +2805,7 @@ local function OSKUYOS_fake_script() -- Title_4.LocalScript
 		end
 	end
 	
-	script.Parent.Text = "Add command "..getname1(game.GameId)
+	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
 coroutine.wrap(OSKUYOS_fake_script)()
 local function HCCMOYF_fake_script() -- BleakAdmin.NewScript 
