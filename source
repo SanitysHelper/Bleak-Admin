@@ -531,7 +531,7 @@ TagType.TextWrapped = true
 
 -- Scripts:
 
-local function DEKQ_fake_script() -- NewCommand.ButtonScript 
+local function HTUNMYR_fake_script() -- NewCommand.ButtonScript 
 	local script = Instance.new('LocalScript', NewCommand)
 
 	local scrollingframe = script.Parent.Parent
@@ -541,8 +541,8 @@ local function DEKQ_fake_script() -- NewCommand.ButtonScript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(DEKQ_fake_script)()
-local function PAOBPU_fake_script() -- CommandBar.LocalScript 
+coroutine.wrap(HTUNMYR_fake_script)()
+local function AGWTLUQ_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -602,7 +602,6 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	
 	if not makefolder then
 		function makefolder()
-			print("folder")
 		end
 	end
 	
@@ -883,30 +882,32 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	end
 	
 	function runcmd(command)
-		local command = command:split(" ")
-		local cmd = command[1]:split("")
-		local cmdname = ""
-		for i, v in pairs(cmd) do
-			if v ~= ";" then
-				cmdname = cmdname..v
+		spawn(function()
+			local command = command:split(" ")
+			local cmd = command[1]:split("")
+			local cmdname = ""
+			for i, v in pairs(cmd) do
+				if v ~= ";" then
+					cmdname = cmdname..v
+				end
 			end
-		end
-		local number = getcmdnumber(cmdname)
-		if number then
-			local ran = nil
-			local error = ""
-			spawn(function()
-				ran,error = pcall(function()
-					commands.Code[number](command)
+			local number = getcmdnumber(cmdname)
+			if number then
+				local ran = nil
+				local error = ""
+				spawn(function()
+					ran,error = pcall(function()
+						commands.Code[number](command)
+					end)
 				end)
-			end)
-			repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
-			if ran == true then
-			else
-				print(error)
-				return error
+				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
+				if ran == true then
+				else
+					print(error)
+					return error
+				end
 			end
-		end
+		end)
 	end
 	
 	if not firetouchinterest then
@@ -989,9 +990,7 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
 		if pressed then
 			local text = script.Parent.Text
-			spawn(function()
 				runcmd(text)
-			end)
 			spawn(function()
 				postmessageondiscord(text)
 			end)
@@ -1013,9 +1012,8 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	
 	local doritos = uis.InputBegan:Connect(function(pp)
 		if pp.KeyCode == prefix and isfocused == nil then
-			script.Parent:CaptureFocus()
 			game:GetService("RunService").Stepped:Wait()
-			script.Parent.Text = ""
+			script.Parent:CaptureFocus()
 		elseif pp.KeyCode == Enum.KeyCode.Tab and isfocused == script.Parent.Name then
 			script.Parent.CursorPosition = -1
 			for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
@@ -1172,6 +1170,148 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	addcmd("cbring","Plr","Beings a player to you [CLIENT]",function(arg)
 		if getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])] and game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart" then
 			game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
+		elseif getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])].Character:FindFirstChild("Head") then
+			game.Players[getplayer(arg[2])].Character:FindFirstChild("Head").CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
+		end
+	end)
+	
+	addcmd("toolbring","[player] and requires a tool","Brings players to you", function(arg)
+		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
+			local victim = getplayer(arg[2])
+			local victimroot = game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart"
+			local oldpos = checkroot().CFrame
+			attach()
+			local hrp = checkroot() 
+			local done = false
+			spawn(function()
+				localplayer.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = oldpos
+			end)
+	
+			repeat
+				game:GetService("RunService").Stepped:Wait()
+				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
+					hrp.CFrame = oldpos
+				elseif hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil  then
+					runcmd("cbring "..victim)
+				else
+					done = true
+				end
+			until not hrp or game.Players.LocalPlayer.Character == nil or not checkroot() or done == true or not getplayer(arg[2]) or game.Players[getplayer(arg[2])].Character == nil
+			if getplayer(arg[2]) then
+				notify(3,"Attempted to teleport... Click to run again.", function()
+					runcmd("toolbring ".. victim)
+				end)
+			else
+				notify(2,"Player left.")
+			end
+		end
+	end)
+	
+	addcmd('dex', '', 'Opens DEX viewer', function(arg)
+		if game.CoreGui:FindFirstChild("Dex") then
+			game.CoreGui:FindFirstChild("Dex"):Destroy()
+		end
+		local PARENT = game.CoreGui
+		local Dex = game:GetObjects("rbxassetid://3567096419")[1]
+		Dex.Name = 'Dex'
+		Dex.Parent = PARENT
+	
+		local function Load(Obj, Url)
+			local function GiveOwnGlobals(Func, Script)
+				local Fenv = {}
+				local RealFenv = {script = Script}
+				local FenvMt = {}
+				FenvMt.__index = function(a,b)
+					if RealFenv[b] == nil then
+						return getfenv()[b]
+					else
+						return RealFenv[b]
+					end
+				end
+				FenvMt.__newindex = function(a, b, c)
+					if RealFenv[b] == nil then
+						getfenv()[b] = c
+					else
+						RealFenv[b] = c
+					end
+				end
+				setmetatable(Fenv, FenvMt)
+				setfenv(Func, Fenv)
+				return Func
+			end
+			local function LoadScripts(Script)
+				if Script.ClassName == "Script" or Script.ClassName == "LocalScript" then
+					spawn(function()
+						GiveOwnGlobals(loadstring(Script.Source, "=" .. Script:GetFullName()), Script)()
+					end)
+				end
+				for i,v in pairs(Script:GetChildren()) do
+					LoadScripts(v)
+				end
+			end
+			LoadScripts(Obj)
+		end
+	
+		Load(Dex)
+	end)
+	
+	addcmd('exit', '', 'Closes ROBLOX', function(arg)
+		game:shutdown()
+	end)
+	
+	addcmd('platformstand', '', 'Stuns you lol', function(arg)
+		game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
+	end)
+	
+	addcmd('removedex', '', 'Removes DEX', function(arg)
+		if game.CoreGui:FindFirstChild("Dex") then
+			game.CoreGui:FindFirstChild("Dex"):Destroy()
+		end
+	end)
+	
+	addcmd('jump', '', 'Makes you jump', function(arg)
+		game.Players.LocalPlayer.Character.Humanoid.Jump = true
+	end)
+	
+	if setclipboard then
+		addcmd('copygameid', '', 'Copys the game ID', function(arg)
+			setclipboard(game.GameId)
+		end)
+	end
+	
+	addcmd("toolfreefall","[player] and requires a tool","Freefalls a player to you", function(arg)
+		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
+			local victim = getplayer(arg[2])
+			local victimroot = game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart"
+			local oldvictimpos = victimroot.CFrame
+			local oldpos = checkroot().CFrame
+			attach()
+			local hrp = checkroot() 
+			local done = false
+			spawn(function()
+				localplayer.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = oldpos
+			end)
+	
+			repeat
+				game:GetService("RunService").Stepped:Wait()
+				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
+					hrp.CFrame = oldvictimpos+ Vector3.new(0,10000,0)
+				elseif hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil  then
+					runcmd("cbring "..victim)
+				else
+					done = true
+				end
+			until not hrp or game.Players.LocalPlayer.Character == nil or not checkroot() or done == true or not getplayer(arg[2]) or game.Players[getplayer(arg[2])].Character == nil
+			wait(1)
+			if getplayer(arg[2]) and victimroot and victimroot.Position.Y - 30 >= oldvictimpos.Position.Y  then
+				notify(3,"Teleported.")
+			elseif getplayer(arg[2]) then
+				notify(3,"Attempted to teleport... Click to run again.", function()
+					runcmd("toolfreefall ".. victim)
+				end)
+			else
+				notify(2,"Player left.")
+			end
 		end
 	end)
 	
@@ -1190,12 +1330,9 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 				game:GetService("RunService").Stepped:Wait()
 				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
 					hrp.CFrame = CFrame.new(99999999, workspace.FallenPartsDestroyHeight+2,99999999)
-					print("killing")
 				elseif hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil  then
 					runcmd("cbring "..victim)
-					print("going to player")
 				else
-					print("finished")
 					done = true
 				end
 			until not hrp or game.Players.LocalPlayer.Character == nil or not checkroot() or done == true or not getplayer(arg[2]) or game.Players[getplayer(arg[2])].Character == nil
@@ -1467,6 +1604,16 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 		noclip()
 	end)
 	
+	addcmd('sit', '', 'Makes you sit', function(arg)
+		game.Players.LocalPlayer.Character.Humanoid.Sit = true
+	end)
+	
+	addcmd("notify","time, string","Notifys string", function(arg)
+		if arg[2] and arg[3] then
+			arg[2] = tonumber(arg[2])
+			notify(arg[2],table.concat(arg," ",3))
+		end
+	end)
 	
 	addcmd("tweengoto","plr","Teleports you to the player bypassing most anti exploits",function(arg)
 		local tweenservice = game:GetService("TweenService")
@@ -2111,9 +2258,8 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	end
 	
 	local function nametag(plr)
-		print(plr)
 		plr = game.Players[plr]
-		if plr then
+		if plr and plr.Name ~= localplayer.Name then
 			nameenabled = true
 			repeat game:GetService("RunService").Stepped:Wait() until not plr or plr.Character:FindFirstChild"Head" or nameenabled == false
 			if plr and plr.Character:FindFirstChild"Head" then
@@ -2175,9 +2321,9 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	end
 	
 	addcmd("nametag","Player","Shows a players nametag", function(arg)
-		if arg[2] and arg[2]:lower() == "all" then
+		if arg[2] and tostring(arg[2]):lower() == "all" then
 			for i,v in pairs(game.Players:GetPlayers()) do
-				nametag(v.Name)
+				runcmd("nametag "..v.Name)
 			end
 		elseif arg[2] then
 			arg[2] = getplayer(arg[2])
@@ -2186,8 +2332,14 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("unnametag","Player","Unshows a players nametag", function(arg)
-		arg[2] = getplayer(arg[2])
-		removetag(arg[2])
+		if arg[2] and tostring(arg[2]):lower() == "all" then
+			for i,v in pairs(game.Players:GetPlayers()) do
+				runcmd("unnametag "..v.Name)
+			end
+		elseif arg[2] then
+			arg[2] = getplayer(arg[2])
+			removetag(arg[2])
+		end
 	end)
 	
 	addcmd("music","ID","Plays music of the specified ID",function(arg)
@@ -2378,8 +2530,7 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 			removetexture(v)
 		end
 	
-		print("Changed "..count.." meshes")
-		print("Deleted "..count1.." textures")
+		notify(5,"Changed "..count.." meshes"..", Deleted "..count1.." textures")
 	
 		local newantilag = workspace.DescendantAdded:Connect(function(v)
 			wait(1)
@@ -2403,7 +2554,6 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 			local letters = arg[2]:split("")
 			letters[1] = string.upper(letters[1])
 			args[2] = table.concat(letters,"")
-			print(arg[2])
 		end
 		prefix = Enum.KeyCode[tostring(arg[2])]
 		notify(5,"Set prefix to the key "..arg[2])
@@ -2459,8 +2609,8 @@ local function PAOBPU_fake_script() -- CommandBar.LocalScript
 	update()
 	notify(5,"Loaded ".. #commands.Name.. " commands")
 end
-coroutine.wrap(PAOBPU_fake_script)()
-local function RNWLUA_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(AGWTLUQ_fake_script)()
+local function BHZLRYE_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2610,16 +2760,16 @@ local function RNWLUA_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(RNWLUA_fake_script)()
-local function FHGFIKQ_fake_script() -- Close.LocalScript 
+coroutine.wrap(BHZLRYE_fake_script)()
+local function CXNTKD_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(FHGFIKQ_fake_script)()
-local function VOFAI_fake_script() -- Check.LocalScript 
+coroutine.wrap(CXNTKD_fake_script)()
+local function LANHIY_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2630,8 +2780,8 @@ local function VOFAI_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(VOFAI_fake_script)()
-local function QHQNPBT_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(LANHIY_fake_script)()
+local function VMKZ_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
@@ -2643,8 +2793,8 @@ local function QHQNPBT_fake_script() -- Script_2.LocalScript
 		resize(script.Parent)
 	end)
 end
-coroutine.wrap(QHQNPBT_fake_script)()
-local function WVRAGG_fake_script() -- Title_4.LocalScript 
+coroutine.wrap(VMKZ_fake_script)()
+local function OSKUYOS_fake_script() -- Title_4.LocalScript 
 	local script = Instance.new('LocalScript', Title_4)
 
 	local function getname1(id)
@@ -2657,8 +2807,8 @@ local function WVRAGG_fake_script() -- Title_4.LocalScript
 	
 	script.Parent.Text = "Add command "..getname1(game.GameId)
 end
-coroutine.wrap(WVRAGG_fake_script)()
-local function SQIJUAI_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(OSKUYOS_fake_script)()
+local function HCCMOYF_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -2739,8 +2889,8 @@ local function SQIJUAI_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(SQIJUAI_fake_script)()
-local function YGZSP_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(HCCMOYF_fake_script)()
+local function KZVCV_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -3004,8 +3154,8 @@ local function YGZSP_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(YGZSP_fake_script)()
-local function SJNAXO_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(KZVCV_fake_script)()
+local function LEAROVS_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -3015,8 +3165,8 @@ local function SJNAXO_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(SJNAXO_fake_script)()
-local function TQURAE_fake_script() -- Search.LocalScript 
+coroutine.wrap(LEAROVS_fake_script)()
+local function CTSI_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3033,8 +3183,8 @@ local function TQURAE_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TQURAE_fake_script)()
-local function OMFF_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(CTSI_fake_script)()
+local function JCVECVX_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3175,8 +3325,8 @@ local function OMFF_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(OMFF_fake_script)()
-local function ITBM_fake_script() -- TagType.LocalScript 
+coroutine.wrap(JCVECVX_fake_script)()
+local function QCUYV_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3202,4 +3352,4 @@ local function ITBM_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ITBM_fake_script)()
+coroutine.wrap(QCUYV_fake_script)()
