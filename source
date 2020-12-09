@@ -31,6 +31,7 @@ local Check = Instance.new("TextButton")
 local OnlyForThisGame = Instance.new("TextLabel")
 local Script = Instance.new("ScrollingFrame")
 local Script_2 = Instance.new("TextBox")
+local Title_4 = Instance.new("TextLabel")
 local Chatlogs = Instance.new("Frame")
 local Chatlogs_2 = Instance.new("ScrollingFrame")
 local AddChat = Instance.new("TextButton")
@@ -58,7 +59,7 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = BleakAdmin
 MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.BackgroundTransparency = 1.000
-MainFrame.Position = UDim2.new(0.41957441, 0, 0.483912468, 0)
+MainFrame.Position = UDim2.new(0.702907741, 0, 0.516087472, 0)
 MainFrame.Size = UDim2.new(0.132287234, 0, 0.223938227, 0)
 MainFrame.ZIndex = 0
 
@@ -198,15 +199,16 @@ CustomCommand.Name = "CustomCommand"
 CustomCommand.Parent = BleakAdmin
 CustomCommand.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 CustomCommand.BorderColor3 = Color3.fromRGB(74, 116, 255)
-CustomCommand.Position = UDim2.new(0.182500005, 0, 0.388674378, 0)
-CustomCommand.Size = UDim2.new(0.210833326, 0, 0.199485183, 0)
+CustomCommand.Position = UDim2.new(0, 230, 0, 105)
+CustomCommand.Size = UDim2.new(0, 300, 0, 450)
 CustomCommand.Visible = false
 
 NameLabel.Name = "NameLabel"
 NameLabel.Parent = CustomCommand
 NameLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 NameLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
-NameLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+NameLabel.Position = UDim2.new(0, 0, 0, 89)
+NameLabel.Size = UDim2.new(0, 119, 0, 25)
 NameLabel.Font = Enum.Font.SourceSans
 NameLabel.Text = "Name:"
 NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -218,8 +220,8 @@ Title_3.Name = "Title"
 Title_3.Parent = CustomCommand
 Title_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Title_3.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Title_3.Position = UDim2.new(0.395256937, 0, 0, 0)
-Title_3.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Title_3.Position = UDim2.new(0, 119, 0, 89)
+Title_3.Size = UDim2.new(0, 181, 0, 25)
 Title_3.Font = Enum.Font.SourceSans
 Title_3.PlaceholderText = "Name Here"
 Title_3.Text = ""
@@ -232,8 +234,8 @@ RequirementLabel.Name = "RequirementLabel"
 RequirementLabel.Parent = CustomCommand
 RequirementLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 RequirementLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
-RequirementLabel.Position = UDim2.new(0, 0, 0.168214485, 0)
-RequirementLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+RequirementLabel.Position = UDim2.new(0, 0, 0, 114)
+RequirementLabel.Size = UDim2.new(0, 118, 0, 26)
 RequirementLabel.Font = Enum.Font.SourceSans
 RequirementLabel.Text = "Requirements"
 RequirementLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -245,8 +247,8 @@ Requirement.Name = "Requirement"
 Requirement.Parent = CustomCommand
 Requirement.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Requirement.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Requirement.Position = UDim2.new(0.395256937, 0, 0.1682145, 0)
-Requirement.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Requirement.Position = UDim2.new(0, 119, 0, 114)
+Requirement.Size = UDim2.new(0, 181, 0, 26)
 Requirement.Font = Enum.Font.SourceSans
 Requirement.PlaceholderText = "Requirement (plr, text etc)"
 Requirement.Text = ""
@@ -259,8 +261,8 @@ DescriptionLabel.Name = "DescriptionLabel"
 DescriptionLabel.Parent = CustomCommand
 DescriptionLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 DescriptionLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
-DescriptionLabel.Position = UDim2.new(0, 0, 0.335956454, 0)
-DescriptionLabel.Size = UDim2.new(0.395256937, 0, 0.172327951, 0)
+DescriptionLabel.Position = UDim2.new(0, 0, 0, 140)
+DescriptionLabel.Size = UDim2.new(0, 118, 0, 26)
 DescriptionLabel.Font = Enum.Font.SourceSans
 DescriptionLabel.Text = "Description"
 DescriptionLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -272,8 +274,8 @@ Description_2.Name = "Description"
 Description_2.Parent = CustomCommand
 Description_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Description_2.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Description_2.Position = UDim2.new(0.395256937, 0, 0.335956454, 0)
-Description_2.Size = UDim2.new(0.604743123, 0, 0.172327951, 0)
+Description_2.Position = UDim2.new(0, 119, 0, 140)
+Description_2.Size = UDim2.new(0, 181, 0, 26)
 Description_2.Font = Enum.Font.SourceSans
 Description_2.PlaceholderText = "Description"
 Description_2.Text = ""
@@ -286,8 +288,8 @@ ScriptLabel.Name = "ScriptLabel"
 ScriptLabel.Parent = CustomCommand
 ScriptLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ScriptLabel.BorderColor3 = Color3.fromRGB(74, 116, 255)
-ScriptLabel.Position = UDim2.new(0, 0, 0.503698409, 0)
-ScriptLabel.Size = UDim2.new(1.00000024, 0, 0.140069857, 0)
+ScriptLabel.Position = UDim2.new(0, 0, 0, 166)
+ScriptLabel.Size = UDim2.new(0, 300, 0, 21)
 ScriptLabel.Font = Enum.Font.SourceSans
 ScriptLabel.Text = "Script:"
 ScriptLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -299,8 +301,8 @@ Documantation.Name = "Documantation"
 Documantation.Parent = CustomCommand
 Documantation.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Documantation.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Documantation.Position = UDim2.new(0, 0, -0.600000083, 0)
-Documantation.Size = UDim2.new(1.00000048, 0, 0.600000083, 0)
+Documantation.Position = UDim2.new(0, 0, 0, 20)
+Documantation.Size = UDim2.new(0, 300, 0, 69)
 Documantation.Font = Enum.Font.SourceSans
 Documantation.Text = "getplayer(arg[number]) is to get the full name of a player while shortening it. Arg is the textbox split into spaces. Example lets say you typed in \"print Hello World!\", arg[1] = print arg[2] = Hello arg[3] = World! you get Name, Description and script are required."
 Documantation.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -312,8 +314,8 @@ AddCommandButton.Name = "AddCommandButton"
 AddCommandButton.Parent = CustomCommand
 AddCommandButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 AddCommandButton.BorderColor3 = Color3.fromRGB(74, 116, 255)
-AddCommandButton.Position = UDim2.new(0, 0, 1.33548403, 0)
-AddCommandButton.Size = UDim2.new(1.00000072, 0, 0.193548411, 0)
+AddCommandButton.Position = UDim2.new(0, 0, 0, 420)
+AddCommandButton.Size = UDim2.new(0, 300, 0, 30)
 AddCommandButton.Font = Enum.Font.SourceSans
 AddCommandButton.Text = "Add Command!"
 AddCommandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -325,8 +327,8 @@ Close.Name = "Close"
 Close.Parent = CustomCommand
 Close.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Close.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Close.Position = UDim2.new(0.881422997, 0, -0.729032338, 0)
-Close.Size = UDim2.new(0.118577085, 0, 0.129032269, 0)
+Close.Position = UDim2.new(0, 266, 0, 0)
+Close.Size = UDim2.new(0, 34, 0, 20)
 Close.Font = Enum.Font.SourceSans
 Close.Text = "X"
 Close.TextColor3 = Color3.fromRGB(255, 0, 0)
@@ -338,8 +340,8 @@ Check.Name = "Check"
 Check.Parent = CustomCommand
 Check.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Check.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Check.Position = UDim2.new(0.437389672, 0, -0.729032338, 0)
-Check.Size = UDim2.new(0.118577085, 0, 0.129032269, 0)
+Check.Position = UDim2.new(0, 114, 0, 0)
+Check.Size = UDim2.new(0, 34, 0, 20)
 Check.Font = Enum.Font.SourceSans
 Check.Text = ""
 Check.TextColor3 = Color3.fromRGB(255, 0, 0)
@@ -351,8 +353,7 @@ OnlyForThisGame.Name = "OnlyForThisGame"
 OnlyForThisGame.Parent = CustomCommand
 OnlyForThisGame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 OnlyForThisGame.BorderColor3 = Color3.fromRGB(74, 116, 255)
-OnlyForThisGame.Position = UDim2.new(0.0565133952, 0, -0.729032338, 0)
-OnlyForThisGame.Size = UDim2.new(0.378353804, 0, 0.129032269, 0)
+OnlyForThisGame.Size = UDim2.new(0, 113, 0, 20)
 OnlyForThisGame.Font = Enum.Font.SourceSans
 OnlyForThisGame.Text = "Only for this game"
 OnlyForThisGame.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -365,15 +366,15 @@ Script.Parent = CustomCommand
 Script.Active = true
 Script.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Script.BorderColor3 = Color3.fromRGB(0, 85, 255)
-Script.Position = UDim2.new(6.10016286e-08, 0, 0.638709724, 0)
-Script.Size = UDim2.new(1, 0, 0.697000027, 0)
+Script.Position = UDim2.new(0, 0, 0, 187)
+Script.Size = UDim2.new(0, 300, 0, 233)
 Script.CanvasSize = UDim2.new(0, 0, 0, 0)
 
 Script_2.Name = "Script"
 Script_2.Parent = Script
 Script_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Script_2.BorderColor3 = Color3.fromRGB(74, 116, 255)
-Script_2.Size = UDim2.new(0, 70, 0, 40)
+Script_2.Size = UDim2.new(0, 300, 0, 233)
 Script_2.ClearTextOnFocus = false
 Script_2.Font = Enum.Font.SourceSans
 Script_2.MultiLine = true
@@ -381,9 +382,21 @@ Script_2.PlaceholderText = "Script"
 Script_2.Text = ""
 Script_2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Script_2.TextSize = 14.000
-Script_2.TextWrapped = true
 Script_2.TextXAlignment = Enum.TextXAlignment.Left
 Script_2.TextYAlignment = Enum.TextYAlignment.Top
+
+Title_4.Name = "Title"
+Title_4.Parent = CustomCommand
+Title_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Title_4.BorderColor3 = Color3.fromRGB(74, 116, 255)
+Title_4.Position = UDim2.new(0.49333334, 0, 0, 0)
+Title_4.Size = UDim2.new(0.393333346, 0, 0.0444444455, 0)
+Title_4.Font = Enum.Font.SourceSans
+Title_4.Text = "Only for this game"
+Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title_4.TextScaled = true
+Title_4.TextSize = 14.000
+Title_4.TextWrapped = true
 
 Chatlogs.Name = "Chatlogs"
 Chatlogs.Parent = BleakAdmin
@@ -518,7 +531,7 @@ TagType.TextWrapped = true
 
 -- Scripts:
 
-local function STBSM_fake_script() -- NewCommand.ButtonScript 
+local function DEKQ_fake_script() -- NewCommand.ButtonScript 
 	local script = Instance.new('LocalScript', NewCommand)
 
 	local scrollingframe = script.Parent.Parent
@@ -528,8 +541,8 @@ local function STBSM_fake_script() -- NewCommand.ButtonScript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(STBSM_fake_script)()
-local function BDZC_fake_script() -- CommandBar.LocalScript 
+coroutine.wrap(DEKQ_fake_script)()
+local function PAOBPU_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -600,7 +613,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 	local function open()
 		checkstorage()
 		script.Parent.Parent.CommandList.ScrollBarImageTransparency = 0
-		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0.781),Enum.EasingDirection.In,Enum.EasingStyle.Quint ,0.25,true)
+		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0.8),Enum.EasingDirection.In,Enum.EasingStyle.Quint ,0.25,true)
 	end
 	
 	local function notify(time, text, pressfunction)
@@ -628,7 +641,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			end)
 			local done = false
 			notifying:TweenSize(UDim2.fromScale(0.854,notifying.Size.Y.Scale),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25,true,function() done = true end)
-			repeat wait() until done == true
+			repeat game:GetService("RunService").Stepped:Wait() until done == true
 			for i = 1,#newtext do
 				if timeleft <= 0 then
 					break
@@ -730,7 +743,6 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			local amountofletter = 1
 			local message1 = message:split("")
 			local lastletter = ""
-			print("checking")
 			if string.match(message,"`") then
 				repeat
 					game:GetService("RunService").Stepped:Wait()
@@ -760,7 +772,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 					if message1[#message1] == " " then
 						table.remove(message1,#message1)
 						message = table.concat(message1,"")
-						wait()
+						game:GetService("RunService").Stepped:Wait()
 					end
 				until message1[#message1] ~= " " 
 			end
@@ -790,9 +802,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 						})
 					}
 				)
-				print("Posted")
 			else
-				print("Fail")
 			end
 		end
 	end
@@ -883,19 +893,19 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		end
 		local number = getcmdnumber(cmdname)
 		if number then
-			--local ran = nil
-			--local error = ""
-			--spawn(function()
-			--	ran,error = pcall(function()
-			commands.Code[number](command)
-			--end)
-			--	end)
-			--repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
-			--if ran == true then
-			--	else
-			--	print(error)
-			--	return error
-			--end
+			local ran = nil
+			local error = ""
+			spawn(function()
+				ran,error = pcall(function()
+					commands.Code[number](command)
+				end)
+			end)
+			repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
+			if ran == true then
+			else
+				print(error)
+				return error
+			end
 		end
 	end
 	
@@ -903,7 +913,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		function firetouchinterest(part1,part2)
 			local oldcframe = part1.CFrame
 			part1.CFrame = part2.Parent.CFrame
-			wait()
+			game:GetService("RunService").Stepped:Wait()
 			part1.CFrame = oldcframe
 		end
 	end
@@ -925,7 +935,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			table.insert(commands.Description,description)
 			table.insert(commands.Code,code)
 			local cmdnumber = #commands.Name
-			print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
+			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
 			newbutton.Parent = script.Parent.Parent.CommandList
@@ -1010,7 +1020,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			script.Parent.CursorPosition = -1
 			for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
 				if v:IsA("TextButton") and v.Position == UDim2.new(0,0,0,0) and v.Visible == true and v.Text ~= "" and not string.match(v.Text,"  ") then
-					wait()
+					game:GetService("RunService").Stepped:Wait()
 					local newexacttext = (v.Text.." ")
 					script.Parent.Text = newexacttext
 					script.Parent.CursorPosition = #v.Text + 10
@@ -1245,7 +1255,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 									cameray = 16
 								else
 									velocity.Velocity = Vector3.new(0,0,0)
-									repeat wait() until not table.find(keys,"S") and not table.find(keys,"Q") and not table.find(keys,'E')
+									repeat game:GetService("RunService").Stepped:Wait() until not table.find(keys,"S") and not table.find(keys,"Q") and not table.find(keys,'E')
 								end
 							end
 							direction = Vector3.new(direction.X,cameray,direction.Z)
@@ -1267,7 +1277,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 									cameray = 16
 								else
 									velocity.Velocity = Vector3.new(0,0,0)
-									repeat wait() until not table.find(keys,"W") and not table.find(keys,"Q") and not table.find(keys,'E')
+									repeat game:GetService("RunService").Stepped:Wait() until not table.find(keys,"W") and not table.find(keys,"Q") and not table.find(keys,'E')
 	
 								end
 							end
@@ -1324,7 +1334,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 	
 					if key.KeyCode == Enum.KeyCode.LeftShift and focusedcheck == "" then
 						flyspeed = maxflyspeed
-						repeat wait() until key.UserInputState == Enum.UserInputState.End
+						repeat game:GetService("RunService").Stepped:Wait() until key.UserInputState == Enum.UserInputState.End
 						flyspeed = maxflyspeed /2
 					end
 				end)
@@ -1370,7 +1380,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 	
 	addcmd("vfly","","Makes you and a vehicle fly", function()
 		fly()
-		wait()
+		game:GetService("RunService").Stepped:Wait()
 		localplayer.Character.Humanoid.PlatformStand = false
 	end)
 	
@@ -1562,7 +1572,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			spawn(function()
 				esp = true
 				local spawnchecking = plr.CharacterAdded:Connect(function()
-					repeat wait() until plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
+					repeat game:GetService("RunService").Stepped:Wait() until plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
 					local chosen = plr.Character:FindFirstChild("HumanoidRootPart") or plr.Character:FindFirstChild"Torso" or plr.Character:FindFirstChild"UpperTorso"
 					local Top = Instance.new("SurfaceGui")
 					local TextLabel = Instance.new("TextLabel")
@@ -1672,7 +1682,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 					TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_6.TextSize = 14.000
 	
-					repeat wait() until not plr or esp == false
+					repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 					if Top then
 						Top:Destroy()
 					end
@@ -1801,7 +1811,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 				TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_6.TextSize = 14.000
 	
-				repeat wait() until not plr or esp == false
+				repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 				if Top then
 					Top:Destroy()
 				end
@@ -1820,7 +1830,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 				if Front then
 					Front:Destroy()
 				end
-				repeat wait() until not plr or esp == false
+				repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 				if plr then
 					spawnchecking:Disconnect()
 					print("Disabled")
@@ -1945,7 +1955,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		local start = uis.InputBegan:Connect(function(key)
 			currentkey = uis:GetStringForKeyCode(key.KeyCode)
 		end)
-		repeat wait() until currentkey ~= ""
+		repeat game:GetService("RunService").Stepped:Wait() until currentkey ~= ""
 		start:Disconnect()
 		notify(3,"Binded "..currentkey.." to the command".. table.concat(arg, " " ,2)..", press \ and "..currentkey.." to remove the keybind")
 		local finished = false
@@ -1981,7 +1991,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		enabled = true
 		local lastpart = ""
 		spawn(function()
-			while wait() do
+			while game:GetService("RunService").Stepped:Wait() do
 				if enabled == false then
 					break
 				end
@@ -1991,12 +2001,12 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 				end)
 			end
 		end)
-		repeat wait() until loaded1 == true
+		repeat game:GetService("RunService").Stepped:Wait() until loaded1 == true
 		print("Loaded")
 		local function move(part,PartToGoto)
 			if part:FindFirstChildWhichIsA("BodyPosition") then
 				repeat
-					wait()
+					game:GetService("RunService").Stepped:Wait()
 					if part:FindFirstChildWhichIsA("BodyPosition") then
 						part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
 						print("Deleted")
@@ -2016,7 +2026,8 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 					tp.position = PartToGoto.Position
 				end
 				spawn(function()
-					while wait(0.1) do
+					while true do
+						game:GetService("RunService").Stepped:Wait()
 						if enabled == false or part.Anchored == true then
 							if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
 								if part:FindFirstChildWhichIsA("BodyPosition") then
@@ -2039,7 +2050,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 					end
 				end)
 			end
-			wait()
+			game:GetService("RunService").Stepped:Wait()
 		end
 	
 		local eee game.Workspace.DescendantAdded:Connect(function(thing)
@@ -2051,8 +2062,8 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 				end
 			elseif enabled == true and thing and thing:IsA("BasePart") and thing.Anchored == true and not thing:IsDescendantOf(game.Players.LocalPlayer.Character) then
 				spawn(function()
-					repeat wait() until not thing or thing.Anchored == false
-					wait()
+					repeat game:GetService("RunService").Stepped:Wait() until not thing or thing.Anchored == false
+					game:GetService("RunService").Stepped:Wait()
 					print("not anchored")
 					move(thing)
 				end)
@@ -2067,27 +2078,116 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 				elseif not v:FindFirstChildWhichIsA"WeldConstraint" and not v:FindFirstChildWhichIsA"Weld" then
 					move(v)
 				end
-				wait()
+				game:GetService("RunService").Stepped:Wait()
 			elseif v and v:IsA("BasePart") and v.Anchored == true and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
 				spawn(function()
-					repeat wait() until not v or v.Anchored == false
+					repeat game:GetService("RunService").Stepped:Wait() until not v or v.Anchored == false
 					move(v)
-					print("not anchored 1")
 				end)
 			end
 		end
-		repeat wait() until enabled == false
+		repeat game:GetService("RunService").Stepped:Wait() until enabled == false
 		eee:Disconnect()
 	end)
 	
 	addcmd("setsimulationradius","number","Sets the simulation radius to a number",function(arg)
 		if setsimulationradius then
-			while wait() do
+			while game:GetService("RunService").Stepped:Wait() do
 				setsimulationradius(arg[2])    
 			end
 		else
-			notify(3,"Not suppored with your exploit")
+			notify(3,"Not supported with your exploit")
 		end
+	end)
+	
+	local nameenabled = false
+	
+	local function removetag(plr)
+		plr = game.Players[plr]
+		nameenabled = false
+		if plr.Character.Head:FindFirstChild("NameTag") then
+			plr.Character.Head:FindFirstChild("NameTag"):Destroy()
+		end
+	end
+	
+	local function nametag(plr)
+		print(plr)
+		plr = game.Players[plr]
+		if plr then
+			nameenabled = true
+			repeat game:GetService("RunService").Stepped:Wait() until not plr or plr.Character:FindFirstChild"Head" or nameenabled == false
+			if plr and plr.Character:FindFirstChild"Head" then
+				local NameTag = Instance.new("BillboardGui")
+				local TextLabel = Instance.new("TextLabel")
+	
+				NameTag.Name = "NameTag"
+				NameTag.Parent = plr.Character.Head
+				NameTag.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+				NameTag.Active = true
+				NameTag.AlwaysOnTop = true
+				NameTag.LightInfluence = 1.000
+				NameTag.Size = UDim2.new(0, 300, 0, 50)
+				NameTag.StudsOffsetWorldSpace = Vector3.new(0, 2, 0)
+	
+				TextLabel.Parent = NameTag
+				TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				TextLabel.BackgroundTransparency = 1.000
+				TextLabel.Size = UDim2.new(1, 0, 1, 0)
+				TextLabel.Font = Enum.Font.SourceSans
+				TextLabel.Text = plr.Name
+				TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+				TextLabel.TextSize = 22.000
+				TextLabel.TextStrokeTransparency = 0.300
+			end
+			local addito = plr.CharacterAdded:Connect(function()
+				repeat game:GetService("RunService").Stepped:Wait() until not plr or plr.Character:FindFirstChild"Head" or nameenabled == false
+				if plr and plr.Character:FindFirstChild"Head" then
+					local NameTag = Instance.new("BillboardGui")
+					local TextLabel = Instance.new("TextLabel")
+	
+					NameTag.Name = "NameTag"
+					NameTag.Parent = plr.Character.Head
+					NameTag.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+					NameTag.Active = true
+					NameTag.AlwaysOnTop = true
+					NameTag.LightInfluence = 1.000
+					NameTag.Size = UDim2.new(0, 300, 0, 50)
+					NameTag.StudsOffsetWorldSpace = Vector3.new(0, 2, 0)
+	
+					TextLabel.Parent = NameTag
+					TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					TextLabel.BackgroundTransparency = 1.000
+					TextLabel.Size = UDim2.new(1, 0, 1, 0)
+					TextLabel.Font = Enum.Font.SourceSans
+					TextLabel.Text = plr.Name
+					TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+					TextLabel.TextSize = 22.000
+					TextLabel.TextStrokeTransparency = 0.300
+				end
+			end)
+			repeat wait() until nameenabled == false or not plr
+			nameenabled = false
+			addito:Disconnect()
+			if plr then
+				removetag(plr)
+			end
+		end
+	end
+	
+	addcmd("nametag","Player","Shows a players nametag", function(arg)
+		if arg[2] and arg[2]:lower() == "all" then
+			for i,v in pairs(game.Players:GetPlayers()) do
+				nametag(v.Name)
+			end
+		elseif arg[2] then
+			arg[2] = getplayer(arg[2])
+			nametag(arg[2])
+		end
+	end)
+	
+	addcmd("unnametag","Player","Unshows a players nametag", function(arg)
+		arg[2] = getplayer(arg[2])
+		removetag(arg[2])
 	end)
 	
 	addcmd("music","ID","Plays music of the specified ID",function(arg)
@@ -2100,7 +2200,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			sound.Name = "MUSIC"
 			sound.SoundId = "rbxassetid://"..tostring(arg[2])
 			sound:Play()
-			repeat wait() until sound.Playing == false
+			repeat game:GetService("RunService").Stepped:Wait() until sound.Playing == false
 			if sound then
 				sound:Destroy()
 			end
@@ -2134,14 +2234,14 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			local team = tostring(game.Players.LocalPlayer.Team)
 			local parttoclick = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].GreenSecond.PurchasedObjects.Mine.Button.ClickDetector
 			spawn(function()
-				while wait() do
+				while game:GetService("RunService").Stepped:Wait() do
 					pcall(function()
 						local part11 = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].Essentials.Giver
 						local part21 = game.Players.LocalPlayer.Character.HumanoidRootPart
 						firetouchinterest(part21,part11,1)
 						firetouchinterest(part21,part11,0)
 						fireclickdetector(parttoclick)
-						wait()
+						game:GetService("RunService").Stepped:Wait()
 					end)
 				end
 			end)
@@ -2150,15 +2250,15 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 	
 			local path = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"]
 	
-			while wait() do
+			while game:GetService("RunService").Stepped:Wait() do
 				for i,v in pairs(path:GetDescendants()) do
 					if v:IsA("TouchTransmitter") and v.Parent.Parent:FindFirstChild("Price") then
-						wait()
+						game:GetService("RunService").Stepped:Wait()
 						pcall(function()
 							local part1 = v.Parent
 							local part2 = game.Players.LocalPlayer.Character.HumanoidRootPart
 							firetouchinterest(part2,part1,1)
-							wait()
+							game:GetService("RunService").Stepped:Wait()
 							firetouchinterest(part2,part1,0)
 						end)
 					end
@@ -2288,7 +2388,7 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 			end
 		end)
 	
-		repeat wait() until antilag == false
+		repeat game:GetService("RunService").Stepped:Wait() until antilag == false
 		newantilag:Disconnect()
 	end)
 	
@@ -2326,13 +2426,13 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
 		if tostring(v):match(".lua") then
-		local ran,error = pcall(function()
-			loadfile(v)()
-		end)
-		if not ran then
-			print(error)
+			local ran,error = pcall(function()
+				loadfile(v)()
+			end)
+			if not ran then
+				print(error)
 			end
-			end
+		end
 	end
 	
 	close()
@@ -2342,11 +2442,10 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		local descript = script.Parent.Parent.Parent.CustomCommand.Description.Text
 		local reqire = script.Parent.Parent.Parent.CustomCommand.Requirement.Text
 		local addfunction = script.Parent.Parent.Parent.CustomCommand.Script.Script.Text
-		spawn(function()
-			wait(40)
-		end)
 		if name ~= "" and descript ~= "" and addfunction ~= "" then
-			loadstring("addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .." end)")()
+			pcall(function()
+				loadstring("addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .." end)")()
+			end)
 			if writefile then
 				if script.Parent.Parent.Parent.CustomCommand.Check.Text ~= "X" then
 					writefile("Bleak Admin/"..name..".lua","local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
@@ -2358,10 +2457,10 @@ local function BDZC_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	update()
-	notify(5,"Updated the admin. Added tpparts and looptpparts and setsimulationradius.")
+	notify(5,"Loaded ".. #commands.Name.. " commands")
 end
-coroutine.wrap(BDZC_fake_script)()
-local function WXNO_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(PAOBPU_fake_script)()
+local function RNWLUA_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2511,16 +2610,16 @@ local function WXNO_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(WXNO_fake_script)()
-local function ZADS_fake_script() -- Close.LocalScript 
+coroutine.wrap(RNWLUA_fake_script)()
+local function FHGFIKQ_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(ZADS_fake_script)()
-local function PIBL_fake_script() -- Check.LocalScript 
+coroutine.wrap(FHGFIKQ_fake_script)()
+local function VOFAI_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2531,27 +2630,35 @@ local function PIBL_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(PIBL_fake_script)()
-local function PGFI_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(VOFAI_fake_script)()
+local function QHQNPBT_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
-		repeat
-			instance.Size = instance.Size + UDim2.fromOffset(0,-1)
-		until instance.TextFits == false
-		repeat
-			instance.Size = instance.Size + UDim2.fromOffset(0,1)
-		until instance.TextFits == true
-		instance.Size = instance.Size + UDim2.fromOffset(0,5)
-		instance.Size = UDim2.fromOffset(instance.TextBounds.X+10,instance.Size.Y.Offset)
-		script.Parent.Parent.CanvasSize = UDim2.fromOffset(script.Parent.TextBounds.X,script.Parent.Size.Y.Offset)
+		instance.Size = UDim2.fromOffset(instance.TextBounds.X + script.Parent.Parent.AbsoluteSize.X,instance.TextBounds.Y + script.Parent.Parent.AbsoluteSize.Y)
+		script.Parent.Parent.CanvasSize = UDim2.fromOffset(script.Parent.TextBounds.X, script.Parent.TextBounds.Y)
 	end
-	while wait() do
+	
+	script.Parent.Changed:Connect(function()
 		resize(script.Parent)
-	end
+	end)
 end
-coroutine.wrap(PGFI_fake_script)()
-local function GHZU_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(QHQNPBT_fake_script)()
+local function WVRAGG_fake_script() -- Title_4.LocalScript 
+	local script = Instance.new('LocalScript', Title_4)
+
+	local function getname1(id)
+		if id ~= "" and id ~= nil and id ~= "Click a audio for options" then
+			local IDITO = id  -- Sound Id Of The Sound
+			local Asset = game:GetService("MarketplaceService"):GetProductInfo(IDITO) --[[Get's Product Information Of The Sound--]]
+			return Asset.Name
+		end
+	end
+	
+	script.Parent.Text = "Add command "..getname1(game.GameId)
+end
+coroutine.wrap(WVRAGG_fake_script)()
+local function SQIJUAI_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -2632,8 +2739,8 @@ local function GHZU_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(GHZU_fake_script)()
-local function XQCEQO_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(SQIJUAI_fake_script)()
+local function YGZSP_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -2652,11 +2759,15 @@ local function XQCEQO_fake_script() -- Chatlogs_2.ChatScript
 			autosaving = true
 			script.Parent.Parent.AutoSave.Text = "Autosave [true]"
 			if writefile and isfile("Bleak Admin/Chatlogs.txt") then
+				pcall(function()
 				writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
-				realmessage = {}
+					realmessage = {}
+					end)
 			elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") then
+				pcall(function()
 				writefile("Bleak Admin/Chatlogs.txt", "New chatlogs \n\n"..table.concat(realmessage,"\n"))
-				realmessage = {}
+					realmessage = {}
+					end)
 			elseif not writefile then
 				script.Parent.Parent.Save.Text = "Not supported"
 				wait(5)
@@ -2711,15 +2822,11 @@ local function XQCEQO_fake_script() -- Chatlogs_2.ChatScript
 				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg.."\n"
 				realoldtext = realmessage[#realmessage] 
 				if writefile and isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
-                    pcall(function()
 					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
 					realmessage = {}
-                end)
 				elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
-                    pcall(function()
 					writefile("Bleak Admin/Chatlogs.txt", realoldtext)
 					realmessage = {}
-                end)
 				end
 				lastmessagesaid = msg
 				amountrepeated = 1
@@ -2897,8 +3004,8 @@ local function XQCEQO_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(XQCEQO_fake_script)()
-local function QIJPRV_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(YGZSP_fake_script)()
+local function SJNAXO_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -2908,8 +3015,8 @@ local function QIJPRV_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(QIJPRV_fake_script)()
-local function AMLGQJ_fake_script() -- Search.LocalScript 
+coroutine.wrap(SJNAXO_fake_script)()
+local function TQURAE_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2926,8 +3033,8 @@ local function AMLGQJ_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(AMLGQJ_fake_script)()
-local function YHJUJE_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(TQURAE_fake_script)()
+local function OMFF_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3068,8 +3175,8 @@ local function YHJUJE_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(YHJUJE_fake_script)()
-local function XKGYS_fake_script() -- TagType.LocalScript 
+coroutine.wrap(OMFF_fake_script)()
+local function ITBM_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3095,4 +3202,4 @@ local function XKGYS_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(XKGYS_fake_script)()
+coroutine.wrap(ITBM_fake_script)()
