@@ -13,6 +13,7 @@ local CommandBar = Instance.new("TextBox")
 local CommandHighlighting = Instance.new("TextButton")
 local Title = Instance.new("TextLabel")
 local Notification = Instance.new("TextButton")
+local KeyThing = Instance.new("TextButton")
 local HowToUse = Instance.new("Frame")
 local Title_2 = Instance.new("TextLabel")
 local Description = Instance.new("TextLabel")
@@ -42,6 +43,11 @@ local Search = Instance.new("TextButton")
 local Searching = Instance.new("ScrollingFrame")
 local SearchBar = Instance.new("TextBox")
 local TagType = Instance.new("TextButton")
+local Tutorial = Instance.new("ScrollingFrame")
+local Info = Instance.new("TextLabel")
+local Title_5 = Instance.new("TextLabel")
+local Cmds = Instance.new("ScrollingFrame")
+local Cmd = Instance.new("TextLabel")
 
 --Properties:
 
@@ -70,8 +76,9 @@ CommandList.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 CommandList.BackgroundTransparency = 0.200
 CommandList.BorderColor3 = Color3.fromRGB(255, 255, 255)
 CommandList.Position = UDim2.new(0, 0, 0.231000006, -2)
-CommandList.Size = UDim2.new(0.999828994, 0, 0.670356393, 0)
+CommandList.Size = UDim2.new(1, 0, 0.800000012, 0)
 CommandList.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
+CommandList.CanvasPosition = Vector2.new(0, 18.0494156)
 CommandList.CanvasSize = UDim2.new(0, 0, 1, 0)
 CommandList.MidImage = "rbxassetid://967852047"
 
@@ -133,7 +140,7 @@ Title.BorderColor3 = Color3.fromRGB(255, 255, 255)
 Title.Position = UDim2.new(0, 0, -0.00124999299, 0)
 Title.Size = UDim2.new(0.999828994, 0, 0.114942528, 0)
 Title.Font = Enum.Font.SourceSans
-Title.Text = "Bleak Admin 1.8"
+Title.Text = "Bleak Admin 1.7"
 Title.TextColor3 = Color3.fromRGB(0, 209, 255)
 Title.TextScaled = true
 Title.TextSize = 14.000
@@ -154,6 +161,21 @@ Notification.TextColor3 = Color3.fromRGB(6, 184, 211)
 Notification.TextScaled = true
 Notification.TextSize = 14.000
 Notification.TextWrapped = true
+
+KeyThing.Name = "KeyThing"
+KeyThing.Parent = MainFrame
+KeyThing.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+KeyThing.BackgroundTransparency = 0.200
+KeyThing.BorderColor3 = Color3.fromRGB(255, 255, 255)
+KeyThing.Position = UDim2.new(0, 0, -0.00699711964, 1)
+KeyThing.Size = UDim2.new(0.427422702, 0, 0.000112073161, 0)
+KeyThing.Visible = false
+KeyThing.Font = Enum.Font.SourceSans
+KeyThing.Text = "Push this button and press a key"
+KeyThing.TextColor3 = Color3.fromRGB(255, 255, 255)
+KeyThing.TextScaled = true
+KeyThing.TextSize = 14.000
+KeyThing.TextWrapped = true
 
 HowToUse.Name = "HowToUse"
 HowToUse.Parent = BleakAdmin
@@ -529,9 +551,70 @@ TagType.TextScaled = true
 TagType.TextSize = 14.000
 TagType.TextWrapped = true
 
+Tutorial.Name = "Tutorial"
+Tutorial.Parent = BleakAdmin
+Tutorial.Active = true
+Tutorial.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Tutorial.BackgroundTransparency = 0.200
+Tutorial.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Tutorial.Position = UDim2.new(0.374468088, 0, 0.411840409, 0)
+Tutorial.Size = UDim2.new(0.287659585, 0, 0.357786328, 0)
+Tutorial.Visible = false
+Tutorial.CanvasSize = UDim2.new(0, 0, 0.600000024, 0)
+Tutorial.ScrollBarThickness = 6
+
+Info.Name = "Info"
+Info.Parent = Tutorial
+Info.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Info.BackgroundTransparency = 1.000
+Info.Position = UDim2.new(0, 0, 0, 31)
+Info.Size = UDim2.new(0, 331, 0, 614)
+Info.Font = Enum.Font.SourceSans
+Info.Text = "Hello, and thanks for using Bleak Admin, lets cut to the chase.\\nThere are name shorteners for the script so you don't have to type in a full name and you don't need to capitialize it. Sweet! You can grab a random player by saying \"random\". Here is an example\\nfindplr random - this will notify a random players name, try it! Another one is \"me\", it gets your players name. Example is findplayer me - notifys your name.\\nYou can hover over commands and it will tell you how to use it.\\nYou can also make your own commands IF you have scripting knowledge. You can also just put scripts in there to I guess... To do this, put in addcommand in the command bar and press enter.\\n		\\n--Scripting stuff\\n		\\nIf you know what arg/args is then you should already know the first part. args/arg is a agrument, when you enter a command, arg[1] is the COMMAND\\nIf you typed in \"findplayer me\" then arg[1] = \"findplayer\" and arg[2] = \"me\" etc...\\nIf you want to get the players shortened name, there is a built in function called \"getplayer(PlayerShorenedName)\"\\nIf you want to get the players name then here is a example script of how to use it\\nif arg[2] and getplayer(arg[2]) then\\n		print(getplayer(arg[2]))\\n	else\\n		print(\"No player found :(\")\\nend\\n"
+Info.TextColor3 = Color3.fromRGB(0, 209, 255)
+Info.TextSize = 14.000
+Info.TextWrapped = true
+Info.TextXAlignment = Enum.TextXAlignment.Left
+Info.TextYAlignment = Enum.TextYAlignment.Top
+
+Title_5.Name = "Title"
+Title_5.Parent = Tutorial
+Title_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title_5.BackgroundTransparency = 1.000
+Title_5.Size = UDim2.new(0, 331, 0, 31)
+Title_5.Font = Enum.Font.SourceSans
+Title_5.Text = "How to use Bleak admin "
+Title_5.TextColor3 = Color3.fromRGB(0, 209, 255)
+Title_5.TextSize = 25.000
+Title_5.TextWrapped = true
+
+Cmds.Name = "Cmds"
+Cmds.Parent = BleakAdmin
+Cmds.Active = true
+Cmds.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Cmds.BackgroundTransparency = 0.200
+Cmds.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Cmds.Position = UDim2.new(0.167659581, 0, 0.462033451, 0)
+Cmds.Size = UDim2.new(0.193191484, 0, 0.244530231, 0)
+Cmds.Visible = false
+Cmds.CanvasSize = UDim2.new(0, 0, 0.600000024, 0)
+Cmds.ScrollBarThickness = 6
+
+Cmd.Name = "Cmd"
+Cmd.Parent = Cmds
+Cmd.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Cmd.BackgroundTransparency = 0.700
+Cmd.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Cmd.Size = UDim2.new(0, 227, 0, 20)
+Cmd.Font = Enum.Font.SourceSans
+Cmd.Text = "Commands"
+Cmd.TextColor3 = Color3.fromRGB(0, 209, 255)
+Cmd.TextSize = 14.000
+Cmd.TextWrapped = true
+
 -- Scripts:
 
-local function HTUNMYR_fake_script() -- NewCommand.ButtonScript 
+local function XYSWQE_fake_script() -- NewCommand.ButtonScript 
 	local script = Instance.new('LocalScript', NewCommand)
 
 	local scrollingframe = script.Parent.Parent
@@ -541,8 +624,8 @@ local function HTUNMYR_fake_script() -- NewCommand.ButtonScript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(HTUNMYR_fake_script)()
-local function AGWTLUQ_fake_script() -- CommandBar.LocalScript 
+coroutine.wrap(XYSWQE_fake_script)()
+local function TRPPBN_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -561,6 +644,23 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 	local uihovered = false
 	local spawnedcommand = {}
 	local exactcommand = ""
+	local histroy = {}
+	local hselect = #histroy + 1
+	
+	function addhistory(thing)
+		for i,v in pairs(histroy) do
+			if v == thing then
+				table.remove(histroy,i)
+			end
+		end
+		histroy[#histroy+1] = thing
+		hselect = #histroy + 1
+	end
+	
+	if writefile and isfile and not isfile("Bleak Admin/prefix.txt") then
+		writefile("Bleak Admin/prefix.txt","Semicolon")
+	end
+	
 	
 	if not isfile then
 		function isfile()
@@ -682,7 +782,7 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 		repeat
 			instance.Size = instance.Size + UDim2.fromOffset(0,1)
 		until instance.TextFits == true
-		instance.Size = instance.Size + UDim2.fromOffset(0,5)
+		instance.Size = instance.Size + UDim2.fromOffset(0,2)
 	end
 	
 	local function close()
@@ -715,6 +815,20 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 			end
 		end
 		script.Parent.Parent.CommandList.CanvasSize = UDim2.fromOffset(0,script.Parent.Parent.CommandList.NewCommand.Size.Y.Offset*amount)
+	end
+	
+	function getplayerkey()
+		notify(2,"Press the button above the title and press a key")
+		script.Parent.Parent.KeyThing.Text = "Push this button and press a key"
+		script.Parent.Parent.KeyThing.Visible = true
+		script.Parent.Parent.KeyThing:TweenSizeAndPosition(UDim2.fromScale(script.Parent.Parent.KeyThing.Size.X.Scale,0.27), UDim2.fromScale(0,-0.277),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true)
+		repeat game:GetService("RunService").Stepped:Wait() until script.Parent.Parent.KeyThing.Text ~= "Push this button and press a key" and script.Parent.Parent.KeyThing.Text ~= "" and script.Parent.Parent.KeyThing.Text ~= nil
+		local keychosen = script.Parent.Parent.KeyThing.Text
+		print(keychosen)
+		script.Parent.Parent.KeyThing:TweenSizeAndPosition(UDim2.fromScale(script.Parent.Parent.KeyThing.Size.X.Scale,0),UDim2.fromScale(0,0),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true, function()
+			script.Parent.Parent.KeyThing.Visible = false
+		end)
+		return keychosen
 	end
 	
 	function getplayer(plr)
@@ -900,8 +1014,10 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 						commands.Code[number](command)
 					end)
 				end)
+				addhistory(cmdname.." ".. table.concat(command," ",2))
 				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
 				if ran == true then
+					print("WOW!")
 				else
 					print(error)
 					return error
@@ -925,6 +1041,8 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 		end
 	end
 	
+	local totalcmdsize = 20
+	
 	function addcmd(name, requirement, description, code)
 		if requirement and code and description and name then
 			if getcmdnumber(name)  then
@@ -934,8 +1052,20 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 			table.insert(commands.Name,name:lower())
 			table.insert(commands.Requirement,requirement)
 			table.insert(commands.Description,description)
-			table.insert(commands.Code,code)
+			table.insert(commands.Code,code)		
 			local cmdnumber = #commands.Name
+			local cmdaddlol = script.Parent.Parent.Parent.Cmds.Cmd:Clone()
+			cmdaddlol.Parent = script.Parent.Parent.Parent.Cmds
+			cmdaddlol.Text = "["..cmdnumber.."] ".. name.. " ".."[".. requirement.."], ".. description
+			cmdaddlol.Position = UDim2.fromOffset(0,totalcmdsize)
+			cmdaddlol.Size = cmdaddlol.Size - UDim2.fromOffset(7,0)
+			resize(cmdaddlol)
+			totalcmdsize = totalcmdsize + cmdaddlol.Size.Y.Offset
+	
+			script.Parent.Parent.Parent.Cmds.CanvasSize = UDim2.fromOffset(0,totalcmdsize)
+			cmdaddlol.TextXAlignment = Enum.TextXAlignment.Left
+			
+			
 			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
@@ -990,7 +1120,7 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
 		if pressed then
 			local text = script.Parent.Text
-				runcmd(text)
+			runcmd(text)
 			spawn(function()
 				postmessageondiscord(text)
 			end)
@@ -1024,6 +1154,24 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 					script.Parent.CursorPosition = #v.Text + 10
 				end
 			end
+		elseif pp.KeyCode == Enum.KeyCode.Up and isfocused == script.Parent.Name then
+			if hselect+1 <= #histroy then
+				hselect = hselect + 1
+				if histroy[hselect] then
+					script.Parent.Text = histroy[hselect]
+				end
+			end 
+		elseif pp.KeyCode == Enum.KeyCode.Down and isfocused == script.Parent.Name then
+			if hselect-1 > 0 then
+				hselect = hselect - 1
+				if histroy[hselect] then
+					script.Parent.Text = histroy[hselect]
+				end
+			else
+				if histroy[hselect] then
+					script.Parent.Text = histroy[hselect]
+				end
+			end 
 		end
 	end)
 	
@@ -1139,16 +1287,93 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	
-	addcmd("respawn", "", "Makes you respawn in ".. game.Players.RespawnTime, function()
+	addcmd("cmds","","Shows all of the commands", function()
+		script.Parent.Parent.Parent.Cmds.Visible = true
+	end)
+	
+	addcmd("closecmds","","Hides all of the commands", function()
+		script.Parent.Parent.Parent.Cmds.Visible = false
+	end)
+	
+	addcmd("respawn", "", "Makes you respawn in ".. game.Players.RespawnTime.." seconds", function()
+		notify(game.Players.RespawnTime-1,"Respawning")
 		respawn()
 	end)
 	
+	addcmd("hide","","Makes you hide from other players and you can't be taken by people. Undo this by using ".. uis:GetStringForKeyCode(prefix).. "respawn.", function()
+		notify(10,"Undo this by using".. uis:GetStringForKeyCode(prefix).."respawn or click this button", function()
+			runcmd("respawn")
+		end)
+		runcmd("gotopos 50000 50000 50000")
+		workspace[game.Players.LocalPlayer.Name].Parent = nil
+	end)
+	
+	local following = false
+	
+	addcmd("follow","Player","Makes you follow a player",function(arg)
+		if getplayer(arg[2]) then
+			if following == true then
+				following = false
+				game:GetService("RunService").Stepped:Wait()
+			end
+			following = true
+			while following == true and getplayer(arg[2]) do
+				game:GetService("RunService").Stepped:Wait()
+				if game.Players[getplayer(arg[2])].Character ~= nil and game.Players[getplayer(arg[2])].Character:FindFirstChild("HumanoidRootPart") then
+					localplayer.Character:WaitForChild("Humanoid").WalkToPoint = game.Players[getplayer(arg[2])].Character:WaitForChild("HumanoidRootPart").Position
+				elseif game.Players[getplayer(arg[2])].Character ~= nil and game.Players[getplayer(arg[2])].Character:FindFirstChild("Head") then
+					localplayer.Character:WaitForChild("Humanoid").WalkToPoint = game.Players[getplayer(arg[2])].Character:WaitForChild("Head").Position
+				end
+			end
+			print("done")
+		end
+	end)
+	
+	addcmd("unfollow","","Makes you unfollow the player", function()
+		following = false
+	end)
+	
+	addcmd("help","","Opens the help gui",function()
+		script.Parent.Parent.Parent.Tutorial.Visible = true
+	end)
+	
+	addcmd("closehelp","","Closes help gui", function()
+		script.Parent.Parent.Parent.Tutorial.Visible = false
+	end)
+	
+	addcmd("view","Plr","Views the players perspective", function(arg)
+		if getplayer(arg[2]) then
+			workspace.Camera.CameraSubject = game.Players[getplayer(arg[2])].Character:FindFirstChild"Humanoid"
+			local camerarespawn = game.Players[getplayer(arg[2])].CharacterAdded:Connect(function()
+				if getplayer(arg[2]) then
+					repeat game:GetService("RunService").Stepped:Wait() until game.Players[getplayer(arg[2])].Character ~= nil and game.Players[getplayer(arg[2])].Character:FindFirstChild("Humanoid")
+					workspace.Camera.CameraSubject = game.Players[getplayer(arg[2])].Character:WaitForChild"Humanoid"
+				end
+			end)
+			repeat wait() until not getplayer(arg[2]) or game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and workspace.Camera.CameraSubject == game.Players.LocalPlayer.Character.Humanoid
+			if not getplayer(arg[2]) then
+				notify(2,"Player left")
+				camerarespawn:Disconnect()
+				workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+			end	
+		end
+	end)
+	
+	addcmd("unview","","Stops viewing a player",function()
+		workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+	end)
 	
 	addcmd("findplr","Plr","Checks if the chosen player is in the game", function(arg)
 		if getplayer(arg[2]) then
 			runcmd("print ".. getplayer(arg[2]))
 		else
 			runcmd("print didn't find the player :(")
+		end
+	end)
+	
+	addcmd("gotopos","pos [X, Y, Z]","Teleports you to a location",function(arg)
+		if checkroot() then
+			checkroot().CFrame = CFrame.new(arg[2],arg[3],arg[4])
 		end
 	end)
 	
@@ -1556,6 +1781,10 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 			v.CanCollide = true
 		end
 		runcmd("clip")
+	end)
+	
+	addcmd("notifykey","","Notifys your key",function()
+		notify(2,getplayerkey())
 	end)
 	
 	addcmd("flyspeed","number","Changes your fly speed", function(arg)
@@ -2094,17 +2323,11 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("bindkey","press a key","Binds a command to a key", function(arg)
-		local currentkey = ""
+		local currentkey = getplayerkey()
 		local enabled = true
 		local ctrlpressed = false
 		local uis = game:GetService("UserInputService")
-		notify(1,"Press a key to bind the command")
-		local start = uis.InputBegan:Connect(function(key)
-			currentkey = uis:GetStringForKeyCode(key.KeyCode)
-		end)
-		repeat game:GetService("RunService").Stepped:Wait() until currentkey ~= ""
-		start:Disconnect()
-		notify(3,"Binded "..currentkey.." to the command".. table.concat(arg, " " ,2)..", press \ and "..currentkey.." to remove the keybind")
+		notify(3,"Binded "..currentkey.." to the command".. table.concat(arg, " " ,2)..", press backslash (not / the other one) and "..currentkey.." to remove the keybind")
 		local finished = false
 	
 		local realdeal = uis.InputBegan:Connect(function(key)
@@ -2548,15 +2771,14 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("prefix","Key","Changes the prefix from "..tostring(prefix).." to your new chosen prefix",function(arg)
-		if string.len(arg[2]) <= 1 then
-			arg[2] = string.upper(arg[2])
-		else
-			local letters = arg[2]:split("")
-			letters[1] = string.upper(letters[1])
-			args[2] = table.concat(letters,"")
-		end
-		prefix = Enum.KeyCode[tostring(arg[2])]
-		notify(5,"Set prefix to the key "..arg[2])
+		local selectedkey = getplayerkey()
+		pcall(function()
+			if Enum.KeyCode[tostring(selectedkey)] then
+				print("true")
+				notify(5,"Set prefix to the key "..selectedkey)
+				prefix = Enum.KeyCode[tostring(selectedkey)]
+			end	
+		end)
 	end)
 	if game.GameId == 719754874 then
 		addcmd("ragdollengineadmin","","Loads the RGA I made, it prints the commands",function(arg)
@@ -2607,10 +2829,10 @@ local function AGWTLUQ_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	update()
-	notify(5,"Loaded ".. #commands.Name.. " commands")
+	notify(5,"Loaded ".. #commands.Name.. " commands and added command history. Press up and down keys to cycle through recently used commands.")
 end
-coroutine.wrap(AGWTLUQ_fake_script)()
-local function BHZLRYE_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(TRPPBN_fake_script)()
+local function JNPVP_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2760,16 +2982,73 @@ local function BHZLRYE_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(BHZLRYE_fake_script)()
-local function CXNTKD_fake_script() -- Close.LocalScript 
+coroutine.wrap(JNPVP_fake_script)()
+local function TZUROSP_fake_script() -- KeyThing.LocalScript 
+	local script = Instance.new('LocalScript', KeyThing)
+
+	local function getkey()
+		local key = nil
+		local uis = game:GetService("UserInputService")
+		local peebrain = uis.InputBegan:Connect(function(po)
+			if po.KeyCode ~= Enum.KeyCode.Unknown then
+				key = uis:GetStringForKeyCode(po.KeyCode)
+			end
+		end)
+		repeat wait() until key ~= nil
+		peebrain:Disconnect()
+		if key == ";" then
+			script.Parent.Text = "Semicolon"
+		elseif key == ":" then
+			script.Parent.Text = "Colon"
+		elseif key == "'" then
+			script.Parent.Text = "Quote"
+		elseif key == '"' then
+			script.Parent.Text = "QuotedDouble"
+		elseif key == "." then
+			script.Parent.Text = "Period"
+		elseif key == "/" then
+			script.Parent.Text = "Slash"
+		elseif key == "1" then
+			script.Parent.Text = "One"
+		elseif key == "2" then
+			script.Parent.Text = "Two"
+		elseif key == "3" then
+			script.Parent.Text = "Three"
+		elseif key == "4" then
+			script.Parent.Text = "Four"
+		elseif key == "5" then
+			script.Parent.Text = "Five"
+		elseif key == "6" then
+			script.Parent.Text = "Six"
+		elseif key == "7" then
+			script.Parent.Text = "Seven"
+		elseif key == "8" then
+			script.Parent.Text = "Eight"
+		elseif key == "9" then
+			script.Parent.Text = "Nine"
+		elseif key == "0" then
+			script.Parent.Text = "Zero"
+		else	
+			script.Parent.Text = key
+		end
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		getkey()
+	end)
+	
+	
+end
+coroutine.wrap(TZUROSP_fake_script)()
+local function YBREH_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(CXNTKD_fake_script)()
-local function LANHIY_fake_script() -- Check.LocalScript 
+coroutine.wrap(YBREH_fake_script)()
+local function GNGBJL_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -2780,8 +3059,8 @@ local function LANHIY_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(LANHIY_fake_script)()
-local function VMKZ_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(GNGBJL_fake_script)()
+local function QPKOO_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
@@ -2793,8 +3072,8 @@ local function VMKZ_fake_script() -- Script_2.LocalScript
 		resize(script.Parent)
 	end)
 end
-coroutine.wrap(VMKZ_fake_script)()
-local function OSKUYOS_fake_script() -- Title_4.LocalScript 
+coroutine.wrap(QPKOO_fake_script)()
+local function NVMF_fake_script() -- Title_4.LocalScript 
 	local script = Instance.new('LocalScript', Title_4)
 
 	local function getname1(id)
@@ -2807,8 +3086,8 @@ local function OSKUYOS_fake_script() -- Title_4.LocalScript
 	
 	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
-coroutine.wrap(OSKUYOS_fake_script)()
-local function HCCMOYF_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(NVMF_fake_script)()
+local function GOZCUF_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -2826,11 +3105,11 @@ local function HCCMOYF_fake_script() -- BleakAdmin.NewScript
 			v.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
 			v.TopImage = "http://www.roblox.com/asset/?id=5903324492"
 			spawn(function()
-				local beginnumber = 0.513722
+				local beginnumber = 0.486278
 				local maxnumber = 0.624833
 				local number = 0.513722
 				local reversing = false
-				while wait() do
+				while game:GetService("RunService").Stepped:Wait() do
 					if reversing == false then
 						number = number + 0.001
 						v.ScrollBarImageColor3 = Color3.fromHSV(number,1,1)
@@ -2889,8 +3168,8 @@ local function HCCMOYF_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(HCCMOYF_fake_script)()
-local function KZVCV_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(GOZCUF_fake_script)()
+local function KEXVTLH_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -3154,8 +3433,8 @@ local function KZVCV_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(KZVCV_fake_script)()
-local function LEAROVS_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(KEXVTLH_fake_script)()
+local function ZMPP_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -3165,8 +3444,8 @@ local function LEAROVS_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(LEAROVS_fake_script)()
-local function CTSI_fake_script() -- Search.LocalScript 
+coroutine.wrap(ZMPP_fake_script)()
+local function VPCBT_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3183,8 +3462,8 @@ local function CTSI_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(CTSI_fake_script)()
-local function JCVECVX_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(VPCBT_fake_script)()
+local function KCRBIR_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3325,8 +3604,8 @@ local function JCVECVX_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(JCVECVX_fake_script)()
-local function QCUYV_fake_script() -- TagType.LocalScript 
+coroutine.wrap(KCRBIR_fake_script)()
+local function GEEQ_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3352,4 +3631,4 @@ local function QCUYV_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(QCUYV_fake_script)()
+coroutine.wrap(GEEQ_fake_script)()
