@@ -885,7 +885,7 @@ local function PTFE_fake_script() -- CommandBar.LocalScript
 				end
 				return farplr
 			elseif v.Name:lower():match(plr:lower()) and v.Name ~= localplayer.Name then
-				return v
+				return v.Name
 			end
 		end
 	end
