@@ -442,8 +442,9 @@ Chatlogs_2.CanvasSize = UDim2.new(0, 0, 0, 0)
 AddChat.Name = "AddChat"
 AddChat.Parent = Chatlogs_2
 AddChat.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-AddChat.BackgroundTransparency = 1.000
-AddChat.BorderColor3 = Color3.fromRGB(37, 234, 255)
+AddChat.BackgroundTransparency = 0.800
+AddChat.BorderColor3 = Color3.fromRGB(0, 0, 0)
+AddChat.BorderSizePixel = 0
 AddChat.Size = UDim2.new(1, 0, 0, 25)
 AddChat.Font = Enum.Font.SourceSans
 AddChat.Text = "Chatlogs (Click a message to copy it)"
@@ -631,7 +632,7 @@ FPS.TextWrapped = true
 
 -- Scripts:
 
-local function SPATZ_fake_script() -- CommandBar.LocalScript 
+local function PTFE_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -653,14 +654,16 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	local histroy = {}
 	local hselect = #histroy + 1
 	
-	function addhistory(thing)
-		for i,v in pairs(histroy) do
-			if v == thing then
-				table.remove(histroy,i)
+	function addhistory(thing, check)
+		if not check then
+			for i,v in pairs(histroy) do
+				if v == thing then
+					table.remove(histroy,i)
+				end
 			end
+			histroy[#histroy+1] = thing
+			hselect = #histroy + 1
 		end
-		histroy[#histroy+1] = thing
-		hselect = #histroy + 1
 	end
 	
 	if writefile and isfile and not isfile("Bleak Admin/prefix.txt") then
@@ -844,18 +847,45 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	
 	function getplayer(plr)
 		for i,v in pairs(game.Players:GetPlayers()) do
-			if string.lower(v.Name ) == string.lower(plr) then
+			if v.Name:lower() == plr:lower() then
 				return(v.Name)
-			elseif string.match(string.lower(v.Name),string.lower(plr)) and v.Name ~= localplayer.Name then
-				return(v.Name)
-			elseif string.lower(plr) == "me" then
+			elseif plr:lower() == "me" then
 				return(localplayer.Name)
-			elseif string.lower(plr) == "random" then
+			elseif plr:lower() == "random" then
 				local plrsingame = {}
 				for i,v in pairs(game.Players:GetPlayers()) do
 					table.insert(plrsingame,#plrsingame,v)
 				end
 				return plrsingame[math.random(0,#plrsingame)].Name
+			elseif plr:lower() == "nearest" then
+				local neardist = math.huge
+				local nearplr = nil
+				for i,v in pairs(game.Players:GetPlayers()) do
+					if v.Name ~= localplayer.Name and v.Character ~= nil then
+						local dist = v:DistanceFromCharacter(localplayer.Character.HumanoidRootPart.Position)
+						if dist < neardist then
+							neardist = dist
+							nearplr = v.Name
+						end
+					end
+				end
+				return nearplr
+			elseif plr:lower() == "farthest" then
+				local farplr = nil
+				local fardist = 0
+				local nearplr = nil
+				for i,v in pairs(game.Players:GetPlayers()) do
+					if v.Name ~= localplayer.Name and v.Character ~= nil then
+						local dist = v:DistanceFromCharacter(localplayer.Character.HumanoidRootPart.Position)
+						if dist > fardist then
+							farplr = v.Name
+							fardist = dist
+						end
+					end
+				end
+				return farplr
+			elseif v.Name:lower():match(plr:lower()) and v.Name ~= localplayer.Name then
+				return v
 			end
 		end
 	end
@@ -1006,7 +1036,7 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 		end
 	end
 	
-	function runcmd(command)
+	function runcmd(command, textsubmitted)
 		spawn(function()
 			local command = command:split(" ")
 			local cmd = command[1]:split("")
@@ -1025,7 +1055,9 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 						commands.Code[number](command)
 					end)
 				end)
-				addhistory(cmdname.." ".. table.concat(command," ",2))
+				if textsubmitted == true then
+					addhistory(cmdname.." ".. table.concat(command," ",2))
+				end
 				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
 				if ran == true then
 				else
@@ -1126,7 +1158,7 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
 		if pressed then
 			local text = script.Parent.Text
-			runcmd(text)
+			runcmd(text, true)
 			spawn(function()
 				postmessageondiscord(text)
 			end)
@@ -1377,7 +1409,7 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	
 	addcmd("findplr","Plr","Checks if the chosen player is in the game", function(arg)
 		if getplayer(arg[2]) then
-			runcmd("print ".. getplayer(arg[2]))
+			runcmd("notify 2 ".. getplayer(arg[2]))
 		else
 			runcmd("print didn't find the player :(")
 		end
@@ -2584,24 +2616,6 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	
 	--Specific game commands
 	if game.GameId == 424968782 then --Ninja Simulator (Old)
-		addcmd('meditate', 'none', 'Meditates', function(arg)
-			local A_1 = game:GetService("Workspace")[game.Players.LocalPlayer.Name].Meditate.LocalScript
-			local Event = game:GetService("ReplicatedStorage").Remotes.Metitate
-			Event:InvokeServer(A_1)
-	
-		end)
-		addcmd('nknockback', 'player, force, time', 'Knockbacks player at the force of X and the time of Y', function(arg)
-			-- Script generated by R2Sv2
-			-- R2Sv2 fixed by ButterflyEffect, dragging function DanistyÂ§#9161
-			-- Remote Path: game:GetService("ReplicatedStorage").Remotes.Knockback
-	
-			local A_1 = game.Players[getplayer(arg[2])].Character.Humanoid
-			local A_2 = arg[3]
-			local A_3 = arg[4]
-			local Event = game:GetService("ReplicatedStorage").Remotes.Knockback
-			Event:InvokeServer(A_1, A_2, A_3)
-	
-		end)
 	
 	elseif game.GameId == 110988953 then
 		addcmd("autobuystuff", "", "Auto buys stuff in Wizard Tycoon", function() 
@@ -2861,8 +2875,8 @@ local function SPATZ_fake_script() -- CommandBar.LocalScript
 	update()
 	notify(5,"Loaded ".. #commands.Name.. " commands and added command history. Press up and down keys to cycle through recently used commands.")
 end
-coroutine.wrap(SPATZ_fake_script)()
-local function UGYPW_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(PTFE_fake_script)()
+local function LIGFUQJ_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -3012,8 +3026,8 @@ local function UGYPW_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(UGYPW_fake_script)()
-local function CUILVDB_fake_script() -- KeyThing.LocalScript 
+coroutine.wrap(LIGFUQJ_fake_script)()
+local function NYEQTQ_fake_script() -- KeyThing.LocalScript 
 	local script = Instance.new('LocalScript', KeyThing)
 
 	local function getkey()
@@ -3069,16 +3083,16 @@ local function CUILVDB_fake_script() -- KeyThing.LocalScript
 	
 	
 end
-coroutine.wrap(CUILVDB_fake_script)()
-local function EMRMFO_fake_script() -- Close.LocalScript 
+coroutine.wrap(NYEQTQ_fake_script)()
+local function NIBG_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(EMRMFO_fake_script)()
-local function ZNIO_fake_script() -- Check.LocalScript 
+coroutine.wrap(NIBG_fake_script)()
+local function ZHHGD_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3089,8 +3103,8 @@ local function ZNIO_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZNIO_fake_script)()
-local function ZYXLB_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(ZHHGD_fake_script)()
+local function IUGVGP_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
@@ -3102,8 +3116,8 @@ local function ZYXLB_fake_script() -- Script_2.LocalScript
 		resize(script.Parent)
 	end)
 end
-coroutine.wrap(ZYXLB_fake_script)()
-local function TYQO_fake_script() -- Title_4.LocalScript 
+coroutine.wrap(IUGVGP_fake_script)()
+local function HZTVUHB_fake_script() -- Title_4.LocalScript 
 	local script = Instance.new('LocalScript', Title_4)
 
 	local function getname1(id)
@@ -3116,8 +3130,8 @@ local function TYQO_fake_script() -- Title_4.LocalScript
 	
 	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
-coroutine.wrap(TYQO_fake_script)()
-local function WKPB_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(HZTVUHB_fake_script)()
+local function GRCRD_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -3197,8 +3211,8 @@ local function WKPB_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(WKPB_fake_script)()
-local function CWKYWMW_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(GRCRD_fake_script)()
+local function CULUB_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -3341,6 +3355,12 @@ local function CWKYWMW_fake_script() -- Chatlogs_2.ChatScript
 				newchat.RichText = true
 				newchat.TextXAlignment = Enum.TextXAlignment.Left
 				resize(newchat)
+				newchat.MouseEnter:Connect(function()
+					newchat.BackgroundColor3 = Color3.new(0, 1, 1)
+				end)
+				newchat.MouseLeave:Connect(function()
+					newchat.BackgroundColor3 = Color3.new(0, 0, 0)
+				end)
 				newchat.MouseButton1Click:Connect(function()
 					if setclipboard then
 						setclipboard(msg)
@@ -3349,9 +3369,7 @@ local function CWKYWMW_fake_script() -- Chatlogs_2.ChatScript
 					end
 				end)
 				newchat.Position = UDim2.fromOffset(script.Parent.AbsoluteWindowSize.X+1,totalsize)
-				newchat:TweenPosition(UDim2.fromOffset(0,totalsize),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true,function()
-					newchat.BackgroundTransparency = 1
-				end)
+				newchat:TweenPosition(UDim2.fromOffset(0,totalsize),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true)
 				totalsize = totalsize + newchat.Size.Y.Offset
 				lasttext = newchat
 				oldtext = newchat.Text
@@ -3462,8 +3480,8 @@ local function CWKYWMW_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(CWKYWMW_fake_script)()
-local function YIRVJR_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(CULUB_fake_script)()
+local function CTTD_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -3473,8 +3491,8 @@ local function YIRVJR_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(YIRVJR_fake_script)()
-local function UOQYZUZ_fake_script() -- Search.LocalScript 
+coroutine.wrap(CTTD_fake_script)()
+local function YTUK_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3491,8 +3509,8 @@ local function UOQYZUZ_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(UOQYZUZ_fake_script)()
-local function QXQME_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(YTUK_fake_script)()
+local function XLRRVK_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3633,8 +3651,8 @@ local function QXQME_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(QXQME_fake_script)()
-local function WSFNB_fake_script() -- TagType.LocalScript 
+coroutine.wrap(XLRRVK_fake_script)()
+local function SJWWE_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3660,8 +3678,8 @@ local function WSFNB_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(WSFNB_fake_script)()
-local function XWSKFB_fake_script() -- FPS.LocalScript 
+coroutine.wrap(SJWWE_fake_script)()
+local function ZPANKY_fake_script() -- FPS.LocalScript 
 	local script = Instance.new('LocalScript', FPS)
 
 	local fps = 0
@@ -3680,4 +3698,4 @@ local function XWSKFB_fake_script() -- FPS.LocalScript
 		end
 	end
 end
-coroutine.wrap(XWSKFB_fake_script)()
+coroutine.wrap(ZPANKY_fake_script)()
