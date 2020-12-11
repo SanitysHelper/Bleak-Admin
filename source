@@ -1897,6 +1897,9 @@ local function HBIG_fake_script() -- CommandBar.LocalScript
 			for i,v in pairs(char:GetChildren()) do
 				if v:IsA("Tool") and v:FindFirstChild"Handle" then
 					v.Parent = workspace
+					if setsimulationradius then
+						setsimulationradius("inf","inf")
+					end
 					local velocity = Instance.new("BodyPosition",v.Handle)
 					velocity.MaxForce = Vector3.new('inf','inf','inf')
 					velocity.P = 9000
