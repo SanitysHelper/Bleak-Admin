@@ -1902,8 +1902,8 @@ local function HBIG_fake_script() -- CommandBar.LocalScript
 					end
 					local velocity = Instance.new("BodyPosition",v.Handle)
 					velocity.MaxForce = Vector3.new('inf','inf','inf')
-					velocity.P = 9000
-					velocity.D = 100
+					velocity.P = 90000
+					velocity.D = 250
 					velocity.Position = game.Players[plr].Character.HumanoidRootPart.Position
 				end
 			end
