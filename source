@@ -48,6 +48,7 @@ local Info = Instance.new("TextLabel")
 local Title_5 = Instance.new("TextLabel")
 local Cmds = Instance.new("ScrollingFrame")
 local Cmd = Instance.new("TextLabel")
+local FPS = Instance.new("TextLabel")
 
 --Properties:
 
@@ -78,18 +79,18 @@ CommandList.BorderColor3 = Color3.fromRGB(255, 255, 255)
 CommandList.Position = UDim2.new(0, 0, 0.231000006, -2)
 CommandList.Size = UDim2.new(1, 0, 0.800000012, 0)
 CommandList.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
-CommandList.CanvasPosition = Vector2.new(0, 18.0494156)
-CommandList.CanvasSize = UDim2.new(0, 0, 1, 0)
+CommandList.CanvasSize = UDim2.new(0, 0, 0, 0)
 CommandList.MidImage = "rbxassetid://967852047"
 
 NewCommand.Name = "NewCommand"
 NewCommand.Parent = CommandList
 NewCommand.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-NewCommand.BackgroundTransparency = 1.000
+NewCommand.BackgroundTransparency = 0.800
 NewCommand.BorderColor3 = Color3.fromRGB(255, 255, 255)
+NewCommand.BorderSizePixel = 0
 NewCommand.Size = UDim2.new(1, 0, 0, 15)
 NewCommand.Visible = false
-NewCommand.Font = Enum.Font.SourceSans
+NewCommand.Font = Enum.Font.Ubuntu
 NewCommand.Text = "Invalid Command (Does not exist)"
 NewCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
 NewCommand.TextScaled = true
@@ -568,7 +569,7 @@ Info.Parent = Tutorial
 Info.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Info.BackgroundTransparency = 1.000
 Info.Position = UDim2.new(0, 0, 0, 31)
-Info.Size = UDim2.new(0, 331, 0, 614)
+Info.Size = UDim2.new(1, -7, 0, 614)
 Info.Font = Enum.Font.SourceSans
 Info.Text = "Hello, and thanks for using Bleak Admin, lets cut to the chase.\\nThere are name shorteners for the script so you don't have to type in a full name and you don't need to capitialize it. Sweet! You can grab a random player by saying \"random\". Here is an example\\nfindplr random - this will notify a random players name, try it! Another one is \"me\", it gets your players name. Example is findplayer me - notifys your name.\\nYou can hover over commands and it will tell you how to use it.\\nYou can also make your own commands IF you have scripting knowledge. You can also just put scripts in there to I guess... To do this, put in addcommand in the command bar and press enter.\\n		\\n--Scripting stuff\\n		\\nIf you know what arg/args is then you should already know the first part. args/arg is a agrument, when you enter a command, arg[1] is the COMMAND\\nIf you typed in \"findplayer me\" then arg[1] = \"findplayer\" and arg[2] = \"me\" etc...\\nIf you want to get the players shortened name, there is a built in function called \"getplayer(PlayerShorenedName)\"\\nIf you want to get the players name then here is a example script of how to use it\\nif arg[2] and getplayer(arg[2]) then\\n		print(getplayer(arg[2]))\\n	else\\n		print(\"No player found :(\")\\nend\\n"
 Info.TextColor3 = Color3.fromRGB(0, 209, 255)
@@ -581,7 +582,7 @@ Title_5.Name = "Title"
 Title_5.Parent = Tutorial
 Title_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title_5.BackgroundTransparency = 1.000
-Title_5.Size = UDim2.new(0, 331, 0, 31)
+Title_5.Size = UDim2.new(1, -7, 0, 31)
 Title_5.Font = Enum.Font.SourceSans
 Title_5.Text = "How to use Bleak admin "
 Title_5.TextColor3 = Color3.fromRGB(0, 209, 255)
@@ -605,27 +606,32 @@ Cmd.Parent = Cmds
 Cmd.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Cmd.BackgroundTransparency = 0.700
 Cmd.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Cmd.Size = UDim2.new(0, 227, 0, 20)
+Cmd.Size = UDim2.new(1, -7, 0, 20)
 Cmd.Font = Enum.Font.SourceSans
 Cmd.Text = "Commands"
 Cmd.TextColor3 = Color3.fromRGB(0, 209, 255)
 Cmd.TextSize = 14.000
 Cmd.TextWrapped = true
 
+FPS.Name = "FPS"
+FPS.Parent = BleakAdmin
+FPS.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+FPS.BackgroundTransparency = 1.000
+FPS.Position = UDim2.new(0.88425529, 0, 0.966537952, 0)
+FPS.Size = UDim2.new(0.11574468, 0, 0.0334620327, 0)
+FPS.Visible = false
+FPS.Font = Enum.Font.SourceSans
+FPS.Text = "FPS: 60"
+FPS.TextColor3 = Color3.fromRGB(0, 0, 0)
+FPS.TextScaled = true
+FPS.TextSize = 14.000
+FPS.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+FPS.TextStrokeTransparency = 0.600
+FPS.TextWrapped = true
+
 -- Scripts:
 
-local function XYSWQE_fake_script() -- NewCommand.ButtonScript 
-	local script = Instance.new('LocalScript', NewCommand)
-
-	local scrollingframe = script.Parent.Parent
-	spawn(function()
-		repeat wait() until scrollingframe.CanvasSize.Y.Offset > scrollingframe.AbsoluteWindowSize.Y
-		script.Parent.Size = UDim2.new(1,script.Parent.Size.X.Offset - (scrollingframe.ScrollBarThickness + 1),0,script.Parent.Size.Y.Offset)
-		script:Destroy()
-	end)
-end
-coroutine.wrap(XYSWQE_fake_script)()
-local function TRPPBN_fake_script() -- CommandBar.LocalScript 
+local function SPATZ_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -815,6 +821,11 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 			end
 		end
 		script.Parent.Parent.CommandList.CanvasSize = UDim2.fromOffset(0,script.Parent.Parent.CommandList.NewCommand.Size.Y.Offset*amount)
+		for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
+			if script.Parent.Parent.CommandList.CanvasSize.Y.Offset > script.Parent.Parent.CommandList.AbsoluteWindowSize.Y then
+				v.Size = UDim2.new(1,-(script.Parent.Parent.CommandList.ScrollBarThickness+1),v.Size.Y.Scale,v.Size.Y.Offset)
+			end
+		end
 	end
 	
 	function getplayerkey()
@@ -1017,7 +1028,6 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 				addhistory(cmdname.." ".. table.concat(command," ",2))
 				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
 				if ran == true then
-					print("WOW!")
 				else
 					print(error)
 					return error
@@ -1064,8 +1074,8 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 	
 			script.Parent.Parent.Parent.Cmds.CanvasSize = UDim2.fromOffset(0,totalcmdsize)
 			cmdaddlol.TextXAlignment = Enum.TextXAlignment.Left
-			
-			
+	
+	
 			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
@@ -1076,42 +1086,38 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 			newbutton.MouseButton1Click:Connect(function()
 				script.Parent:CaptureFocus()
 				script.Parent.Text = newbutton.Text.." "
-				script.Parent.CursorPosition = 234
+				script.Parent.CursorPosition = #script.Parent.Text+1
 			end)
 			local entered = false
 			newbutton.MouseEnter:Connect(function()
-				entered = true
-			end)
-	
-			newbutton.MouseButton2Down:Connect(function()
+				newbutton.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
 				newbutton.Text = name.." "..requirement
-			end)
-	
-			newbutton.MouseButton2Up:Connect(function()
-				newbutton.Text = name
+				entered = true
+				while entered == true do
+					game:GetService("RunService").Stepped:Wait()
+					if entered == true then
+						local mouse = game.Players.LocalPlayer:GetMouse()
+						script.Parent.Parent.Parent.HowToUse.Visible = true
+						script.Parent.Parent.Parent.HowToUse.Title.Text = name.." ".. requirement
+						resize(script.Parent.Parent.Parent.HowToUse.Title)
+						if description then
+							script.Parent.Parent.Parent.HowToUse.Description.Text = description
+							resize(script.Parent.Parent.Parent.HowToUse.Description)
+							script.Parent.Parent.Parent.HowToUse.Description.Position = UDim2.new(0,0,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Scale,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Offset)
+						end
+						script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(script.Parent.Parent.CommandList.AbsolutePosition.X,mouse.Y)
+					end
+				end
 			end)
 	
 			newbutton.MouseLeave:Connect(function()
 				entered = false
+				newbutton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 				newbutton.Text = name
 				script.Parent.Parent.Parent.HowToUse.Visible = false
 				script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(0,0)
 			end)
 	
-			newbutton.MouseMoved:Connect(function()
-				if entered == true then
-					local mouse = game.Players.LocalPlayer:GetMouse()
-					script.Parent.Parent.Parent.HowToUse.Visible = true
-					script.Parent.Parent.Parent.HowToUse.Title.Text = name.." ".. requirement
-					resize(script.Parent.Parent.Parent.HowToUse.Title)
-					if description then
-						script.Parent.Parent.Parent.HowToUse.Description.Text = description
-						resize(script.Parent.Parent.Parent.HowToUse.Description)
-						script.Parent.Parent.Parent.HowToUse.Description.Position = UDim2.new(0,0,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Scale,script.Parent.Parent.Parent.HowToUse.Title.Size.Y.Offset)
-					end
-					script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(mouse.X-5,mouse.Y)
-				end
-			end)
 			update()
 			wait(0.1)
 		end
@@ -1158,18 +1164,24 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 			if hselect+1 <= #histroy then
 				hselect = hselect + 1
 				if histroy[hselect] then
+					script.Parent.CursorPosition = -1
 					script.Parent.Text = histroy[hselect]
+					script.Parent.CursorPosition = #script.Parent.Text + 1
 				end
 			end 
 		elseif pp.KeyCode == Enum.KeyCode.Down and isfocused == script.Parent.Name then
 			if hselect-1 > 0 then
 				hselect = hselect - 1
 				if histroy[hselect] then
+					script.Parent.CursorPosition = -1
 					script.Parent.Text = histroy[hselect]
+					script.Parent.CursorPosition = #script.Parent.Text + 1
 				end
 			else
 				if histroy[hselect] then
+					script.Parent.CursorPosition = -1
 					script.Parent.Text = histroy[hselect]
+					script.Parent.CursorPosition = #script.Parent.Text + 1
 				end
 			end 
 		end
@@ -1915,20 +1927,6 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 		loadstring(game:HttpGet("https://pastebin.com/raw/z80z5Nee",true))()
 	end)
 	
-	addcmd("deleteadmin","Yes or no","Deletes the admin gui",function(arg)
-		if arg[2] == "yes" then
-			doritos:Disconnect()
-			romainia:Disconnect()
-			starterinput:Disconnect()
-			openedi:Disconnect()
-			marioi:Disconnet()
-			luigijuice:Disconnect()
-			unfly()
-			bald:Disconnect()
-			script.Parent.Parent:Destroy()
-		end
-	end)
-	
 	addcmd("firealltouchinterest","","Fires touch interests", function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v:IsA("TouchTransmitter") then
@@ -2319,7 +2317,6 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 	
 	addcmd("unlooptpparts","","Disables the tp thing",function(arg)
 		enabled = false    
-	
 	end)
 	
 	addcmd("bindkey","press a key","Binds a command to a key", function(arg)
@@ -2352,8 +2349,6 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 		repeat game:GetService("RunService").Stepped:Wait() until finished == true
 		realdeal:Disconnect()
 		saddeal:Disconnect()
-		print("removed command")
-	
 	end)
 	
 	
@@ -2372,14 +2367,12 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 			end
 		end)
 		repeat game:GetService("RunService").Stepped:Wait() until loaded1 == true
-		print("Loaded")
 		local function move(part,PartToGoto)
 			if part:FindFirstChildWhichIsA("BodyPosition") then
 				repeat
 					game:GetService("RunService").Stepped:Wait()
 					if part:FindFirstChildWhichIsA("BodyPosition") then
 						part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-						print("Deleted")
 					end
 				until not part:FindFirstChildWhichIsA("BodyPosition")
 			end
@@ -2392,18 +2385,16 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 				if PartToGoto == nil or PartToGoto == "" then
 					tp.Position = target.Position
 				else
-					print("not fine")
 					tp.position = PartToGoto.Position
 				end
 				spawn(function()
 					while true do
-						game:GetService("RunService").Stepped:Wait()
+						wait(1)
 						if enabled == false or part.Anchored == true then
 							if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
 								if part:FindFirstChildWhichIsA("BodyPosition") then
 									part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
 								end
-								print("Stopped")
 								break
 							end
 						end
@@ -2413,7 +2404,6 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 							if PartToGoto == nil or PartToGoto == "" then
 								tp.Position = target.Position
 							else
-								print("not fine")
 								tp.position = PartToGoto.Position
 							end
 						end)
@@ -2565,6 +2555,15 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 		end
 	end)
 	
+	addcmd("showfps","","Shows FPS in the bottom right corner",function()
+		notify(3, "Showing FPS in the bottom right corner")
+		script.Parent.Parent.Parent.FPS.Visible = true
+	end)
+	
+	addcmd("hidefps","","Hides FPS in the bottom right corner",function()
+		script.Parent.Parent.Parent.FPS.Visible = false
+	end)
+	
 	addcmd("music","ID","Plays music of the specified ID",function(arg)
 		if arg[2] then
 			if game.Workspace:FindFirstChild("MUSIC") then
@@ -2703,11 +2702,21 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 	
 		notify(5,"Loaded Anti Afk")
 	end)
-	
+	local defaultbrightness = game.Lighting.Brightness
 	addcmd("increaselighting","Int","Makes it brighter or darker depending on what you chose", function(arg)
 		if arg[2] then
 			game.Lighting.Brightness = arg[2]
 		end
+	end)
+	
+	addcmd("resetlighting","","Resets lighting",function()
+		game.Lighting.Brightness = defaultbrightness
+	end)
+	
+	local defaultgravity = workspace.Gravity
+	
+	addcmd("ungravity","","Resets gravity",function()
+		workspace.Gravity = defaultgravity
 	end)
 	
 	addcmd("drophats","","Drops your accessories",function(arg)
@@ -2795,6 +2804,27 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 		script.Parent.Parent.Parent.CustomCommand.Visible = true
 	end)
 	
+	addcmd("deleteadmin","Yes or no","Deletes the admin gui",function(arg)
+		if arg[2] == "yes" then
+			doritos:Disconnect()
+			romainia:Disconnect()
+			starterinput:Disconnect()
+			openedi:Disconnect()
+			marioi:Disconnect()
+			luigijuice:Disconnect()
+			noclipping = false
+	
+			unfly()
+			bald:Disconnect()
+			for i,v in pairs(commands.Name) do
+				if v:lower():match("un") or v:lower():match("hide") or v:lower():match("reset") or v:lower():match("close") and v:lower() ~= "hide" then
+					runcmd(v.." random")
+				end
+			end
+			script.Parent.Parent:Destroy()
+		end
+	end)
+	
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
 		if tostring(v):match(".lua") then
@@ -2831,8 +2861,8 @@ local function TRPPBN_fake_script() -- CommandBar.LocalScript
 	update()
 	notify(5,"Loaded ".. #commands.Name.. " commands and added command history. Press up and down keys to cycle through recently used commands.")
 end
-coroutine.wrap(TRPPBN_fake_script)()
-local function JNPVP_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(SPATZ_fake_script)()
+local function UGYPW_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -2982,8 +3012,8 @@ local function JNPVP_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(JNPVP_fake_script)()
-local function TZUROSP_fake_script() -- KeyThing.LocalScript 
+coroutine.wrap(UGYPW_fake_script)()
+local function CUILVDB_fake_script() -- KeyThing.LocalScript 
 	local script = Instance.new('LocalScript', KeyThing)
 
 	local function getkey()
@@ -3039,16 +3069,16 @@ local function TZUROSP_fake_script() -- KeyThing.LocalScript
 	
 	
 end
-coroutine.wrap(TZUROSP_fake_script)()
-local function YBREH_fake_script() -- Close.LocalScript 
+coroutine.wrap(CUILVDB_fake_script)()
+local function EMRMFO_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(YBREH_fake_script)()
-local function GNGBJL_fake_script() -- Check.LocalScript 
+coroutine.wrap(EMRMFO_fake_script)()
+local function ZNIO_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3059,8 +3089,8 @@ local function GNGBJL_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GNGBJL_fake_script)()
-local function QPKOO_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(ZNIO_fake_script)()
+local function ZYXLB_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
@@ -3072,8 +3102,8 @@ local function QPKOO_fake_script() -- Script_2.LocalScript
 		resize(script.Parent)
 	end)
 end
-coroutine.wrap(QPKOO_fake_script)()
-local function NVMF_fake_script() -- Title_4.LocalScript 
+coroutine.wrap(ZYXLB_fake_script)()
+local function TYQO_fake_script() -- Title_4.LocalScript 
 	local script = Instance.new('LocalScript', Title_4)
 
 	local function getname1(id)
@@ -3086,8 +3116,8 @@ local function NVMF_fake_script() -- Title_4.LocalScript
 	
 	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
-coroutine.wrap(NVMF_fake_script)()
-local function GOZCUF_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(TYQO_fake_script)()
+local function WKPB_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -3100,12 +3130,11 @@ local function GOZCUF_fake_script() -- BleakAdmin.NewScript
 	
 	for i,v in pairs(script.Parent:GetDescendants()) do
 		if v:IsA("ScrollingFrame") then
-			print(v.Name)
 			v.MidImage = "http://www.roblox.com/asset/?id=5903324492"
 			v.BottomImage = "http://www.roblox.com/asset/?id=5903324492"
 			v.TopImage = "http://www.roblox.com/asset/?id=5903324492"
 			spawn(function()
-				local beginnumber = 0.486278
+				local beginnumber = 0.513722
 				local maxnumber = 0.624833
 				local number = 0.513722
 				local reversing = false
@@ -3117,7 +3146,7 @@ local function GOZCUF_fake_script() -- BleakAdmin.NewScript
 							reversing = true
 						end
 					else
-						number = number - 0.001
+						number = number - 0.0003
 						v.ScrollBarImageColor3 = Color3.fromHSV(number,1,1)
 						if number <= beginnumber then
 							number = beginnumber
@@ -3168,8 +3197,8 @@ local function GOZCUF_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(GOZCUF_fake_script)()
-local function KEXVTLH_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(WKPB_fake_script)()
+local function CWKYWMW_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -3433,8 +3462,8 @@ local function KEXVTLH_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(KEXVTLH_fake_script)()
-local function ZMPP_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(CWKYWMW_fake_script)()
+local function YIRVJR_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -3444,8 +3473,8 @@ local function ZMPP_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(ZMPP_fake_script)()
-local function VPCBT_fake_script() -- Search.LocalScript 
+coroutine.wrap(YIRVJR_fake_script)()
+local function UOQYZUZ_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3462,8 +3491,8 @@ local function VPCBT_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(VPCBT_fake_script)()
-local function KCRBIR_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(UOQYZUZ_fake_script)()
+local function QXQME_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3604,8 +3633,8 @@ local function KCRBIR_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(KCRBIR_fake_script)()
-local function GEEQ_fake_script() -- TagType.LocalScript 
+coroutine.wrap(QXQME_fake_script)()
+local function WSFNB_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3631,4 +3660,24 @@ local function GEEQ_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GEEQ_fake_script)()
+coroutine.wrap(WSFNB_fake_script)()
+local function XWSKFB_fake_script() -- FPS.LocalScript 
+	local script = Instance.new('LocalScript', FPS)
+
+	local fps = 0
+	local time = tick()
+	
+	while true do
+		fps = fps + 1
+		game:GetService("RunService").Stepped:Wait()
+		if time+1 <= tick() then
+			time = tick()
+			if fps > 60 then
+				fps = 60
+			end
+			script.Parent.Text = "FPS: ".. fps
+			fps = 0
+		end
+	end
+end
+coroutine.wrap(XWSKFB_fake_script)()
