@@ -632,7 +632,7 @@ FPS.TextWrapped = true
 
 -- Scripts:
 
-local function PTFE_fake_script() -- CommandBar.LocalScript 
+local function HBIG_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
 	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
@@ -1881,6 +1881,32 @@ local function PTFE_fake_script() -- CommandBar.LocalScript
 		game.Players.LocalPlayer.Character.Humanoid.Sit = true
 	end)
 	
+	addcmd("givetools","Player", "Gives a player your tools", function(arg)
+		local plr = getplayer(arg[2])
+		if plr and checkroot() then
+			checkroot().CFrame = CFrame.new(5000,5000,5000)
+			local char = game.Players.LocalPlayer.Character
+			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+				if v:IsA("Tool") and v:FindFirstChild"Handle" then
+					v.Parent = char
+				end
+			end
+			char.Parent = game
+			char.Humanoid:Destroy()
+			char.Parent = workspace
+			for i,v in pairs(char:GetChildren()) do
+				if v:IsA("Tool") and v:FindFirstChild"Handle" then
+					v.Parent = workspace
+					local velocity = Instance.new("BodyPosition",v.Handle)
+					velocity.MaxForce = Vector3.new('inf','inf','inf')
+					velocity.P = 9000
+					velocity.D = 100
+					velocity.Position = game.Players[plr].Character.HumanoidRootPart.Position
+				end
+			end
+		end
+	end)
+	
 	addcmd("notify","time, string","Notifys string", function(arg)
 		if arg[2] and arg[3] then
 			arg[2] = tonumber(arg[2])
@@ -2875,8 +2901,8 @@ local function PTFE_fake_script() -- CommandBar.LocalScript
 	update()
 	notify(5,"Loaded ".. #commands.Name.. " commands and added command history. Press up and down keys to cycle through recently used commands.")
 end
-coroutine.wrap(PTFE_fake_script)()
-local function LIGFUQJ_fake_script() -- CommandHighlighting.LocalScript 
+coroutine.wrap(HBIG_fake_script)()
+local function EGPZVNZ_fake_script() -- CommandHighlighting.LocalScript 
 	local script = Instance.new('LocalScript', CommandHighlighting)
 
 	script.Parent.RichText = true
@@ -3026,8 +3052,8 @@ local function LIGFUQJ_fake_script() -- CommandHighlighting.LocalScript
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
 end
-coroutine.wrap(LIGFUQJ_fake_script)()
-local function NYEQTQ_fake_script() -- KeyThing.LocalScript 
+coroutine.wrap(EGPZVNZ_fake_script)()
+local function SVRTPF_fake_script() -- KeyThing.LocalScript 
 	local script = Instance.new('LocalScript', KeyThing)
 
 	local function getkey()
@@ -3083,16 +3109,16 @@ local function NYEQTQ_fake_script() -- KeyThing.LocalScript
 	
 	
 end
-coroutine.wrap(NYEQTQ_fake_script)()
-local function NIBG_fake_script() -- Close.LocalScript 
+coroutine.wrap(SVRTPF_fake_script)()
+local function HJPJV_fake_script() -- Close.LocalScript 
 	local script = Instance.new('LocalScript', Close)
 
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.Visible = not script.Parent.Parent.Visible
 	end)
 end
-coroutine.wrap(NIBG_fake_script)()
-local function ZHHGD_fake_script() -- Check.LocalScript 
+coroutine.wrap(HJPJV_fake_script)()
+local function HHXZZTE_fake_script() -- Check.LocalScript 
 	local script = Instance.new('LocalScript', Check)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3103,8 +3129,8 @@ local function ZHHGD_fake_script() -- Check.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZHHGD_fake_script)()
-local function IUGVGP_fake_script() -- Script_2.LocalScript 
+coroutine.wrap(HHXZZTE_fake_script)()
+local function HSUB_fake_script() -- Script_2.LocalScript 
 	local script = Instance.new('LocalScript', Script_2)
 
 	local function resize(instance)
@@ -3116,8 +3142,8 @@ local function IUGVGP_fake_script() -- Script_2.LocalScript
 		resize(script.Parent)
 	end)
 end
-coroutine.wrap(IUGVGP_fake_script)()
-local function HZTVUHB_fake_script() -- Title_4.LocalScript 
+coroutine.wrap(HSUB_fake_script)()
+local function TUNZO_fake_script() -- Title_4.LocalScript 
 	local script = Instance.new('LocalScript', Title_4)
 
 	local function getname1(id)
@@ -3130,8 +3156,8 @@ local function HZTVUHB_fake_script() -- Title_4.LocalScript
 	
 	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
-coroutine.wrap(HZTVUHB_fake_script)()
-local function GRCRD_fake_script() -- BleakAdmin.NewScript 
+coroutine.wrap(TUNZO_fake_script)()
+local function HVOJ_fake_script() -- BleakAdmin.NewScript 
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
@@ -3211,8 +3237,8 @@ local function GRCRD_fake_script() -- BleakAdmin.NewScript
 	end
 	dragify(script.Parent:WaitForChild("MainFrame"))
 end
-coroutine.wrap(GRCRD_fake_script)()
-local function CULUB_fake_script() -- Chatlogs_2.ChatScript 
+coroutine.wrap(HVOJ_fake_script)()
+local function KYHL_fake_script() -- Chatlogs_2.ChatScript 
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
@@ -3480,8 +3506,8 @@ local function CULUB_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
-coroutine.wrap(CULUB_fake_script)()
-local function CTTD_fake_script() -- AddChat.Chatscript 
+coroutine.wrap(KYHL_fake_script)()
+local function GQTMD_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
 	local scrollingframe = script.Parent.Parent
@@ -3491,8 +3517,8 @@ local function CTTD_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
-coroutine.wrap(CTTD_fake_script)()
-local function YTUK_fake_script() -- Search.LocalScript 
+coroutine.wrap(GQTMD_fake_script)()
+local function AYXI_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3509,8 +3535,8 @@ local function YTUK_fake_script() -- Search.LocalScript
 		end
 	end)
 end
-coroutine.wrap(YTUK_fake_script)()
-local function XLRRVK_fake_script() -- SearchBar.LocalScript 
+coroutine.wrap(AYXI_fake_script)()
+local function KGTK_fake_script() -- SearchBar.LocalScript 
 	local script = Instance.new('LocalScript', SearchBar)
 
 	local focused = false
@@ -3651,8 +3677,8 @@ local function XLRRVK_fake_script() -- SearchBar.LocalScript
 		end
 	end)
 end
-coroutine.wrap(XLRRVK_fake_script)()
-local function SJWWE_fake_script() -- TagType.LocalScript 
+coroutine.wrap(KGTK_fake_script)()
+local function JLJPR_fake_script() -- TagType.LocalScript 
 	local script = Instance.new('LocalScript', TagType)
 
 	local tags = {
@@ -3678,8 +3704,8 @@ local function SJWWE_fake_script() -- TagType.LocalScript
 		end
 	end)
 end
-coroutine.wrap(SJWWE_fake_script)()
-local function ZPANKY_fake_script() -- FPS.LocalScript 
+coroutine.wrap(JLJPR_fake_script)()
+local function JHMOW_fake_script() -- FPS.LocalScript 
 	local script = Instance.new('LocalScript', FPS)
 
 	local fps = 0
@@ -3698,4 +3724,4 @@ local function ZPANKY_fake_script() -- FPS.LocalScript
 		end
 	end
 end
-coroutine.wrap(ZPANKY_fake_script)()
+coroutine.wrap(JHMOW_fake_script)()
