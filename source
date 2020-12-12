@@ -1882,32 +1882,28 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("givetools","Player", "Gives a player your tools", function(arg)
-		local jimmyneutron = getplayer(arg[2])
-		if jimmyneutron and checkroot() then
-			local timmyturner = game.Players.LocalPlayer.Character
+	local tacobell = getplayer(arg[2])
+		if tacobell then
 			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-				if v:IsA("Tool") and v:FindFirstChild"Handle" then
-					v.Parent = timmyturner
+				if v:IsA("Tool") and v:FindFirstChild("Handle") then
+					v.Parent = localplayer.Character
 				end
 			end
-			timmyturner.Parent = game
-			timmyturner.Humanoid:Destroy()
-			timmyturner.Parent = workspace
-			for i,v in pairs(timmyturner:GetChildren()) do
-				if v:IsA("Tool") and v:FindFirstChild"Handle" then
+			local charie = localplayer.Character
+			charie.Parent = game
+			charie.Humanoid:Destroy()
+			charie.Parent = workspace
+			wait()
+			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Tool") and v:FindFirstChild("Handle") then
 					v.Parent = workspace
-					if setsimulationradius then
-						setsimulationradius("inf","inf")
-					end
-					v.Handle.CanCollide = false
-					local velocity = Instance.new("BodyPosition",v.Handle)
-					velocity.MaxForce = Vector3.new('inf','inf','inf')
+					local velocity = Instance.new("BodyPosition")
+					velocity.D = 250
 					velocity.P = 9000
-					velocity.D = 200
-					velocity.Position = game.Players[jimmyneutron].Character.HumanoidRootPart.Position
+					velocity.MaxForce = Vector3.new('inf','inf','inf')
+					velocity.Position = game.Players[tacobell].Character.HumanoidRootPart.Position
 				end
 			end
-			checkroot().CFrame = CFrame.new(0,game.Workspace.FallenPartsDestroyHeight + 5,0)
 		end
 	end)
 	
