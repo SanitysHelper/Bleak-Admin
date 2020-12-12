@@ -1899,19 +1899,15 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					if setsimulationradius then
 						setsimulationradius("inf","inf")
 					end
-					v.Handle.CanCollide = true
+					v.Handle.CanCollide = false
 					local velocity = Instance.new("BodyPosition",v.Handle)
 					velocity.MaxForce = Vector3.new('inf','inf','inf')
 					velocity.P = 9000
-					velocity.D = 100
+					velocity.D = 200
 					velocity.Position = game.Players[jimmyneutron].Character.HumanoidRootPart.Position
 				end
 			end
 			checkroot().CFrame = CFrame.new(0,game.Workspace.FallenPartsDestroyHeight + 5,0)
-			repeat game:GetService("RunService").Stepped:Wait() until gettools("char") == 0
-			if game.GameId == 424968782 then
-				runcmd("fix")
-			end
 		end
 	end)
 	
