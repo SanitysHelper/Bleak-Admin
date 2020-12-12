@@ -1882,28 +1882,41 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("givetools","Player", "Gives a player your tools", function(arg)
-	local tacobell = getplayer(arg[2])
-		if tacobell then
+		local target = "perozziPepperoni3006"
+		local sadface = game.Players.LocalPlayer.Character
+		if game.Players[target] then
 			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 				if v:IsA("Tool") and v:FindFirstChild("Handle") then
-					v.Parent = localplayer.Character
+					v.Parent = sadface
 				end
 			end
-			local charie = localplayer.Character
-			charie.Parent = game
-			charie.Humanoid:Destroy()
-			charie.Parent = workspace
-			wait()
-			for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+			sadface.Parent = game
+			sadface.Humanoid:Destroy()
+			sadface.Parent = workspace
+			for i,v in pairs(sadface:GetChildren()) do
 				if v:IsA("Tool") and v:FindFirstChild("Handle") then
-					v.Parent = workspace
-					local velocity = Instance.new("BodyPosition")
+					if setsimulationradius then
+						setsimulationradius(math.huge,math.huge)
+					end
+
+					local velocity = Instance.new("BodyPosition",v.Handle)
 					velocity.D = 250
 					velocity.P = 9000
 					velocity.MaxForce = Vector3.new('inf','inf','inf')
-					velocity.Position = game.Players[tacobell].Character.HumanoidRootPart.Position
+					velocity.Position = game.Players[target].Character.HumanoidRootPart.Position
 				end
 			end
+			local function poochecctools()
+				local counting = 0
+				for i,v in pairs(sadface:GetChildren()) do
+					if v:IsA("Tool") and v:FindFirstChild("Handle") then
+						counting = counting + 1
+					end
+				end
+				return counting
+			end
+			repeat wait() until poochecctools() <= 0
+			sadface:ClearAllChildren()
 		end
 	end)
 	
