@@ -1901,7 +1901,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 
 					local velocity = Instance.new("BodyPosition",v.Handle)
 					velocity.D = 250
-					velocity.P = 9000
+					velocity.P = 539034
 					velocity.MaxForce = Vector3.new('inf','inf','inf')
 					velocity.Position = game.Players[target].Character.HumanoidRootPart.Position
 				end
