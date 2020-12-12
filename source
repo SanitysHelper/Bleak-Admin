@@ -3400,7 +3400,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 					newchat.BackgroundColor3 = Color3.new(0, 1, 1)
 				end)
 				spawn(function()
-					repeat wait() until not newchat or newchat.Parent ~= script.Parent
+					repeat wait() until not newchat or newchat.Parent == nil
 					kevincall:Disconnect()
 				end)
 				newchat.MouseButton1Click:Connect(function()
