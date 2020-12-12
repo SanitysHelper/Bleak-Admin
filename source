@@ -1882,9 +1882,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end)
 	
 	addcmd("givetools","Player", "Gives a player your tools", function(arg)
-		local target = "perozziPepperoni3006"
+		local target = getplayer(arg[2])
 		local sadface = game.Players.LocalPlayer.Character
-		if game.Players[target] then
+		if game.Players:FindFirstChild(target) then
 			for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 				if v:IsA("Tool") and v:FindFirstChild("Handle") then
 					v.Parent = sadface
