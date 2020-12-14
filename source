@@ -2375,8 +2375,10 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				if v:IsA("BasePart") and v.Anchored == false and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
 					if v and v:FindFirstChildWhichIsA"Weld" and v:FindFirstChildWhichIsA"Weld".Enabled == false and v:FindFirstChildWhichIsA"WeldConstraint" and v:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
 						move(v)
+						game:GetService("RunService").Stepped:Wait()
 					elseif not v:FindFirstChildWhichIsA"WeldConstraint" and not v:FindFirstChildWhichIsA"Weld" then
 						move(v)
+						game:GetService("RunService").Stepped:Wait()
 					end
 				end
 			end
