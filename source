@@ -1994,7 +1994,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	
 	addcmd("audiologger","","Gives a audiologger GUI",function(arg)
 		notify(2,"Loading...")
-		--[[This is san/tal's audiologger. I spent about 2 days making this. Have fun getting audios!]]
 		loadstring(game:HttpGet("https://pastebin.com/raw/z80z5Nee",true))()
 	end)
 	
