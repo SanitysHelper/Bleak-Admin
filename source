@@ -2347,6 +2347,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 				local tp = Instance.new("BodyPosition",part)
 				tp.MaxForce = Vector3.new('inf','inf','inf')
+				tp.Position = target.Position
 				spawn(function()
 					if enabled == false and PartToGoto ~= nil and PartToGoto ~= "" then
 						if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
@@ -2452,6 +2453,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 				local tp = Instance.new("BodyPosition",part)
 				tp.MaxForce = Vector3.new('inf','inf','inf')
+				tp.Position = target.Position
 				if PartToGoto == nil or PartToGoto == "" then
 					tp.Position = target.Position
 				else
