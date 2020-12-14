@@ -2347,6 +2347,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 				local tp = Instance.new("BodyPosition",part)
 				tp.MaxForce = Vector3.new('inf','inf','inf')
+				tp.P = 9000
 				tp.Position = target.Position
 				spawn(function()
 					if enabled == false and PartToGoto ~= nil and PartToGoto ~= "" then
