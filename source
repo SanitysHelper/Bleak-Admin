@@ -1037,7 +1037,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end
 	
 	function runcmd(command, textsubmitted)
-		spawn(function()
 			local command = command:split(" ")
 			local cmd = command[1]:split("")
 			local cmdname = ""
@@ -1050,22 +1049,21 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			if number then
 				local ran = nil
 				local error = ""
-				spawn(function()
-					ran,error = pcall(function()
-						commands.Code[number](command)
-					end)
-				end)
 				if textsubmitted == true then
 					addhistory(cmdname.." ".. table.concat(command," ",2))
 				end
-				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
-				if ran == true then
-				else
-					print(error)
-					return error
-				end
+				spawn(function()
+    				ran,error = pcall(function()
+    					commands.Code[number](command)
+    				end)
+    				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
+    				if ran == true then
+    				else
+    					print(error)
+    					return error
+    				end
+				end)
 			end
-		end)
 	end
 	
 	if not firetouchinterest then
@@ -1229,10 +1227,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	script.Parent.Changed:Connect(function()
 		if boomertext ~= script.Parent.Text then
 			boomertext = script.Parent.Text
-			spawn(function()
 				local informationsad = script.Parent.Text:split(" ")
 				checkstorage()
 				search(informationsad[1])
+				wait(0.15)
+				update()
 				if script.Parent.Parent.CommandList:FindFirstChild(string.lower(informationsad[1])) then
 					exactcommand = string.lower(informationsad[1])
 					script.Parent.Parent.Title.Text = "Matching command: ".. exactcommand
@@ -1240,9 +1239,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					script.Parent.Parent.Title.Text = "Bleak Admin 1.7"
 					exactcommand = ""
 				end
-				wait(0.15)
-				update()
-			end)
 		end
 	end)
 	
@@ -1259,7 +1255,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				break
 			end
 		end
-		print("done")
 	end
 	
 	
@@ -1369,7 +1364,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					localplayer.Character:WaitForChild("Humanoid").WalkToPoint = game.Players[getplayer(arg[2])].Character:WaitForChild("Head").Position
 				end
 			end
-			print("done")
 		end
 	end)
 	
@@ -1399,6 +1393,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				notify(2,"Player left")
 				camerarespawn:Disconnect()
 				workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+			else 
+			    notify(2,"Stopped viewing")
+			    camerarespawn:Disconnect()
 			end	
 		end
 	end)
@@ -1443,6 +1440,23 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			game.Players[getplayer(arg[2])].Character:FindFirstChild("Head").CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
 		end
 	end)
+	
+	local deaththinglmao = false 
+	
+	addcmd("respawnatdeathpoint","","Where you die, is where you spawn", function()
+	   	if deaththinglmao ~= true then
+	   	    deaththinglmao = true
+	   	    local charaddedthing = localplayer.CharacterAdded:Connect(function()
+		    	    localplayer.Character:WaitForChild("HumanoidRootPart").CFrame = oldpos
+	   	    end)
+	   	    repeat game:GetService("RunService").Stepped:Wait() until deaththinglmao == false
+	   	    charaddedthing:Disconnect()
+	   	end
+	end)
+
+    addcmd("unrespawnatdeathpoint","","Reverses respawnatdeathpoint", function()
+        deaththinglmao = false
+    end)
 	
 	addcmd("toolbring","[player] and requires a tool","Brings players to you", function(arg)
 		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
@@ -1532,6 +1546,10 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
 	end)
 	
+		addcmd('unplatformstand', '', 'Unstuns you lol', function(arg)
+		game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+	end)
+	
 	addcmd('removedex', '', 'Removes DEX', function(arg)
 		if game.CoreGui:FindFirstChild("Dex") then
 			game.CoreGui:FindFirstChild("Dex"):Destroy()
@@ -1545,6 +1563,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	if setclipboard then
 		addcmd('copygameid', '', 'Copys the game ID', function(arg)
 			setclipboard(game.GameId)
+		end)
+		addcmd('copyplrname',"","Copys a players name",function(arg)
+		    setclipboard(getplayer(arg[2]))
+		end)
+		
+		addcmd('copyplaceid', '', 'Copys the place ID', function(arg)
+			setclipboard(game.PlaceId)
 		end)
 	end
 	
@@ -2404,8 +2429,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		local realdeal = uis.InputBegan:Connect(function(key)
 			if ctrlpressed == true and uis:GetStringForKeyCode(key.KeyCode) == currentkey then
 				finished = true
-			elseif uis:GetStringForKeyCode(key.KeyCode) == currentkey and ctrlpressed == false and finished == false then
-				print("ran")
+			elseif uis:GetStringForKeyCode(key.KeyCode) == currentkey and ctrlpressed == false and finished == false and isfocused == nil then
 				runcmd(table.concat(arg, " " ,2))
 			end
 		end)
@@ -2663,12 +2687,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	elseif game.GameId == 110988953 then
 		addcmd("autobuystuff", "", "Auto buys stuff in Wizard Tycoon", function() 
 			local team = tostring(game.Players.LocalPlayer.Team)
-			local parttoclick = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].GreenSecond.PurchasedObjects.Mine.Button.ClickDetector
 			spawn(function()
 				while game:GetService("RunService").Stepped:Wait() do
 					pcall(function()
 						local part11 = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].Essentials.Giver
 						local part21 = game.Players.LocalPlayer.Character.HumanoidRootPart
+						local parttoclick = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"].GreenSecond.PurchasedObjects.Mine.Button.ClickDetector
 						firetouchinterest(part21,part11,1)
 						firetouchinterest(part21,part11,0)
 						fireclickdetector(parttoclick)
