@@ -449,7 +449,7 @@ AddChat.Size = UDim2.new(1, 0, 0, 25)
 AddChat.Font = Enum.Font.SourceSans
 AddChat.Text = "Chatlogs (Click a message to copy it)"
 AddChat.TextColor3 = Color3.fromRGB(255, 255, 255)
-AddChat.TextScaled = true
+AddChat.TextScaled = false
 AddChat.TextSize = 14.000
 AddChat.TextWrapped = true
 
@@ -3553,7 +3553,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 	end
 		dragify(script.Parent.Parent)
 end
---coroutine.wrap(CALO_fake_script)()
+coroutine.wrap(CALO_fake_script)()
 local function SFFZHXY_fake_script() -- AddChat.Chatscript 
 	local script = Instance.new('LocalScript', AddChat)
 
@@ -3564,7 +3564,7 @@ local function SFFZHXY_fake_script() -- AddChat.Chatscript
 		script:Destroy()
 	end)
 end
---coroutine.wrap(SFFZHXY_fake_script)()
+coroutine.wrap(SFFZHXY_fake_script)()
 local function SQNH_fake_script() -- Search.LocalScript 
 	local script = Instance.new('LocalScript', Search)
 
