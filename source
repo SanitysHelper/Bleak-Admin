@@ -2025,7 +2025,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	addcmd("firealltouchinterest","","Fires touch interests", function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v:IsA("TouchTransmitter") then
-				firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v)
+				firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild"HumanoidRootPart",v.Parent)
 			end
 		end
 	end)
