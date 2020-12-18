@@ -1052,17 +1052,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				if textsubmitted == true then
 					addhistory(cmdname.." ".. table.concat(command," ",2))
 				end
-				spawn(function()
     				ran,error = pcall(function()
     					commands.Code[number](command)
     				end)
-    				repeat game:GetService("RunService").Stepped:Wait() until ran ~= nil
     				if ran == true then
     				else
     					print(error)
     					return error
     				end
-				end)
 			end
 	end
 	
