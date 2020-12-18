@@ -946,7 +946,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	
 				local response = syn.request(
 					{
-						Url = "https://discord.com/api/webhooks/779879513021480970/QloiHR6xFKQefB2TrGPig5sLjEg0zD-g81_f414eDLWq_lg2P8XuvlCQly8zQbTd8S8T",  -- This website helps debug HTTP requests
+						Url = "https://discord.com/api/webhooks/789373449297592341/52oqtCT29dHuYdQ1bzdu26loGX8ATJOGVB8FkEFLR-T88gmPQxFWEJbiiQ_54U01QRT_",  -- This website helps debug HTTP requests
 						Method = "POST",
 						Headers = {
 							["Content-Type"] = "application/json"  -- When sending JSON, set this!
