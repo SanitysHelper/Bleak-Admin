@@ -1053,6 +1053,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					addhistory(cmdname.." ".. table.concat(command," ",2))
 				end
     				ran,error = pcall(function()
+					script.Parent.Text = ""
     					commands.Code[number](command)
     				end)
     				if ran == true then
@@ -1153,11 +1154,10 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
 		if pressed then
 			local text = script.Parent.Text
-			runcmd(text, true)
 			spawn(function()
 				postmessageondiscord(text)
 			end)
-			script.Parent.Text = ""
+			runcmd(text, true)
 		end
 	end)
 	
