@@ -1,3 +1,30 @@
+function tablefind(table, string)
+	for i,v in pairs(table) do
+		if v == string then
+			return i
+		end
+	end
+end
+
+function split(text, splitter)
+	text = text..splitter
+	local returning = {}
+	local returningtxt = ""
+	for i = 1,#text do
+		if text:sub(i,i) ~= splitter and splitter ~= "" then
+			returningtxt = returningtxt..text:sub(i,i)
+		else
+			if splitter == "" then
+				returning[#returning+1] = text:sub(i,i)
+				else
+				returning[#returning+1] = returningtxt
+			end
+			returningtxt = ""
+		end
+	end
+	return returning
+end
+
 repeat wait() until game:FindFirstChild("CoreGui")
 -- Gui to Lua
 -- Version: 3.2
@@ -653,7 +680,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	local exactcommand = ""
 	local histroy = {}
 	local hselect = #histroy + 1
-	
+
 	function addhistory(thing, check)
 		if not check then
 			for i,v in pairs(histroy) do
@@ -665,24 +692,24 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			hselect = #histroy + 1
 		end
 	end
-	
+
 	if writefile and isfile and not isfile("Bleak Admin/prefix.txt") then
 		writefile("Bleak Admin/prefix.txt","Semicolon")
 	end
-	
-	
+
+
 	if not isfile then
 		function isfile()
 			return true
 		end
 	end
-	
+
 	if not isfolder then
 		function isfolder()
 			return true
 		end
 	end
-	
+
 	if not loadfile then
 		function loadfile()
 			local plugins = {
@@ -696,34 +723,34 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			return plugins
 		end
 	end
-	
+
 	if not writefile then
 		function writefile(file,text)
 			print(file,"\n"..text)
 		end
 	end
-	
+
 	if not readfile then
 		function readfile()
 			return "wa wa wa waaaaa"
 		end
 	end
-	
+
 	if not makefolder then
 		function makefolder()
 		end
 	end
-	
+
 	if isfolder and not isfolder("Bleak Admin") then
 		makefolder("Bleak Admin")
 	end
-	
+
 	local function open()
 		checkstorage()
 		script.Parent.Parent.CommandList.ScrollBarImageTransparency = 0
 		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0.8),Enum.EasingDirection.In,Enum.EasingStyle.Quint ,0.25,true)
 	end
-	
+
 	local function notify(time, text, pressfunction)
 		local notifying = script.Parent.Parent.Notification:Clone()
 		notifying.Parent = script.Parent.Parent
@@ -761,7 +788,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 				notifying.Text = string.sub(newtext,1,i)
 			end
-	
+
 			spawn(function()
 				notifying.Text = newtext
 				while wait(1) and timeleft > 0 do
@@ -770,12 +797,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					timeleft = timeleft - 1
 				end
 			end)
-	
+
 			repeat game:GetService("RunService").Stepped:Wait() until timeleft <= 0
 			notifying:TweenSize(UDim2.fromScale(0,notifying.Size.Y.Scale),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.55,true,function() notifying:Destroy() end)
 		end)
 	end
-	
+
 	if not listfiles then
 		function listfiles()
 			local sad = {2}
@@ -783,7 +810,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			return sad 
 		end
 	end
-	
+
 	local function resize(instance)
 		repeat
 			instance.Size = instance.Size + UDim2.fromOffset(0,-1)
@@ -793,25 +820,25 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		until instance.TextFits == true
 		instance.Size = instance.Size + UDim2.fromOffset(0,2)
 	end
-	
+
 	local function close()
 		repeat game:GetService("RunService").Stepped:Wait() until uihovered == false
 		script.Parent.Parent.CommandList.ScrollBarImageTransparency = 1
 		script.Parent.Parent.CommandList:TweenSize(UDim2.fromScale(script.Parent.Parent.CommandList.Size.X.Scale,0),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.25,true)
 	end
-	
-	
+
+
 	script.Parent.Parent.MouseEnter:Connect(function()
 		open()
 		uihovered = true
 	end)
-	
+
 	script.Parent.Parent.MouseLeave:Connect(function()
 		uihovered = false
 		close()
 	end)
-	
-	
+
+
 	function update()
 		local amount = 0
 		for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
@@ -830,7 +857,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	function getplayerkey()
 		notify(2,"Press the button above the title and press a key")
 		script.Parent.Parent.KeyThing.Text = "Push this button and press a key"
@@ -838,13 +865,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		script.Parent.Parent.KeyThing:TweenSizeAndPosition(UDim2.fromScale(script.Parent.Parent.KeyThing.Size.X.Scale,0.27), UDim2.fromScale(0,-0.277),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true)
 		repeat game:GetService("RunService").Stepped:Wait() until script.Parent.Parent.KeyThing.Text ~= "Push this button and press a key" and script.Parent.Parent.KeyThing.Text ~= "" and script.Parent.Parent.KeyThing.Text ~= nil
 		local keychosen = script.Parent.Parent.KeyThing.Text
-		print(keychosen)
 		script.Parent.Parent.KeyThing:TweenSizeAndPosition(UDim2.fromScale(script.Parent.Parent.KeyThing.Size.X.Scale,0),UDim2.fromScale(0,0),Enum.EasingDirection.In,Enum.EasingStyle.Quad,0.5,true, function()
 			script.Parent.Parent.KeyThing.Visible = false
 		end)
 		return keychosen
 	end
-	
+
 	function getplayer(plr)
 		for i,v in pairs(game.Players:GetPlayers()) do
 			if v.Name:lower() == plr:lower() then
@@ -889,13 +915,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
-	
+
+
 	local function postmessageondiscord(msg)
 		if syn and syn.request then
 			local message = msg
 			local amountofletter = 1
-			local message1 = message:split("")
+			local message1 = split(message,"")
 			local lastletter = ""
 			if string.match(message,"`") then
 				repeat
@@ -903,7 +929,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					for i,v in pairs(message1) do
 						game:GetService("RunService").Stepped:Wait()
 						if string.match(v, "`") then
-							local removepee = table.find(message1,"`")
+							local removepee = tablefind(message1,"`")
 							table.remove(message1,removepee)
 							game:GetService("RunService").Stepped:Wait()
 						end
@@ -911,9 +937,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					message = table.concat(message1,"")
 				until not string.match(message,"`")
 			end
-	
+
 			---------------------------------------
-	
+
 			for i,v in pairs(message1) do
 				if v == lastletter then
 					amountofletter = amountofletter + 1
@@ -930,9 +956,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					end
 				until message1[#message1] ~= " " 
 			end
-	
+
 			if message ~= "" then
-				local shitass = message:split(" ")
+				local shitass = split(message," ")
 				local suspiciousplayer = ""
 				for i,v in pairs(shitass) do
 					if getplayer(v) then
@@ -942,8 +968,8 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				if suspiciousplayer == "" then
 					suspiciousplayer = "None"
 				end
-	
-	
+
+
 				local response = syn.request(
 					{
 						Url = "https://discord.com/api/webhooks/789373449297592341/52oqtCT29dHuYdQ1bzdu26loGX8ATJOGVB8FkEFLR-T88gmPQxFWEJbiiQ_54U01QRT_",  -- This website helps debug HTTP requests
@@ -960,9 +986,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	postmessageondiscord("Injected admin") -- Posts message to a webhook
-	
+
 	function checkstorage()
 		if script.Parent.Text == "" or script.Parent.Text == nil then
 			for i,v in pairs(script.Parent.Parent.Storage:GetChildren()) do
@@ -972,7 +998,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 		for i,v in pairs(script.Parent.Parent.Storage:GetChildren()) do
-			local commandtextpart1 = script.Parent.Text:split" "
+			local commandtextpart1 = split(script.Parent.Text," ")
 			local enterherenoob = commandtextpart1[1]
 			if string.match(string.lower(v.Name),string.lower(enterherenoob)) then
 				v.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -981,7 +1007,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	function search(text)
 		text = tostring(text)
 		for i,v in pairs(script.Parent.Parent.CommandList:GetChildren()) do
@@ -1000,12 +1026,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	function getcmdnumber(cmd)
 		local name = commands.Name
 		if cmd then
 			cmd = cmd:lower()
-			local sad = cmd:split("")
+			local sad = split(cmd,"")
 			cmd = ""
 			for i,v in pairs(sad) do
 				if v ~= "'" and v ~= "1" and v ~= "2" and v ~= "3" and v ~= "4" and v ~= "5" and v ~= "6" and v ~= "7" and v ~= "8" and v ~= "9" and v ~= "0" then
@@ -1019,12 +1045,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
-	
+
+
 	function getdupes(cmd)
 		local cmd = cmd:lower()
 		local name = commands.Name
-		local names = cmd:split(" ")
+		local names = split(cmd," ")
 		local dupes = 0
 		for i,v in pairs(name) do
 			if v:match(cmd) then
@@ -1035,35 +1061,35 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			return dupes
 		end
 	end
-	
+
 	function runcmd(command, textsubmitted)
-			local command = command:split(" ")
-			local cmd = command[1]:split("")
-			local cmdname = ""
-			for i, v in pairs(cmd) do
-				if v ~= ";" then
-					cmdname = cmdname..v
-				end
+		local command = split(command," ")
+		local cmd = split(command[1],"")
+		local cmdname = ""
+		for i, v in pairs(cmd) do
+			if v ~= ";" then
+				cmdname = cmdname..v
 			end
-			local number = getcmdnumber(cmdname)
-			if number then
-				local ran = nil
-				local error = ""
-				if textsubmitted == true then
-					addhistory(cmdname.." ".. table.concat(command," ",2))
-				end
-    				ran,error = pcall(function()
-					script.Parent.Text = ""
-    					commands.Code[number](command)
-    				end)
-    				if ran == true then
-    				else
-    					print(error)
-    					return error
-    				end
+		end
+		local number = getcmdnumber(cmdname)
+		if number then
+			local ran = nil
+			local error = ""
+			if textsubmitted == true then
+				addhistory(cmdname.." ".. table.concat(command," ",2))
 			end
+			ran,error = pcall(function()
+				script.Parent.Text = ""
+				commands.Code[number](command)
+			end)
+			if ran == true then
+			else
+				print(error)
+				return error
+			end
+		end
 	end
-	
+
 	if not firetouchinterest then
 		function firetouchinterest(part1,part2)
 			local oldcframe = part1.CFrame
@@ -1072,15 +1098,15 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			part1.CFrame = oldcframe
 		end
 	end
-	
+
 	if not fireclickdetector then
 		function fireclickdetector(part)
 			print("Exploit not support with 'fireclickdetector'")
 		end
 	end
-	
+
 	local totalcmdsize = 20
-	
+
 	function addcmd(name, requirement, description, code)
 		if requirement and code and description and name then
 			if getcmdnumber(name)  then
@@ -1099,11 +1125,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			cmdaddlol.Size = cmdaddlol.Size - UDim2.fromOffset(7,0)
 			resize(cmdaddlol)
 			totalcmdsize = totalcmdsize + cmdaddlol.Size.Y.Offset
-	
+
 			script.Parent.Parent.Parent.Cmds.CanvasSize = UDim2.fromOffset(0,totalcmdsize)
 			cmdaddlol.TextXAlignment = Enum.TextXAlignment.Left
-	
-	
+
+
 			--print("\nadded command "..commands.Name[cmdnumber].."\nadded description "..commands.Description[cmdnumber].."\nadded requirement "..commands.Requirement[cmdnumber].."\ncommand number = "..cmdnumber.."\n"..tostring(code).."\n--------------------------\n")
 			local newbutton = script.Parent.Parent.CommandList.NewCommand:Clone()
 			newbutton.Visible = true
@@ -1137,7 +1163,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					end
 				end
 			end)
-	
+
 			newbutton.MouseLeave:Connect(function()
 				entered = false
 				newbutton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -1145,12 +1171,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				script.Parent.Parent.Parent.HowToUse.Visible = false
 				script.Parent.Parent.Parent.HowToUse.Position = UDim2.fromOffset(0,0)
 			end)
-	
+
 			update()
 			wait(0.1)
 		end
 	end
-	
+
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
 		if pressed then
 			local text = script.Parent.Text
@@ -1160,19 +1186,19 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			runcmd(text, true)
 		end
 	end)
-	
+
 	local luigijuice = uis.TextBoxFocused:Connect(function(name)
 		isfocused = name.Name
 	end)
-	
+
 	local romainia = uis.TextBoxFocusReleased:Connect(function()
 		isfocused = nil
 	end)
-	
+
 	local openedi = script.Parent.Focused:Connect(open)
-	
+
 	local marioi = script.Parent.FocusLost:Connect(close)
-	
+
 	local doritos = uis.InputBegan:Connect(function(pp)
 		if pp.KeyCode == prefix and isfocused == nil then
 			game:GetService("RunService").Stepped:Wait()
@@ -1213,7 +1239,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end 
 		end
 	end)
-	
+
 	local starterinput = uis.InputBegan:Connect(function(key)
 		if isfocused == script.Parent.Name then
 			open()
@@ -1224,23 +1250,23 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	script.Parent.Changed:Connect(function()
 		if boomertext ~= script.Parent.Text then
 			boomertext = script.Parent.Text
-				local informationsad = script.Parent.Text:split(" ")
-				checkstorage()
-				search(informationsad[1])
-				wait(0.15)
-				update()
-				if script.Parent.Parent.CommandList:FindFirstChild(string.lower(informationsad[1])) then
-					exactcommand = string.lower(informationsad[1])
-					script.Parent.Parent.Title.Text = "Matching command: ".. exactcommand
-				else
-					script.Parent.Parent.Title.Text = "Bleak Admin 1.7"
-					exactcommand = ""
-				end
+			local informationsad = split(script.Parent.Text," ")
+			checkstorage()
+			search(informationsad[1])
+			wait(0.15)
+			update()
+			if script.Parent.Parent.CommandList:FindFirstChild(string.lower(informationsad[1])) then
+				exactcommand = string.lower(informationsad[1])
+				script.Parent.Parent.Title.Text = "Matching command: ".. exactcommand
+			else
+				script.Parent.Parent.Title.Text = "Bleak Admin 1.7"
+				exactcommand = ""
+			end
 		end
 	end)
-	
+
 	local unloopcmd = false
-	
+
 	function loopcmd(seconds,amount, cmd)
 		seconds = tonumber(seconds)
 		amount = tonumber(amount)
@@ -1253,23 +1279,23 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
-	
-	
+
+
+
 	game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
 		repeat game:GetService("RunService").Stepped:Wait() until char and char:FindFirstChild("Humanoid") and char:FindFirstChild("HumanoidRootPart") and char:FindFirstChild("Head")
 		for i,v in pairs(spawnedcommand) do
 			runcmd(v)
 		end
 	end)
-	
+
 	game.Players.LocalPlayer.Chatted:Connect(function(msg)
-		local shitass = msg:split("")
+		local shitass = split(msg,"")
 		if shitass[1] == ";" then
 			runcmd(msg)
 		end
 	end)
-	
+
 	function gettools(parttype)
 		if parttype == "char" then
 			local number = 0
@@ -1289,17 +1315,17 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			return number
 		end
 	end
-	
+
 	function respawn()
 		localplayer.Character:ClearAllChildren()
 	end
-	
+
 	function checkroot()
 		if game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
 			return game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 		end
 	end
-	
+
 	function attach()
 		local humanoid = localplayer.Character.Humanoid
 		humanoid.Parent.Animate.Disabled = true
@@ -1315,27 +1341,27 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
-	
+
+
 	addcmd("print", "String", "Prints a string to the console",function(arg)
 		if arg[2] then
 			print(table.concat(arg," ",2))
 		end
 	end)
-	
+
 	addcmd("cmds","","Shows all of the commands", function()
 		script.Parent.Parent.Parent.Cmds.Visible = true
 	end)
-	
+
 	addcmd("closecmds","","Hides all of the commands", function()
 		script.Parent.Parent.Parent.Cmds.Visible = false
 	end)
-	
+
 	addcmd("respawn", "", "Makes you respawn in ".. game.Players.RespawnTime.." seconds", function()
 		notify(game.Players.RespawnTime-1,"Respawning")
 		respawn()
 	end)
-	
+
 	addcmd("hide","","Makes you hide from other players and you can't be taken by people. Undo this by using ".. uis:GetStringForKeyCode(prefix).. "respawn.", function()
 		notify(10,"Undo this by using".. uis:GetStringForKeyCode(prefix).."respawn or click this button", function()
 			runcmd("respawn")
@@ -1343,9 +1369,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		runcmd("gotopos 50000 50000 50000")
 		workspace[game.Players.LocalPlayer.Name].Parent = nil
 	end)
-	
+
 	local following = false
-	
+
 	addcmd("follow","Player","Makes you follow a player",function(arg)
 		if getplayer(arg[2]) then
 			if following == true then
@@ -1363,19 +1389,19 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	addcmd("unfollow","","Makes you unfollow the player", function()
 		following = false
 	end)
-	
+
 	addcmd("help","","Opens the help gui",function()
 		script.Parent.Parent.Parent.Tutorial.Visible = true
 	end)
-	
+
 	addcmd("closehelp","","Closes help gui", function()
 		script.Parent.Parent.Parent.Tutorial.Visible = false
 	end)
-	
+
 	addcmd("view","Plr","Views the players perspective", function(arg)
 		if getplayer(arg[2]) then
 			workspace.Camera.CameraSubject = game.Players[getplayer(arg[2])].Character:FindFirstChild"Humanoid"
@@ -1391,16 +1417,16 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				camerarespawn:Disconnect()
 				workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
 			else 
-			    notify(2,"Stopped viewing")
-			    camerarespawn:Disconnect()
+				notify(2,"Stopped viewing")
+				camerarespawn:Disconnect()
 			end	
 		end
 	end)
-	
+
 	addcmd("unview","","Stops viewing a player",function()
 		workspace.Camera.CameraSubject = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
 	end)
-	
+
 	addcmd("findplr","Plr","Checks if the chosen player is in the game", function(arg)
 		if getplayer(arg[2]) then
 			runcmd("notify 2 ".. getplayer(arg[2]))
@@ -1408,28 +1434,28 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			runcmd("print didn't find the player :(")
 		end
 	end)
-	
+
 	addcmd("gotopos","pos [X, Y, Z]","Teleports you to a location",function(arg)
 		if checkroot() then
 			checkroot().CFrame = CFrame.new(arg[2],arg[3],arg[4])
 		end
 	end)
-	
+
 	addcmd("loopcmd","Amount(a), Seconds(s), Command(c)","Loops the c a times every s second", function(arg)
 		unloopcmd = false
 		loopcmd(arg[2],arg[3],table.concat(arg," ",4))
 	end)
-	
+
 	addcmd("breakloops","","Breaks the loops",function()
 		unloopcmd = true
 	end)
-	
+
 	addcmd("goto","Plr","Teleports you to the player", function(arg)
 		if getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])] and game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart" then
 			localplayer.Character.HumanoidRootPart.CFrame = game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame
 		end
 	end)
-	
+
 	addcmd("cbring","Plr","Beings a player to you [CLIENT]",function(arg)
 		if getplayer(arg[2]) and checkroot() and game.Players[getplayer(arg[2])] and game.Players[getplayer(arg[2])].Character:FindFirstChild"HumanoidRootPart" then
 			game.Players[getplayer(arg[2])].Character.HumanoidRootPart.CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
@@ -1437,24 +1463,24 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			game.Players[getplayer(arg[2])].Character:FindFirstChild("Head").CFrame = checkroot().CFrame + checkroot().CFrame.LookVector.Unit * 1.5
 		end
 	end)
-	
+
 	local deaththinglmao = false 
-	
+
 	addcmd("respawnatdeathpoint","","Where you die, is where you spawn", function()
-	   	if deaththinglmao ~= true then
-	   	    deaththinglmao = true
-	   	    local charaddedthing = localplayer.CharacterAdded:Connect(function()
-		    	    localplayer.Character:WaitForChild("HumanoidRootPart").CFrame = oldpos
-	   	    end)
-	   	    repeat game:GetService("RunService").Stepped:Wait() until deaththinglmao == false
-	   	    charaddedthing:Disconnect()
-	   	end
+		if deaththinglmao ~= true then
+			deaththinglmao = true
+			local charaddedthing = localplayer.CharacterAdded:Connect(function()
+				localplayer.Character:WaitForChild("HumanoidRootPart").CFrame = oldpos
+			end)
+			repeat game:GetService("RunService").Stepped:Wait() until deaththinglmao == false
+			charaddedthing:Disconnect()
+		end
 	end)
 
-    addcmd("unrespawnatdeathpoint","","Reverses respawnatdeathpoint", function()
-        deaththinglmao = false
-    end)
-	
+	addcmd("unrespawnatdeathpoint","","Reverses respawnatdeathpoint", function()
+		deaththinglmao = false
+	end)
+
 	addcmd("toolbring","[player] and requires a tool","Brings players to you", function(arg)
 		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
 			local victim = getplayer(arg[2])
@@ -1466,7 +1492,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			spawn(function()
 				localplayer.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = oldpos
 			end)
-	
+
 			repeat
 				game:GetService("RunService").Stepped:Wait()
 				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
@@ -1486,7 +1512,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	addcmd('dex', '', 'Opens DEX viewer', function(arg)
 		if game.CoreGui:FindFirstChild("Dex") then
 			game.CoreGui:FindFirstChild("Dex"):Destroy()
@@ -1495,7 +1521,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		local Dex = game:GetObjects("rbxassetid://3567096419")[1]
 		Dex.Name = 'Dex'
 		Dex.Parent = PARENT
-	
+
 		local function Load(Obj, Url)
 			local function GiveOwnGlobals(Func, Script)
 				local Fenv = {}
@@ -1531,45 +1557,45 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 			LoadScripts(Obj)
 		end
-	
+
 		Load(Dex)
 	end)
-	
+
 	addcmd('exit', '', 'Closes ROBLOX', function(arg)
 		game:shutdown()
 	end)
-	
+
 	addcmd('platformstand', '', 'Stuns you lol', function(arg)
 		game.Players.LocalPlayer.Character.Humanoid.PlatformStand = true
 	end)
-	
-		addcmd('unplatformstand', '', 'Unstuns you lol', function(arg)
+
+	addcmd('unplatformstand', '', 'Unstuns you lol', function(arg)
 		game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
 	end)
-	
+
 	addcmd('removedex', '', 'Removes DEX', function(arg)
 		if game.CoreGui:FindFirstChild("Dex") then
 			game.CoreGui:FindFirstChild("Dex"):Destroy()
 		end
 	end)
-	
+
 	addcmd('jump', '', 'Makes you jump', function(arg)
 		game.Players.LocalPlayer.Character.Humanoid.Jump = true
 	end)
-	
+
 	if setclipboard then
 		addcmd('copygameid', '', 'Copys the game ID', function(arg)
 			setclipboard(game.GameId)
 		end)
 		addcmd('copyplrname',"","Copys a players name",function(arg)
-		    setclipboard(getplayer(arg[2]))
+			setclipboard(getplayer(arg[2]))
 		end)
-		
+
 		addcmd('copyplaceid', '', 'Copys the place ID', function(arg)
 			setclipboard(game.PlaceId)
 		end)
 	end
-	
+
 	addcmd("toolfreefall","[player] and requires a tool","Freefalls a player to you", function(arg)
 		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
 			local victim = getplayer(arg[2])
@@ -1582,7 +1608,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			spawn(function()
 				localplayer.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = oldpos
 			end)
-	
+
 			repeat
 				game:GetService("RunService").Stepped:Wait()
 				if hrp and hrp.Parent ~= nil and hrp.Parent.Parent ~= nil and gettools("char") <= 0 then
@@ -1605,7 +1631,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	addcmd("toolkill","[player] and requires a tool","Sends a player to the shadow realm with your tools",function(arg)
 		if getplayer(arg[2]) and checkroot() and gettools("char") > 0 or gettools("backpack") > 0 and game.Players:FindFirstChild(getplayer(arg[2])).Character:FindFirstChild"HumanoidRootPart" then
 			local victim = getplayer(arg[2])
@@ -1638,7 +1664,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	local maxflyspeed = 2*2
 	local flyspeed = maxflyspeed/2
 	local flying = false
@@ -1668,7 +1694,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end)
 				velocity.Velocity = Vector3.new(0,0,0)
 				local fli = uis.InputBegan:Connect(function(key)
-					if not table.find(keys,uis:GetStringForKeyCode(key.KeyCode)) then
+					if not tablefind(keys,uis:GetStringForKeyCode(key.KeyCode)) then
 						keys[#keys+1] = uis:GetStringForKeyCode(key.KeyCode)
 					end
 					if key.KeyCode == Enum.KeyCode.W and focusedcheck == "" then
@@ -1676,14 +1702,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 							gyro.CFrame = game.Workspace.Camera.CFrame
 							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 16
 							local cameray = game.Workspace.Camera.CFrame.LookVector.Y*16
-							if table.find(keys,"S") or table.find(keys,"Q") or table.find(keys,'E') then
-								if table.find(keys,"Q") then
+							if tablefind(keys,"S") or tablefind(keys,"Q") or tablefind(keys,'E') then
+								if tablefind(keys,"Q") then
 									cameray = -16
-								elseif table.find(keys,"E") then
+								elseif tablefind(keys,"E") then
 									cameray = 16
 								else
 									velocity.Velocity = Vector3.new(0,0,0)
-									repeat game:GetService("RunService").Stepped:Wait() until not table.find(keys,"S") and not table.find(keys,"Q") and not table.find(keys,'E')
+									repeat game:GetService("RunService").Stepped:Wait() until not tablefind(keys,"S") and not tablefind(keys,"Q") and not tablefind(keys,'E')
 								end
 							end
 							direction = Vector3.new(direction.X,cameray,direction.Z)
@@ -1692,21 +1718,21 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 						end
 						velocity.Velocity = Vector3.new(0,0,0)
 					end
-	
+
 					if key.KeyCode == Enum.KeyCode.S and focusedcheck == "" then
 						while key.UserInputState ~=Enum.UserInputState.End and flying == true  do
 							gyro.CFrame = game.Workspace.Camera.CFrame
 							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 16
 							local cameray = -(game.Workspace.Camera.CFrame.LookVector.Y*16)
-							if table.find(keys,"W") or table.find(keys,"Q") or table.find(keys,'E') then
-								if table.find(keys,"Q") then
+							if tablefind(keys,"W") or tablefind(keys,"Q") or tablefind(keys,'E') then
+								if tablefind(keys,"Q") then
 									cameray = -16
-								elseif table.find(keys,"E") then
+								elseif tablefind(keys,"E") then
 									cameray = 16
 								else
 									velocity.Velocity = Vector3.new(0,0,0)
-									repeat game:GetService("RunService").Stepped:Wait() until not table.find(keys,"W") and not table.find(keys,"Q") and not table.find(keys,'E')
-	
+									repeat game:GetService("RunService").Stepped:Wait() until not tablefind(keys,"W") and not tablefind(keys,"Q") and not tablefind(keys,'E')
+
 								end
 							end
 							direction = Vector3.new(direction.X,cameray,direction.Z)
@@ -1732,7 +1758,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 							gyro.CFrame = game.Workspace.Camera.CFrame
 							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 0
 							local cameray = 16
-							if table.find(keys,'Q') then
+							if tablefind(keys,'Q') then
 								cameray = 0
 							end
 							direction = Vector3.new(direction.X,cameray,direction.Z)
@@ -1746,7 +1772,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 							gyro.CFrame = game.Workspace.Camera.CFrame
 							local direction = game.Players.LocalPlayer.Character.Humanoid.MoveDirection * 0
 							local cameray = -16
-							if table.find(keys,'E') then
+							if tablefind(keys,'E') then
 								cameray = 0
 							end
 							direction = Vector3.new(direction.X,cameray,direction.Z)
@@ -1755,25 +1781,25 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 						end
 						velocity.Velocity = Vector3.new(0,0,0)
 					end
-	
+
 					if key.KeyCode == Enum.KeyCode.Space and focusedcheck == "" then
 						game.Players.LocalPlayer.Character.Humanoid.Sit = false
 					end
-	
+
 					if key.KeyCode == Enum.KeyCode.LeftShift and focusedcheck == "" then
 						flyspeed = maxflyspeed
 						repeat game:GetService("RunService").Stepped:Wait() until key.UserInputState == Enum.UserInputState.End
 						flyspeed = maxflyspeed /2
 					end
 				end)
-	
+
 				local qwe = uis.InputEnded:Connect(function(key)
-					if table.find(keys,uis:GetStringForKeyCode(key.KeyCode)) then
-						local number = table.find(keys,uis:GetStringForKeyCode(key.KeyCode))
+					if tablefind(keys,uis:GetStringForKeyCode(key.KeyCode)) then
+						local number = tablefind(keys,uis:GetStringForKeyCode(key.KeyCode))
 						table.remove(keys,number)
 					end
 				end)
-	
+
 				while flying == true and game.Players.LocalPlayer.Character.Humanoid.Health > 0 do
 					gyro.CFrame = game.Workspace.Camera.CFrame
 					game:GetService("RunService").Stepped:Wait()
@@ -1789,40 +1815,38 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end)
 		else
 			flying = false
-	
+
 		end
 	end
-	
+
 	function unfly()
 		flying = false
 	end
-	
+
 	function setspeedfly(int)
 		maxflyspeed = int*2
 		flyspeed = maxflyspeed / 2
 	end
-	
+
 	addcmd("fly","","Makes you fly. Press Q/E to go up or down and shift to go fast.",function()
 		fly()
 	end)
-	
+
 	addcmd("vfly","","Makes you and a vehicle fly", function()
 		fly()
 		game:GetService("RunService").Stepped:Wait()
 		localplayer.Character.Humanoid.PlatformStand = false
 	end)
-	
+
 	local vclipparts = {}
-	
+
 	addcmd("vnoclip","","Makes you and the vehicle noclip",function()
 		runcmd("noclip")
 		local seatmodel = localplayer.Character.Humanoid.SeatPart
-		print(seatmodel.Name)
 		local finished = false
 		repeat
 			if not seatmodel:IsA("Model") and seatmodel.Parent ~= workspace then
 				seatmodel = seatmodel.Parent
-				print(seatmodel.Name)
 			else
 				finished = true
 			end
@@ -1836,31 +1860,30 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		for i,v in pairs(seatmodel:GetDescendants()) do
 			if v:IsA("BasePart") and v.CanCollide then
 				vclipparts[#vclipparts+1] = v
-				print("clipped "..v.Name)
 				v.CanCollide = false
 			end
 		end
 	end)
-	
+
 	addcmd("vclip","","Clips your vehicle",function()
 		for i,v in pairs(vclipparts) do
 			v.CanCollide = true
 		end
 		runcmd("clip")
 	end)
-	
+
 	addcmd("notifykey","","Notifys your key",function()
 		notify(2,getplayerkey())
 	end)
-	
+
 	addcmd("flyspeed","number","Changes your fly speed", function(arg)
 		setspeedfly(arg[2])
 	end)
-	
+
 	addcmd("unfly","","Makes you stop flying", function()
 		unfly()
 	end)
-	
+
 	local noclipping = false
 	function noclip()
 		if noclipping == false then
@@ -1880,7 +1903,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end)
 		end
 	end
-	
+
 	function clip()
 		noclipping = false
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
@@ -1888,21 +1911,20 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				v.CanCollide = true
 			end
 		end
-		print("stopped noclipping")
 	end
-	
+
 	addcmd("clip","","Makes you clip", function()
 		clip()
 	end)
-	
+
 	addcmd("noclip","","Makes you noclip", function()
 		noclip()
 	end)
-	
+
 	addcmd('sit', '', 'Makes you sit', function(arg)
 		game.Players.LocalPlayer.Character.Humanoid.Sit = true
 	end)
-	
+
 	addcmd("givetools","Player", "Gives a player your tools", function(arg)
 		local target = getplayer(arg[2])
 		local sadface = game.Players.LocalPlayer.Character
@@ -1941,14 +1963,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			sadface:ClearAllChildren()
 		end
 	end)
-	
+
 	addcmd("notify","time, string","Notifys string", function(arg)
 		if arg[2] and arg[3] then
 			arg[2] = tonumber(arg[2])
 			notify(arg[2],table.concat(arg," ",3))
 		end
 	end)
-	
+
 	addcmd("tweengoto","plr","Teleports you to the player bypassing most anti exploits",function(arg)
 		local tweenservice = game:GetService("TweenService")
 		local info = TweenInfo.new(1)
@@ -1957,7 +1979,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		local newtween = tweenservice:Create(localplayer.Character.HumanoidRootPart,info,proptable)
 		newtween:Play()
 	end)
-	
+
 	addcmd("saveassets","[clothing type (Pants or Shirt)]","Saves assets in a file", function(arg)
 		if arg[2] and arg[2]:lower() == "shirt" or arg[2]:lower() == "pants" then
 			local text = arg[2]
@@ -1970,12 +1992,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					return Asset.Name
 				end
 			end
-	
+
 			local typeofasset = tostring(arg[2]) -- Shirt or Pants
 			if not isfile(typeofasset.."Templates.txt") then
 				writefile(typeofasset.."Templates.txt","")
 			end
-	
+
 			local gui = Instance.new("ScreenGui")
 			if game:GetService("RunService"):IsStudio() then
 				gui.Parent = game.Players.LocalPlayer.PlayerGui
@@ -1986,9 +2008,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			imagelabel.Size = UDim2.new(0.05,0,0.1,0)
 			imagelabel.Position = UDim2.new(0,50,0,50)
 			imagelabel.Draggable = true
-	
+
 			local function getnumbers(value)
-				local strings = value:split("")
+				local strings = split(value,"")
 				local valid = {}
 				for i = 1,#strings do
 					if strings[i] == 1 or strings[i] == 2 or strings[i] == 3 or strings[i] == 4 or strings[i] == 5 or strings[i] == 6 or strings[i] == 7 or strings[i] == 8 or strings[i] == 9 or strings[i] == 0 then
@@ -1999,26 +2021,25 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 				return tostring(table.concat(valid, ""))
 			end
-	
-	
+
+
 			local collected = {}
 			for i,v in pairs(game.Workspace:GetDescendants()) do
-				if v:IsA(typeofasset) and not table.find(collected,v[typeofasset.."Template"]) then
+				if v:IsA(typeofasset) and not tablefind(collected,v[typeofasset.."Template"]) then
 					writefile(typeofasset.."Templates.txt",readfile(typeofasset.."Templates.txt")..getname(getnumbers(v[typeofasset.."Template"])).."   ".."https://www.roblox.com/library/"..getnumbers(v[typeofasset.."Template"]).."/"..getname(getnumbers(v[typeofasset.."Template"])).."\n")
 					collected[#collected+1] = v[typeofasset.."Template"]
 					imagelabel.Image = v[typeofasset.."Template"]
-					print("saved")
 				end
 			end
 			imagelabel:Destroy()
 		end
 	end)
-	
+
 	addcmd("audiologger","","Gives a audiologger GUI",function(arg)
 		notify(2,"Loading...")
 		loadstring(game:HttpGet("https://pastebin.com/raw/z80z5Nee",true))()
 	end)
-	
+
 	addcmd("firealltouchinterest","","Fires touch interests", function()
 		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v:IsA("TouchTransmitter") then
@@ -2026,7 +2047,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	esp = false
 	function Esp(plr)
 		if tostring(plr):lower() == "all" then
@@ -2052,14 +2073,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					local TextLabel_5 = Instance.new("TextLabel")
 					local Right = Instance.new("SurfaceGui")
 					local TextLabel_6 = Instance.new("TextLabel")
-	
+
 					Top.Name = "Top"
 					Top.Parent = chosen
 					Top.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Top.AlwaysOnTop = true
 					Top.Face = Enum.NormalId.Top
 					Top.LightInfluence = 1.000
-	
+
 					TextLabel.Parent = Top
 					TextLabel.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel.BackgroundTransparency = 0.500
@@ -2068,14 +2089,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel.Text = ""
 					TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel.TextSize = 14.000
-	
+
 					Bottom.Name = "Bottom"
 					Bottom.Parent = chosen
 					Bottom.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Bottom.AlwaysOnTop = true
 					Bottom.Face = Enum.NormalId.Bottom
 					Bottom.LightInfluence = 1.000
-	
+
 					TextLabel_2.Parent = Bottom
 					TextLabel_2.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel_2.BackgroundTransparency = 0.500
@@ -2084,14 +2105,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel_2.Text = ""
 					TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_2.TextSize = 14.000
-	
+
 					Left.Name = "Left"
 					Left.Parent = chosen
 					Left.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Left.AlwaysOnTop = true
 					Left.Face = Enum.NormalId.Left
 					Left.LightInfluence = 1.000
-	
+
 					TextLabel_3.Parent = Left
 					TextLabel_3.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel_3.BackgroundTransparency = 0.500
@@ -2100,13 +2121,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel_3.Text = ""
 					TextLabel_3.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_3.TextSize = 14.000
-	
+
 					Front.Name = "Front"
 					Front.Parent = chosen
 					Front.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Front.AlwaysOnTop = true
 					Front.LightInfluence = 1.000
-	
+
 					TextLabel_4.Parent = Front
 					TextLabel_4.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel_4.BackgroundTransparency = 0.500
@@ -2115,14 +2136,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel_4.Text = ""
 					TextLabel_4.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_4.TextSize = 14.000
-	
+
 					Back.Name = "Back"
 					Back.Parent = chosen
 					Back.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Back.AlwaysOnTop = true
 					Back.Face = Enum.NormalId.Back
 					Back.LightInfluence = 1.000
-	
+
 					TextLabel_5.Parent = Back
 					TextLabel_5.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel_5.BackgroundTransparency = 0.500
@@ -2131,14 +2152,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel_5.Text = ""
 					TextLabel_5.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_5.TextSize = 14.000
-	
+
 					Right.Name = "Right"
 					Right.Parent = chosen
 					Right.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 					Right.AlwaysOnTop = true
 					Right.Face = Enum.NormalId.Right
 					Right.LightInfluence = 1.000
-	
+
 					TextLabel_6.Parent = Right
 					TextLabel_6.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 					TextLabel_6.BackgroundTransparency = 0.500
@@ -2147,7 +2168,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					TextLabel_6.Text = ""
 					TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
 					TextLabel_6.TextSize = 14.000
-	
+
 					repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 					if Top then
 						Top:Destroy()
@@ -2181,14 +2202,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				local TextLabel_5 = Instance.new("TextLabel")
 				local Right = Instance.new("SurfaceGui")
 				local TextLabel_6 = Instance.new("TextLabel")
-	
+
 				Top.Name = "Top"
 				Top.Parent = chosen
 				Top.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Top.AlwaysOnTop = true
 				Top.Face = Enum.NormalId.Top
 				Top.LightInfluence = 1.000
-	
+
 				TextLabel.Parent = Top
 				TextLabel.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel.BackgroundTransparency = 0.500
@@ -2197,14 +2218,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel.Text = ""
 				TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel.TextSize = 14.000
-	
+
 				Bottom.Name = "Bottom"
 				Bottom.Parent = chosen
 				Bottom.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Bottom.AlwaysOnTop = true
 				Bottom.Face = Enum.NormalId.Bottom
 				Bottom.LightInfluence = 1.000
-	
+
 				TextLabel_2.Parent = Bottom
 				TextLabel_2.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel_2.BackgroundTransparency = 0.500
@@ -2213,14 +2234,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel_2.Text = ""
 				TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_2.TextSize = 14.000
-	
+
 				Left.Name = "Left"
 				Left.Parent = chosen
 				Left.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Left.AlwaysOnTop = true
 				Left.Face = Enum.NormalId.Left
 				Left.LightInfluence = 1.000
-	
+
 				TextLabel_3.Parent = Left
 				TextLabel_3.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel_3.BackgroundTransparency = 0.500
@@ -2229,13 +2250,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel_3.Text = ""
 				TextLabel_3.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_3.TextSize = 14.000
-	
+
 				Front.Name = "Front"
 				Front.Parent = chosen
 				Front.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Front.AlwaysOnTop = true
 				Front.LightInfluence = 1.000
-	
+
 				TextLabel_4.Parent = Front
 				TextLabel_4.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel_4.BackgroundTransparency = 0.500
@@ -2244,14 +2265,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel_4.Text = ""
 				TextLabel_4.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_4.TextSize = 14.000
-	
+
 				Back.Name = "Back"
 				Back.Parent = chosen
 				Back.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Back.AlwaysOnTop = true
 				Back.Face = Enum.NormalId.Back
 				Back.LightInfluence = 1.000
-	
+
 				TextLabel_5.Parent = Back
 				TextLabel_5.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel_5.BackgroundTransparency = 0.500
@@ -2260,14 +2281,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel_5.Text = ""
 				TextLabel_5.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_5.TextSize = 14.000
-	
+
 				Right.Name = "Right"
 				Right.Parent = chosen
 				Right.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 				Right.AlwaysOnTop = true
 				Right.Face = Enum.NormalId.Right
 				Right.LightInfluence = 1.000
-	
+
 				TextLabel_6.Parent = Right
 				TextLabel_6.BackgroundColor3 = Color3.fromRGB(56, 255, 1)
 				TextLabel_6.BackgroundTransparency = 0.500
@@ -2276,7 +2297,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				TextLabel_6.Text = ""
 				TextLabel_6.TextColor3 = Color3.fromRGB(0, 0, 0)
 				TextLabel_6.TextSize = 14.000
-	
+
 				repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 				if Top then
 					Top:Destroy()
@@ -2299,17 +2320,16 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				repeat game:GetService("RunService").Stepped:Wait() until not plr or esp == false
 				if plr then
 					spawnchecking:Disconnect()
-					print("Disabled")
 					esp = false
 				end
 			end)
 		end
 	end
-	
+
 	function unEsp()
 		esp = false
 	end
-	
+
 	addcmd("esp","plr or all","Highlights a player", function(arg)
 		if getplayer(arg[2]) or arg[2]:lower() == "all" then
 			if arg[2]:lower() == "all" then
@@ -2319,11 +2339,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	addcmd("unesp","","Removes all of the highlighting", function()
 		unEsp()
 	end)
-	
+
 	addcmd("spin","number","Makes you *spin*",function(arg)
 		runcmd("unspin")
 		if not arg[2] then
@@ -2334,14 +2354,14 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		spin.MaxTorque = Vector3.new(0,'inf',0)
 		spin.AngularVelocity = Vector3.new(0,arg[2],0)
 	end)
-	
+
 	addcmd("unspin","","Makes you stop spinning",function()
 		local spin = localplayer.Character.HumanoidRootPart:FindFirstChild("BAspin")
 		if spin then
 			spin:Destroy()
 		end
 	end)
-	
+
 	addcmd("fireallclickdetectors","","Fires all click detectors", function(arg)
 		if fireclickdetector then
 			for i,v in pairs(game.Workspace:GetDescendants()) do
@@ -2353,7 +2373,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			notify("Exploit not supported")
 		end
 	end)
-	
+
 	addcmd("tpparts","plr","Teleports unanchored parts",function(arg)
 		local target = game.Players[getplayer(arg[2])].Character.HumanoidRootPart
 		if setsimulationradius then
@@ -2363,7 +2383,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 						game:GetService("RunService").Stepped:Wait()
 						if part:FindFirstChildWhichIsA("BodyPosition") then
 							part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-							print("Deleted")
 						end
 					until not part:FindFirstChildWhichIsA("BodyPosition")
 				end
@@ -2375,7 +2394,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					if enabled == false and PartToGoto ~= nil and PartToGoto ~= "" then
 						if part.Anchored == true or part:FindFirstChildWhichIsA("BodyPosition") or enabled == false then
 							part:FindFirstChildWhichIsA("BodyPosition"):Destroy()
-							print("Stopped")
 						end
 					end
 					pcall(function()
@@ -2384,7 +2402,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 						if PartToGoto == nil or PartToGoto == "" then
 							tp.Position = target.Position
 						else
-							print("not fine")
 							tp.position = PartToGoto.Position
 						end
 						wait(3)
@@ -2392,7 +2409,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					end)
 				end)
 			end
-	
+
 			for i,v in pairs(game.Workspace:GetDescendants()) do
 				if v:IsA("BasePart") and v.Anchored == false and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
 					if v and v:FindFirstChildWhichIsA"Weld" and v:FindFirstChildWhichIsA"Weld".Enabled == false and v:FindFirstChildWhichIsA"WeldConstraint" and v:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
@@ -2410,11 +2427,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end)
 	local target = ""
 	local enabled = false
-	
+
 	addcmd("unlooptpparts","","Disables the tp thing",function(arg)
 		enabled = false    
 	end)
-	
+
 	addcmd("bindkey","press a key","Binds a command to a key", function(arg)
 		local currentkey = getplayerkey()
 		local enabled = true
@@ -2422,7 +2439,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		local uis = game:GetService("UserInputService")
 		notify(3,"Binded "..currentkey.." to the command".. table.concat(arg, " " ,2)..", press backslash (not / the other one) and "..currentkey.." to remove the keybind")
 		local finished = false
-	
+
 		local realdeal = uis.InputBegan:Connect(function(key)
 			if ctrlpressed == true and uis:GetStringForKeyCode(key.KeyCode) == currentkey then
 				finished = true
@@ -2430,7 +2447,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				runcmd(table.concat(arg, " " ,2))
 			end
 		end)
-	
+
 		local saddeal = uis.InputBegan:Connect(function(key)
 			if key.KeyCode == Enum.KeyCode.BackSlash then
 				ctrlpressed = true
@@ -2440,13 +2457,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				ctrlpressed = false
 			end
 		end)
-	
+
 		repeat game:GetService("RunService").Stepped:Wait() until finished == true
 		realdeal:Disconnect()
 		saddeal:Disconnect()
 	end)
-	
-	
+
+
 	addcmd("looptpparts","plr","Brings parts to a player for eternity unless you quit. Laggy!",function(arg)
 		enabled = true
 		local lastpart = ""
@@ -2508,7 +2525,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 			game:GetService("RunService").Stepped:Wait()
 		end
-	
+
 		local eee game.Workspace.DescendantAdded:Connect(function(thing)
 			if enabled == true and thing and thing:IsA("BasePart") and thing.Anchored == false and not thing:IsDescendantOf(game.Players.LocalPlayer.Character) then
 				if thing:FindFirstChildWhichIsA"Weld" and thing:FindFirstChildWhichIsA"Weld".Enabled == false and thing:FindFirstChildWhichIsA"WeldConstraint" and thing:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
@@ -2520,13 +2537,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				spawn(function()
 					repeat game:GetService("RunService").Stepped:Wait() until not thing or thing.Anchored == false
 					game:GetService("RunService").Stepped:Wait()
-					print("not anchored")
 					move(thing)
 				end)
 			end
 		end)
-	
-	
+
+
 		for i,v in pairs(game.Workspace:GetDescendants()) do
 			if v:IsA("BasePart") and v.Anchored == false and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
 				if v and v:FindFirstChildWhichIsA"Weld" and v:FindFirstChildWhichIsA"Weld".Enabled == false and v:FindFirstChildWhichIsA"WeldConstraint" and v:FindFirstChildWhichIsA"WeldConstraint".Enabled == false then
@@ -2545,7 +2561,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 		repeat game:GetService("RunService").Stepped:Wait() until enabled == false
 		eee:Disconnect()
 	end)
-	
+
 	addcmd("setsimulationradius","number","Sets the simulation radius to a number",function(arg)
 		if setsimulationradius then
 			while game:GetService("RunService").Stepped:Wait() do
@@ -2555,9 +2571,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			notify(3,"Not supported with your exploit")
 		end
 	end)
-	
+
 	local nameenabled = false
-	
+
 	local function removetag(plr)
 		plr = game.Players[plr]
 		nameenabled = false
@@ -2565,7 +2581,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			plr.Character.Head:FindFirstChild("NameTag"):Destroy()
 		end
 	end
-	
+
 	local function nametag(plr)
 		plr = game.Players[plr]
 		if plr and plr.Name ~= localplayer.Name then
@@ -2574,7 +2590,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			if plr and plr.Character:FindFirstChild"Head" then
 				local NameTag = Instance.new("BillboardGui")
 				local TextLabel = Instance.new("TextLabel")
-	
+
 				NameTag.Name = "NameTag"
 				NameTag.Parent = plr.Character.Head
 				NameTag.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -2583,7 +2599,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				NameTag.LightInfluence = 1.000
 				NameTag.Size = UDim2.new(0, 300, 0, 50)
 				NameTag.StudsOffsetWorldSpace = Vector3.new(0, 2, 0)
-	
+
 				TextLabel.Parent = NameTag
 				TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 				TextLabel.BackgroundTransparency = 1.000
@@ -2599,7 +2615,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				if plr and plr.Character:FindFirstChild"Head" then
 					local NameTag = Instance.new("BillboardGui")
 					local TextLabel = Instance.new("TextLabel")
-	
+
 					NameTag.Name = "NameTag"
 					NameTag.Parent = plr.Character.Head
 					NameTag.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -2608,7 +2624,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					NameTag.LightInfluence = 1.000
 					NameTag.Size = UDim2.new(0, 300, 0, 50)
 					NameTag.StudsOffsetWorldSpace = Vector3.new(0, 2, 0)
-	
+
 					TextLabel.Parent = NameTag
 					TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					TextLabel.BackgroundTransparency = 1.000
@@ -2628,7 +2644,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	addcmd("nametag","Player","Shows a players nametag", function(arg)
 		if arg[2] and tostring(arg[2]):lower() == "all" then
 			for i,v in pairs(game.Players:GetPlayers()) do
@@ -2639,7 +2655,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			nametag(arg[2])
 		end
 	end)
-	
+
 	addcmd("unnametag","Player","Unshows a players nametag", function(arg)
 		if arg[2] and tostring(arg[2]):lower() == "all" then
 			for i,v in pairs(game.Players:GetPlayers()) do
@@ -2650,16 +2666,16 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			removetag(arg[2])
 		end
 	end)
-	
+
 	addcmd("showfps","","Shows FPS in the bottom right corner",function()
 		notify(3, "Showing FPS in the bottom right corner")
 		script.Parent.Parent.Parent.FPS.Visible = true
 	end)
-	
+
 	addcmd("hidefps","","Hides FPS in the bottom right corner",function()
 		script.Parent.Parent.Parent.FPS.Visible = false
 	end)
-	
+
 	addcmd("music","ID","Plays music of the specified ID",function(arg)
 		if arg[2] then
 			if game.Workspace:FindFirstChild("MUSIC") then
@@ -2676,11 +2692,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
-	
+
+
 	--Specific game commands
 	if game.GameId == 424968782 then --Ninja Simulator (Old)
-	
+
 	elseif game.GameId == 110988953 then
 		addcmd("autobuystuff", "", "Auto buys stuff in Wizard Tycoon", function() 
 			local team = tostring(game.Players.LocalPlayer.Team)
@@ -2697,11 +2713,11 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 					end)
 				end
 			end)
-	
-	
-	
+
+
+
 			local path = game:GetService("Workspace")["berezaa's Tycoon Kit"]["Medium green"]
-	
+
 			while game:GetService("RunService").Stepped:Wait() do
 				for i,v in pairs(path:GetDescendants()) do
 					if v:IsA("TouchTransmitter") and v.Parent.Parent:FindFirstChild("Price") then
@@ -2718,58 +2734,58 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end)
 	end
-	
+
 	addcmd("onspawnedcommand","Cmd","Uses the specified command when you respawn",function(arg)
 		spawnedcommand[#spawnedcommand+1] = table.concat(arg," ",2)
 		notify(5,"Added spawned command ".. spawnedcommand[#spawnedcommand])
 	end)
-	
+
 	addcmd("removespawnedcommand","Cmd","Deletes the command that runs when you respawn",function(arg)
-		local checking = table.find(spawnedcommand,table.concat(arg,2))
+		local checking = tablefind(spawnedcommand,table.concat(arg,2))
 		if checking then
 			table.remove(spawnedcommand,checking)
 			notify(5,"Removed spawned command "..table.concat(arg," ",2))
 		end
 	end)
-	
+
 	addcmd("removehighlighting","","Removes the command highlighting",function(arg)
 		script.Parent.Parent.CommandHighlighting.Visible = false
 	end)
-	
+
 	addcmd("showhighlighting","","Shows the command highlighting",function(arg)
 		script.Parent.Parent.CommandHighlighting.Visible = true
 	end)
-	
+
 	addcmd("stopmusic","","Stops the music",function(arg)
 		if game.Workspace:FindFirstChild("MUSIC") then
 			game.Workspace:FindFirstChild("MUSIC"):Destroy()
 			notify(5,"Deleted the music")
 		end
 	end)
-	
+
 	addcmd("walkspeed","Int","Changes your walkspeed",function(arg)
 		if arg[2] then
 			localplayer.Character.Humanoid.WalkSpeed = arg[2]
 		end
 	end)
-	
+
 	addcmd("jumppower","Int","Changes your jumpheight",function(arg)
 		if arg[2] then
 			localplayer.Character.Humanoid.JumpPower = arg[2]
 		end
 	end)
-	
+
 	addcmd("gravity","Int","Changes gravity [CLIENT]",function(arg)
 		if arg[2] then
 			game.Workspace.Gravity = arg[2]
 		end
 	end)
-	
+
 	addcmd("rejoin","","Makes you rejoin the game",function(arg)
 		notify(5,"Rejoining...")
 		game:GetService("TeleportService"):Teleport(game.PlaceId)
 	end)
-	
+
 	addcmd("antiafk","","Prevents you from being kicked for being afk",function(arg)
 		local vu = game:GetService("VirtualUser")
 		game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -2777,7 +2793,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			wait(1)
 			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 		end)
-	
+
 		notify(5,"Loaded Anti Afk")
 	end)
 	local defaultbrightness = game.Lighting.Brightness
@@ -2786,17 +2802,17 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			game.Lighting.Brightness = arg[2]
 		end
 	end)
-	
+
 	addcmd("resetlighting","","Resets lighting",function()
 		game.Lighting.Brightness = defaultbrightness
 	end)
-	
+
 	local defaultgravity = workspace.Gravity
-	
+
 	addcmd("ungravity","","Resets gravity",function()
 		workspace.Gravity = defaultgravity
 	end)
-	
+
 	addcmd("drophats","","Drops your accessories",function(arg)
 		for i,v in pairs(localplayer.Character:GetChildren()) do
 			if v:IsA("Accessory") then
@@ -2804,18 +2820,18 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end)
-	
+
 	addcmd("chatlogs","","Shows a chatlogs gui that is included with this admin",function(arg)
 		notify(5,"Loading Chatlogs...")
 		script.Parent.Parent.Parent.Chatlogs.Visible = true
 	end)
-	
+
 	addcmd("closechatlogs","","Closes the chatlogs",function(arg)
 		script.Parent.Parent.Parent.Chatlogs.Visible = false
 	end)
-	
+
 	local antilag = false
-	
+
 	addcmd("antilag","","Turns on antilag",function()
 		antilag = true
 		local count = 0
@@ -2835,33 +2851,32 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 				end
 			end
 		end
-	
+
 		for i,v in pairs(workspace:GetDescendants()) do
 			removetexture(v)
 		end
-	
+
 		notify(5,"Changed "..count.." meshes"..", Deleted "..count1.." textures")
-	
+
 		local newantilag = workspace.DescendantAdded:Connect(function(v)
 			wait(1)
 			if v then
 				removetexture(v)
 			end
 		end)
-	
+
 		repeat game:GetService("RunService").Stepped:Wait() until antilag == false
 		newantilag:Disconnect()
 	end)
-	
+
 	addcmd("unantilag","","Turns off the auto antilag",function()
 		antilag = false
 	end)
-	
+
 	addcmd("prefix","Key","Changes the prefix from "..tostring(prefix).." to your new chosen prefix",function(arg)
 		local selectedkey = getplayerkey()
 		pcall(function()
 			if Enum.KeyCode[tostring(selectedkey)] then
-				print("true")
 				notify(5,"Set prefix to the key "..selectedkey)
 				prefix = Enum.KeyCode[tostring(selectedkey)]
 			end	
@@ -2876,12 +2891,12 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			loadstring(game:HttpGet("https://pastebin.com/raw/EbGJu9A8",true))()
 		end)
 	end
-	
-	
+
+
 	addcmd("addcommand","look at gui","Adds a custom command",function(arg)
 		script.Parent.Parent.Parent.CustomCommand.Visible = true
 	end)
-	
+
 	addcmd("deleteadmin","Yes or no","Deletes the admin gui",function(arg)
 		if arg[2] == "yes" then
 			doritos:Disconnect()
@@ -2891,7 +2906,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			marioi:Disconnect()
 			luigijuice:Disconnect()
 			noclipping = false
-	
+
 			unfly()
 			bald:Disconnect()
 			for i,v in pairs(commands.Name) do
@@ -2902,7 +2917,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			script.Parent.Parent:Destroy()
 		end
 	end)
-	
+
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
 		if tostring(v):match(".lua") then
@@ -2914,9 +2929,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end
 		end
 	end
-	
+
 	close()
-	
+
 	script.Parent.Parent.Parent.CustomCommand.AddCommandButton.MouseButton1Click:Connect(function()
 		local name = script.Parent.Parent.Parent.CustomCommand.Title.Text
 		local descript = script.Parent.Parent.Parent.CustomCommand.Description.Text
@@ -2949,7 +2964,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 		--<font color= "rgb(240, 40, 10)">red text</font>
 		--<font color= "rgb (0, 150, 50)" >print</font>
 	end
-	
+
 	function findandhighlightplr(text)
 		local w = text
 		if w ~= nil and w~="" then
@@ -2965,22 +2980,22 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 		end
 		return w
 	end
-	
+
 	local previousletter = ""
-	
+
 	function isNumber(letter)
 		local l = tostring(letter)
 		local isletter = false
 		if l == "1" or l == "2" or l == "3" or l == "4" or l == "5" or l == "6" or l == "7" or l == "8" or l == "9" or l == "0" then
 		elseif l == "," and isNumber(previousletter) == false then
-			else
+		else
 			isletter = true
-	
+
 		end
 		previousletter = l
 		return isletter
 	end
-	
+
 	function highlighnormaltext(text)
 		local plrfound = false
 		local numberfound = false
@@ -2991,7 +3006,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 			end
 		end
 		if plrfound == false then
-			local str = text:split("")
+			local str = split(text,"")
 			for i,v in pairs(str) do
 				if isNumber(str[i]) == false then
 					numberfound = true
@@ -3004,10 +3019,10 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 			return text
 		end
 	end
-	
+
 	function highlightnumber(text)
 		local isnumber = true
-		local str = text:split("")
+		local str = split(text,"")
 		for i = 1,#str do
 			if isNumber(str[i]) == false then
 			else
@@ -3021,7 +3036,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 			return text
 		end
 	end
-	
+
 	function scaletext()
 		if script.Parent.Text == "" then
 			script.Parent.TextSize = 17
@@ -3041,10 +3056,10 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 			end
 		until script.Parent.TextBounds.X < script.Parent.AbsoluteSize.X * 0.90 or finished == true or rancount >= 10
 	end
-	
-	
+
+
 	script.Parent.Parent.CommandBar.Changed:Connect(function()
-		local args = script.Parent.Parent.CommandBar.Text:split(" ")
+		local args = split(script.Parent.Parent.CommandBar.Text," ")
 		if args then
 			scaletext()
 			for i = 1, #args do
@@ -3056,7 +3071,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 					args[i] = highlight(args[i],192, 250, 255)
 				else
 					args[i] = ""
-	
+
 				end
 			end
 		end
@@ -3065,7 +3080,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 	spawn(function()
 		while wait(1) do
 			pcall(function()
-				local args = script.Parent.Parent.CommandBar.Text:split(" ")
+				local args = split(script.Parent.Parent.CommandBar.Text," ")
 				if args then
 					scaletext()
 					for i = 1, #args do
@@ -3077,7 +3092,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 							args[i] = highlight(args[i],192, 250, 255)
 						else
 							args[i] = ""
-	
+
 						end
 					end
 				end
@@ -3085,7 +3100,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 			end)
 		end
 	end)
-	
+
 	script.Parent.MouseButton1Click:Connect(function()
 		script.Parent.Parent.CommandBar:CaptureFocus()
 	end)
@@ -3140,12 +3155,12 @@ local function RROBRI_fake_script() -- KeyThing.LocalScript
 			script.Parent.Text = key
 		end
 	end
-	
+
 	script.Parent.MouseButton1Click:Connect(function()
 		getkey()
 	end)
-	
-	
+
+
 end
 coroutine.wrap(RROBRI_fake_script)()
 local function MTHYJRE_fake_script() -- Close.LocalScript 
@@ -3175,7 +3190,7 @@ local function AEFMQFX_fake_script() -- Script_2.LocalScript
 		instance.Size = UDim2.fromOffset(instance.TextBounds.X + script.Parent.Parent.AbsoluteSize.X,instance.TextBounds.Y + script.Parent.Parent.AbsoluteSize.Y)
 		script.Parent.Parent.CanvasSize = UDim2.fromOffset(script.Parent.TextBounds.X, script.Parent.TextBounds.Y)
 	end
-	
+
 	script.Parent.Changed:Connect(function()
 		resize(script.Parent)
 	end)
@@ -3191,7 +3206,7 @@ local function IIZGTZ_fake_script() -- Title_4.LocalScript
 			return Asset.Name
 		end
 	end
-	
+
 	script.Parent.Text = "Add command "..getname1(game.PlaceId)
 end
 coroutine.wrap(IIZGTZ_fake_script)()
@@ -3199,13 +3214,13 @@ local function CLOBNER_fake_script() -- BleakAdmin.NewScript
 	local script = Instance.new('LocalScript', BleakAdmin)
 
 	local runservice = game:GetService("RunService")
-	
+
 	if runservice:IsStudio() then
 		script.Parent.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 	else
 		script.Parent.Parent = game.CoreGui
 	end
-	
+
 	for i,v in pairs(script.Parent:GetDescendants()) do
 		if v:IsA("ScrollingFrame") then
 			v.MidImage = "http://www.roblox.com/asset/?id=5903324492"
@@ -3235,7 +3250,7 @@ local function CLOBNER_fake_script() -- BleakAdmin.NewScript
 			end)
 		end
 	end
-	
+
 	local UIS = game:GetService("UserInputService")
 	local function dragify(Frame)
 		local dragToggle = nil
@@ -3280,7 +3295,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 	local script = Instance.new('LocalScript', Chatlogs_2)
 
 	local messages = {}
-	
+
 	local lastmessagesaid = ""
 	local amountrepeated = 1
 	local lasttext = ""
@@ -3290,20 +3305,20 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 	local realoldtext = ""
 	local autosaving = false
 	if isfile and isfile("Bleak Admin/Settings.txt") then
-		local settings = readfile("Bleak Admin/Settings.txt"):split("\n")
+		local settings = split(readfile("Bleak Admin/Settings.txt"),"\n")
 		if settings[1] == "true" then
 			autosaving = true
 			script.Parent.Parent.AutoSave.Text = "Autosave [true]"
 			if writefile and isfile("Bleak Admin/Chatlogs.txt") then
 				pcall(function()
-				writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
+					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
 					realmessage = {}
-					end)
+				end)
 			elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") then
 				pcall(function()
-				writefile("Bleak Admin/Chatlogs.txt", "New chatlogs \n\n"..table.concat(realmessage,"\n"))
+					writefile("Bleak Admin/Chatlogs.txt", "New chatlogs \n\n"..table.concat(realmessage,"\n"))
 					realmessage = {}
-					end)
+				end)
 			elseif not writefile then
 				script.Parent.Parent.Save.Text = "Not supported"
 				wait(5)
@@ -3316,8 +3331,8 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 	else
 		script.Parent.Parent.AutoSave.Text = "Autosave [false]"
 	end
-	
-	
+
+
 	function getTime()
 		local date = os.date("*t")
 		local hour = tonumber(date["hour"])
@@ -3337,11 +3352,11 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 		end
 		return hour..":"..minute.." "..letter
 	end
-	
+
 	function highlight(text,r,g,b)
 		return '<font color= "rgb' .. '(' .. r .. ', ' .. g .. ', ' .. b .. ')" >'..text..'</font>'
 	end
-	
+
 	local function resize(instance)
 		repeat
 			instance.Size = instance.Size + UDim2.fromOffset(0,-2)
@@ -3351,22 +3366,22 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 		until instance.TextFits == true
 		instance.Size = instance.Size + UDim2.fromOffset(0,7)
 	end
-	
+
 	local function logplr(plr)
 		game.Players[plr].Chatted:Connect(function(msg)
 			if lastmessagesaid ~= msg then
 				realmessage[#realmessage+1] = getTime().." ".."["..plr.."]: "..msg.."\n"
 				realoldtext = realmessage[#realmessage] 
 				if writefile and isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
-				pcall(function()
-					writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
-					realmessage = {}
-				end)
+					pcall(function()
+						writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt")..realoldtext)
+						realmessage = {}
+					end)
 				elseif isfile and not isfile("Bleak Admin/Chatlogs.txt") and autosaving == true then
-				pcall(function()
-					writefile("Bleak Admin/Chatlogs.txt", realoldtext)
-					realmessage = {}
-				end)
+					pcall(function()
+						writefile("Bleak Admin/Chatlogs.txt", realoldtext)
+						realmessage = {}
+					end)
 				end
 				lastmessagesaid = msg
 				amountrepeated = 1
@@ -3380,7 +3395,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 				local first3letterofplr = string.lower(string.sub(game.Players.LocalPlayer.Name,0,3))
 				local first3letterofmsg = string.lower(string.sub(msg,0,3))
 				local checkedpassed = 0
-				local excludespaces = msg:split(" ")
+				local excludespaces = split(msg," ")
 				for i,v in pairs(excludespaces) do
 					local letters3 = string.lower(string.sub(v,0,3))
 					if first3letterofplr == letters3 then
@@ -3417,7 +3432,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 					tag.Name = "tag"
 					tag.Value = "none"
 				end
-				
+
 				newchat.Parent = script.Parent
 				newchat.Text = " "..messages[#messages]
 				newchat.RichText = true
@@ -3458,8 +3473,8 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 			end
 		end)
 	end
-	
-	
+
+
 	script.Parent.Parent.Save.MouseButton1Click:Connect(function()
 		if writefile and isfile("Bleak Admin/Chatlogs.txt") then
 			writefile("Bleak Admin/Chatlogs.txt",readfile("Bleak Admin/Chatlogs.txt").."New chatlogs \n\n".. table.concat(realmessage,"\n"))
@@ -3473,10 +3488,10 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 			script.Parent.Parent.Save.Text = "Save"
 		end
 	end)
-	
+
 	script.Parent.Parent.Clear.MouseButton1Click:Connect(function()
 		messages = {}
-	
+
 		lastmessagesaid = ""
 		amountrepeated = 1
 		lasttext = script.Parent.AddChat
@@ -3490,19 +3505,19 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 				v:Destroy()
 			end
 		end
-	
+
 	end)
-	
+
 	for i,v in pairs(game.Players:GetPlayers()) do
 		logplr(v.Name)
 	end
-	
+
 	game.Players.PlayerAdded:Connect(function(e)
 		logplr(e.Name)
 	end)
-	
+
 	script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
-	
+
 	script.Parent.Parent.AutoSave.MouseButton1Click:Connect(function()
 		autosaving = not autosaving
 		script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
@@ -3510,7 +3525,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 			writefile("Bleak Admin/Settings.txt",tostring(autosaving))
 		end
 	end)
-	
+
 	local UIS = game:GetService("UserInputService")
 	local function dragify(Frame)
 		local dragToggle = nil
@@ -3548,7 +3563,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 			end
 		end)
 	end
-		dragify(script.Parent.Parent)
+	dragify(script.Parent.Parent)
 end
 coroutine.wrap(CALO_fake_script)()
 local function SFFZHXY_fake_script() -- AddChat.Chatscript 
@@ -3612,9 +3627,9 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 			end
 		elseif tag.Text == "msgtxt" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
-	
+
 				if v:IsA("TextButton") and  v.Name ~= "AddChat" then
-					local msgs = v.Text:split(": ")
+					local msgs = split(v.Text,": ")
 					local msg = msgs[2]
 					if msg then
 						msg = msg:lower()
@@ -3631,7 +3646,7 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 		elseif tag.Text == "pm" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
 				if v:IsA("TextButton") and v.Text:lower():match("/w") and v.Name ~= "AddChat" then
-					local msgs = v.Text:split(": ")
+					local msgs = split(v.Text,": ")
 					local msg = msgs[2]
 					if msg then
 						msg = msg:lower()
@@ -3648,7 +3663,7 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 		elseif tag.Text == "localname" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
 				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "localname" then
-					local msgs = v.Text:split(": ")
+					local msgs = split(v.Text,": ")
 					local msg = msgs[2]
 					if msg then
 						msg = msg:lower()
@@ -3665,7 +3680,7 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 		elseif tag.Text == "url" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
 				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "url" then
-					local msgs = v.Text:split(": ")
+					local msgs = split(v.Text,": ")
 					local msg = msgs[2]
 					if msg then
 						msg = msg:lower()
@@ -3682,7 +3697,7 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 		elseif tag.Text == "potentialadmin" then
 			for i,v in pairs(script.Parent.Parent.Chatlogs:GetChildren()) do
 				if v:IsA("TextButton") and v.Name ~= "AddChat" and v.tag.Value == "potentialadmin" then
-					local msgs = v.Text:split(": ")
+					local msgs = split(v.Text,": ")
 					local msg = msgs[2]
 					if msg then
 						msg = msg:lower()
@@ -3707,15 +3722,15 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 					end
 				end)
 				spawn(function()
-				repeat wait() until not v or v.Parent ~= script.Parent.Parent.Searching 
-				entering:Disconnect()
-					end)
+					repeat wait() until not v or v.Parent ~= script.Parent.Parent.Searching 
+					entering:Disconnect()
+				end)
 			end
 		end
 	end
-	
+
 	local lasttag = tag.Text
-	
+
 	tag.Changed:Connect(function()
 		if tag.Text ~= lasttag then
 			lasttag = tag.Text
@@ -3723,12 +3738,12 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 			search1(script.Parent.Text)
 		end
 	end)
-	
+
 	script.Parent.Parent.Chatlogs.ChildAdded:Connect(function()
 		game:GetService("RunService").Stepped:Wait()
 		search1(script.Parent.Text)
 	end)
-	
+
 	uis.InputBegan:Connect(function()
 		if focused == true then
 			game:GetService("RunService").Stepped:Wait()
@@ -3748,7 +3763,7 @@ local function OPBN_fake_script() -- TagType.LocalScript
 		"pm";
 		"potentialadmin"
 	}
-	
+
 	local number = 1
 	script.Parent.Text = tags[number]
 	script.Parent.MouseButton1Click:Connect(function()
@@ -3769,7 +3784,7 @@ local function XESPS_fake_script() -- FPS.LocalScript
 
 	local fps = 0
 	local time = tick()
-	
+
 	while true do
 		fps = fps + 1
 		game:GetService("RunService").Stepped:Wait()
