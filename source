@@ -1047,6 +1047,17 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end
 
 
+    function getfiledupe(filename)
+        if listfiles then
+            local inter = 1
+            for i,v in pairs(listfiles("Bleak Admin")) do
+                if v == filename then
+                    filename = filename:gsub(".lua")
+                end
+            end
+        end
+    end
+
 	function getdupes(cmd)
 		local cmd = cmd:lower()
 		local name = commands.Name
@@ -2920,7 +2931,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 
 	local files = listfiles("Bleak Admin")
 	for i,v in pairs(files) do
-		if tostring(v):match(".lua") then
+		if tostring(v):match(".lua") and not v:match("Autoruncmds") then
 			local ran,error = pcall(function()
 				loadfile(v)()
 			end)
@@ -2953,6 +2964,13 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 	end)
 	update()
 	notify(5,"Loaded ".. #commands.Name.. " commands and added command history. Press up and down keys to cycle through recently used commands.")
+	if isfile and isfile("Bleak Admin/Autoruncmds.lua") then
+	    loadfile("Bleak Admin/Autoruncmds.lua")()
+	    print("ran commands")
+	elseif writefile then
+        writefile("Bleak Admin/Autoruncmds.lua", 'local plugins = {\n--commands here. here is an example\n--runcmd("showfps"); -- you need ; at the end\n--runcmd("kill playername"); --you can run any command, even plugins\n\n\n}\nreturn plugins')
+        print"made file"
+	end
 end
 coroutine.wrap(HSTDLMS_fake_script)()
 local function JYOM_fake_script() -- CommandHighlighting.LocalScript 
@@ -2988,6 +3006,7 @@ local function JYOM_fake_script() -- CommandHighlighting.LocalScript
 		local isletter = false
 		if l == "1" or l == "2" or l == "3" or l == "4" or l == "5" or l == "6" or l == "7" or l == "8" or l == "9" or l == "0" then
 		elseif l == "," and isNumber(previousletter) == false then
+		elseif l == "." and isNumber(previousletter) == false then
 		else
 			isletter = true
 
