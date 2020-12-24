@@ -1,3 +1,56 @@
+function TACOPANICCC(string)
+    for i = 1,string:len() do
+        local v = string:sub(i,i)
+        if v == "1" or v == '2' or v == '3' or v == '4' or v == '5' or v == '6' or v == '7' or v == '8' or v == '9' or v == '0' then
+            string = string:gsub(v,"")
+        end
+    end
+    return string
+end
+    
+
+function removefilestuff(file, boolremovenumbers)
+    file = tostring(file)
+    file = file:gsub("/",[[\]])
+    if boolremovenumbers then
+    file = TACOPANICCC(file)
+    end
+    file = file:gsub("Bleak Admin"..[[\]],""):gsub(".lua",""):gsub(".txt","")
+    return file
+end
+
+function checkdupesfile(file)
+    local files = {}
+    local extension = file:sub(#file-3,#file)
+    local dupe = 0
+    for i,v in pairs(listfiles("Bleak Admin")) do
+        files[#files+1] = removefilestuff(v,true)
+    end
+    repeat
+        if table.find(files,removefilestuff(file,true)) then
+            local numbito = table.find(files,removefilestuff(file,true))
+            table.remove(files,numbito)
+            dupe = dupe + 1
+        end
+    until not table.find(files,removefilestuff(file,true))
+        file = removefilestuff(file,true)..dupe
+        file = "Bleak Admin"..[[\]]..file..extension
+        local files2 = {}
+        for i,v in pairs(listfiles("Bleak Admin")) do
+            files2[#files2+1] = removefilestuff(v,true)
+        end
+        if table.find(files2,removefilestuff(file,true)) then
+            repeat
+                local numbie = table.find(files2,removefilestuff(file,true))
+                table.remove(files2,numbie)
+               file = removefilestuff(file,true)..tostring(dupe)
+               file = "Bleak Admin"..[[\]]..file..extension
+                dupe = dupe + 1
+            until not table.find(files2,removefilestuff(file,true))
+        end
+    return(file)
+end
+
 function tablefind(table, string)
 	for i,v in pairs(table) do
 		if v == string then
@@ -1186,7 +1239,6 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end)
 
 			update()
-			wait(0.1)
 		end
 	end
 
@@ -2956,9 +3008,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			end)
 			if writefile then
 				if script.Parent.Parent.Parent.CustomCommand.Check.Text ~= "X" then
-					writefile("Bleak Admin/"..name..".lua","local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
+					writefile(checkdupesfile("Bleak Admin/"..name..".lua"),"local plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins")
 				else
-					writefile("Bleak Admin/"..name..".lua","if game.GameId == "..game.GameId.." then\nlocal plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins\nend")
+					writefile(checkdupesfile("Bleak Admin/"..name..".lua"),"if game.GameId == "..game.GameId.." then\nlocal plugins = {\n".."addcmd('"..name.."', '".. reqire .."', '"..descript.."', function(arg)\n".. addfunction .."\nend)\n}\n" .. "return plugins\nend")
 				end
 				--function addcmd(cmd, requirement, description, functioninscript)
 			end
