@@ -1240,6 +1240,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 
 			update()
 		end
+	wait()
 	end
 
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
