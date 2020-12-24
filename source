@@ -11,7 +11,7 @@ function split(text, splitter)
 	local returning = {}
 	local returningtxt = ""
 	for i = 1,#text do
-		if text:sub(i,i) ~= splitter and splitter ~= "" then
+		if text:sub(i,splitter:len()) ~= splitter and splitter ~= "" then
 			returningtxt = returningtxt..text:sub(i,i)
 		else
 			if splitter == "" then
@@ -3740,9 +3740,15 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 						v.BackgroundColor3 = Color3.new(0,0,0)
 					end
 				end)
+				
+				local buttonpress = v.MouseButton1Click:Connect(function()
+				    setclipboard(v.Text)
+				end)
+				
 				spawn(function()
 					repeat wait() until not v or v.Parent ~= script.Parent.Parent.Searching 
 					entering:Disconnect()
+					buttonpress:Disconnect()
 				end)
 			end
 		end
@@ -3760,7 +3766,9 @@ local function JHHWCGZ_fake_script() -- SearchBar.LocalScript
 
 	script.Parent.Parent.Chatlogs.ChildAdded:Connect(function()
 		game:GetService("RunService").Stepped:Wait()
-		search1(script.Parent.Text)
+		if focused == true then
+    		search1(script.Parent.Text)
+	    end
 	end)
 
 	uis.InputBegan:Connect(function()
