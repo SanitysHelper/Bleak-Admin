@@ -1143,9 +1143,9 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			local error = ""
 			if textsubmitted == true then
 				addhistory(cmdname.." ".. table.concat(command," ",2))
+				script.Parent.Text = ""
 			end
 			ran,error = pcall(function()
-				script.Parent.Text = ""
 				commands.Code[number](command)
 			end)
 			if ran == true then
