@@ -1,3 +1,70 @@
+function drag(guiobject, gui)
+	local moveoutofscreen = false
+	local gui = gui
+	if not gui then
+		gui = guiobject
+		repeat
+			gui = gui.Parent
+			wait()
+		until gui:IsA("ScreenGui")
+	end
+
+	local function checkpos(pos)
+		local range1 = guiobject.AbsolutePosition.X
+		local range2 = guiobject.AbsolutePosition.X + gui.AbsoluteSize.X
+		local range3 = guiobject.AbsolutePosition.Y
+		local range4 = guiobject.AbsolutePosition.Y + gui.AbsoluteSize.Y
+		if pos.X.Offset >= range1 and pos.X.Offset <= range2 and pos.Y.Offset >= range3 and pos.Y.Offset <= range4 then
+			return true
+		end
+	end
+
+	guiobject.Active = true
+	local speed = 0.1
+	local uis = game:GetService("UserInputService")
+	local helddown = false
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local delta = nil
+
+	uis.InputBegan:Connect(function(thing)
+		if thing.UserInputType == Enum.UserInputType.MouseButton1 and checkpos(UDim2.fromOffset(mouse.X,mouse.Y)) == true then
+			delta = UDim2.fromOffset(guiobject.AbsolutePosition.X,guiobject.AbsolutePosition.Y) - UDim2.fromOffset(mouse.X,mouse.Y)
+			helddown = true
+			repeat wait() until thing.UserInputState == Enum.UserInputState.End
+			helddown = false
+		end
+	end)
+	--pos.X.Offset >= 0 and pos.X.Offset <= script.Parent.Parent.AbsoluteSize.X
+	local function modifypos(position, position2)
+		if moveoutofscreen ~= true then
+			if position.X.Offset < 0 then
+				position = UDim2.fromOffset(0,position.Y.Offset)
+			elseif position2.X.Offset > gui.AbsoluteSize.X then
+				position = UDim2.fromOffset(gui.AbsoluteSize.X - guiobject.AbsoluteSize.X, position.Y.Offset)
+			end
+
+			if position.Y.Offset < 0 then
+				position = UDim2.fromOffset(position.X.Offset,0)
+			elseif position2.Y.Offset > gui.AbsoluteSize.Y then
+				position = UDim2.fromOffset(position.X.Offset, gui.AbsoluteSize.Y - guiobject.AbsoluteSize.Y)
+			end
+		end
+		return position
+	end
+
+	mouse.Move:Connect(function()
+		if helddown == true then
+			local mpos = UDim2.fromOffset(mouse.X,mouse.Y)
+			local pos = modifypos(mpos + delta, (mpos+delta) + UDim2.fromOffset(guiobject.AbsoluteSize.X,guiobject.AbsoluteSize.Y))
+			if speed > 0 then
+				guiobject:TweenPosition(pos,Enum.EasingDirection.In,Enum.EasingStyle.Linear,speed,true)
+			else
+				guiobject.Position = pos
+			end
+		end
+	end)
+end
+
 function TACOPANICCC(string)
     for i = 1,string:len() do
         local v = string:sub(i,i)
@@ -133,6 +200,7 @@ local Cmd = Instance.new("TextLabel")
 local FPS = Instance.new("TextLabel")
 
 --Properties:
+
 
 BleakAdmin.Name = "BleakAdmin"
 local runservice = game:GetService("RunService")
@@ -320,6 +388,8 @@ NameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 NameLabel.TextScaled = true
 NameLabel.TextSize = 14.000
 NameLabel.TextWrapped = true
+
+drag(CustomCommand)
 
 Title_3.Name = "Title"
 Title_3.Parent = CustomCommand
@@ -2073,7 +2143,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 			local imagelabel = Instance.new("ImageLabel",gui)
 			imagelabel.Size = UDim2.new(0.05,0,0.1,0)
 			imagelabel.Position = UDim2.new(0,50,0,50)
-			imagelabel.Draggable = true
+			drag(imagelabel)
 
 			local function getnumbers(value)
 				local strings = split(value,"")
@@ -3326,45 +3396,7 @@ local function CLOBNER_fake_script() -- BleakAdmin.NewScript
 			end)
 		end
 	end
-
-	local UIS = game:GetService("UserInputService")
-	local function dragify(Frame)
-		local dragToggle = nil
-		local dragSpeed = 1
-		local dragInput = nil
-		local dragStart = nil
-		local dragPos = nil
-		local function updateInput(input)
-			local Delta = input.Position - dragStart
-			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25,Enum.EasingStyle.Quad), {Position = Position}):Play()
-		end
-		Frame.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				if UIS:GetFocusedTextBox() == nil then
-					dragToggle = true
-					dragStart = input.Position
-					startPos = Frame.Position
-					input.Changed:Connect(function()
-						if input.UserInputState == Enum.UserInputState.End then
-							dragToggle = false
-						end
-					end)
-				end
-			end
-		end)
-		Frame.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-		game:GetService("UserInputService").InputChanged:Connect(function(input)
-			if input == dragInput and dragToggle then
-				updateInput(input)
-			end
-		end)
-	end
-	dragify(script.Parent:WaitForChild("MainFrame"))
+	drag(script.Parent:WaitForChild("MainFrame"))
 end
 coroutine.wrap(CLOBNER_fake_script)()
 local function CALO_fake_script() -- Chatlogs_2.ChatScript 
@@ -3602,44 +3634,7 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 		end
 	end)
 
-	local UIS = game:GetService("UserInputService")
-	local function dragify(Frame)
-		local dragToggle = nil
-		local dragSpeed = 1
-		local dragInput = nil
-		local dragStart = nil
-		local dragPos = nil
-		local function updateInput(input)
-			local Delta = input.Position - dragStart
-			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.25,Enum.EasingStyle.Quad), {Position = Position}):Play()
-		end
-		Frame.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				if UIS:GetFocusedTextBox() == nil then
-					dragToggle = true
-					dragStart = input.Position
-					startPos = Frame.Position
-					input.Changed:Connect(function()
-						if input.UserInputState == Enum.UserInputState.End then
-							dragToggle = false
-						end
-					end)
-				end
-			end
-		end)
-		Frame.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-		game:GetService("UserInputService").InputChanged:Connect(function(input)
-			if input == dragInput and dragToggle then
-				updateInput(input)
-			end
-		end)
-	end
-	dragify(script.Parent.Parent)
+	drag(script.Parent.Parent)
 end
 coroutine.wrap(CALO_fake_script)()
 local function SFFZHXY_fake_script() -- AddChat.Chatscript 
