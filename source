@@ -9,25 +9,25 @@ function drag(guiobject, gui)
 		until gui:IsA("ScreenGui")
 	end
 
-	local function checkpos(pos)
+	local function checkpos1(pos)
 		local range1 = guiobject.AbsolutePosition.X
-		local range2 = guiobject.AbsolutePosition.X + gui.AbsoluteSize.X
+		local range2 = guiobject.AbsolutePosition.X + guiobject.AbsoluteSize.X
 		local range3 = guiobject.AbsolutePosition.Y
-		local range4 = guiobject.AbsolutePosition.Y + gui.AbsoluteSize.Y
+		local range4 = guiobject.AbsolutePosition.Y + guiobject.AbsoluteSize.Y
 		if pos.X.Offset >= range1 and pos.X.Offset <= range2 and pos.Y.Offset >= range3 and pos.Y.Offset <= range4 then
 			return true
 		end
 	end
 
 	guiobject.Active = true
-	local speed = 0.1
+	local speed = 0.2
 	local uis = game:GetService("UserInputService")
 	local helddown = false
 	local mouse = game.Players.LocalPlayer:GetMouse()
 	local delta = nil
 
 	uis.InputBegan:Connect(function(thing)
-		if thing.UserInputType == Enum.UserInputType.MouseButton1 and checkpos(UDim2.fromOffset(mouse.X,mouse.Y)) == true then
+		if thing.UserInputType == Enum.UserInputType.MouseButton1 and checkpos1(UDim2.fromOffset(mouse.X,mouse.Y)) == true then
 			delta = UDim2.fromOffset(guiobject.AbsolutePosition.X,guiobject.AbsolutePosition.Y) - UDim2.fromOffset(mouse.X,mouse.Y)
 			helddown = true
 			repeat wait() until thing.UserInputState == Enum.UserInputState.End
@@ -3396,7 +3396,7 @@ local function CLOBNER_fake_script() -- BleakAdmin.NewScript
 			end)
 		end
 	end
-	drag(script.Parent:WaitForChild("MainFrame"))
+	drag(MainFrame)
 end
 coroutine.wrap(CLOBNER_fake_script)()
 local function CALO_fake_script() -- Chatlogs_2.ChatScript 
