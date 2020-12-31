@@ -1,3 +1,5 @@
+repeat wait() until game:FindFirstChild("CoreGui")
+
 function drag(guiobject, gui)
 	local moveoutofscreen = false
 	local gui = gui
@@ -30,7 +32,7 @@ function drag(guiobject, gui)
 		if thing.UserInputType == Enum.UserInputType.MouseButton1 and checkpos1(UDim2.fromOffset(mouse.X,mouse.Y)) == true then
 			delta = UDim2.fromOffset(guiobject.AbsolutePosition.X,guiobject.AbsolutePosition.Y) - UDim2.fromOffset(mouse.X,mouse.Y)
 			helddown = true
-			repeat wait() until thing.UserInputState == Enum.UserInputState.End
+			repeat game:GetService("RunService").Stepped:Wait() until thing.UserInputState == Enum.UserInputState.End
 			helddown = false
 		end
 	end)
@@ -146,8 +148,6 @@ function split(text, splitter)
 	end
 	return returning
 end
-
-repeat wait() until game:FindFirstChild("CoreGui")
 -- Gui to Lua
 -- Version: 3.2
 
@@ -787,7 +787,7 @@ FPS.TextWrapped = true
 local function HSTDLMS_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
-	repeat wait() until game:IsLoaded() and game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+	repeat wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 	local commands = {
 		Name = {};
 		Requirement = {};
