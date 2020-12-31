@@ -1,4 +1,4 @@
-repeat wait() until game:FindFirstChild("CoreGui")
+repeat wait() until game:FindFirstChild("CoreGui") and game.Players.LocalPlayer.Character
 
 function drag(guiobject, gui)
 	local moveoutofscreen = false
