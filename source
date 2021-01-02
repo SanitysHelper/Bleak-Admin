@@ -787,7 +787,6 @@ FPS.TextWrapped = true
 local function HSTDLMS_fake_script() -- CommandBar.LocalScript 
 	local script = Instance.new('LocalScript', CommandBar)
 
-	repeat wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui")
 	local commands = {
 		Name = {};
 		Requirement = {};
