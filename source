@@ -1309,7 +1309,7 @@ local function HSTDLMS_fake_script() -- CommandBar.LocalScript
 
 			update()
 		end
-	game:GetService("RunService").Stepped:Wait()
+	wait(0.1)
 	end
 
 	local bald = script.Parent.FocusLost:Connect(function(pressed)
