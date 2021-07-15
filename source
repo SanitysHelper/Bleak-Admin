@@ -1,5 +1,5 @@
 repeat wait() until game:FindFirstChild("CoreGui") and game.Players.LocalPlayer and game.Players.LocalPlayer.Character and workspace and game.Players.LocalPlayer:GetMouse()
-
+-- logplr
 function drag(guiobject, gui)
 	local moveoutofscreen = false
 	local gui = gui
@@ -3616,11 +3616,11 @@ local function CALO_fake_script() -- Chatlogs_2.ChatScript
 	end)
 
 	for i,v in pairs(game.Players:GetPlayers()) do
-		logplr(v.Name)
+--		logplr(v.Name)
 	end
 
 	game.Players.PlayerAdded:Connect(function(e)
-		logplr(e.Name)
+--		logplr(e.Name)
 	end)
 
 	script.Parent.Parent.AutoSave.Text = "Autosave".."[".. tostring(autosaving) .."]"
